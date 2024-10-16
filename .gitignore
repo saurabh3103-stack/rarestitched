@@ -39,5 +39,5 @@ vercel.performance.json
 __generated__
 *.graphql.d.ts
 *.graphqls.d.ts
-
+.env
 TODO.MD
