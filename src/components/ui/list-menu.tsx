@@ -4,12 +4,14 @@ import Link from "./link";
 
 const ListMenu = ({ dept, data, hasSubMenu, menuIndex }: any) => {
 	const { t } = useTranslation("menu");
+
 	return (
 		<li className="relative">
 			<Link
 				href={data.path}
 				className="flex items-center justify-between py-2 ltr:pl-5 rtl:pr-5 ltr:xl:pl-7 rtl:xl:pr-7 ltr:pr-3 ltr:xl:pr-3.5 rtl:pl-3 rtl:xl:pl-3.5 hover:text-heading hover:bg-gray-300"
 			>
+				
 				{t(data.label)}
 				{data.subMenu && (
 					<span className="text-sm mt-0.5 shrink-0">

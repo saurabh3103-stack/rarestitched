@@ -7,6 +7,7 @@ import { useShops } from '@framework/shops';
 import Button from '@components/ui/button';
 import { useTranslation } from 'next-i18next';
 
+
 const ShopsPageContent: React.FC = () => {
   const [gridView, setGridView] = useState(Boolean(false));
   const { t } = useTranslation();
@@ -28,6 +29,9 @@ const ShopsPageContent: React.FC = () => {
   const gridViewHandel = () => {
     setGridView(true);
   };
+  if(data){
+    console.log(data)
+  }
 
   if (error) return <Alert message={error?.message} />;
 

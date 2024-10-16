@@ -942,11 +942,11 @@ export const menu = [
         path: '/404',
         label: 'menu-404',
       },
-      {
-        id:12,
-        path: '/become-seller',
-        label: 'menu-become-seller',
-      },
+      // {
+      //   id:12,
+      //   path: '/become-seller',
+      //   label: 'menu-become-seller',
+      // },
     ],
   },
   {
@@ -1830,11 +1830,11 @@ export const mobileMenu = [
         path: '/404',
         label: 'menu-404',
       },
-      {
-        id: 12,
-        path: '/become-seller',
-        label: 'menu-become-seller',
-      },
+      // {
+      //   id: 12,
+      //   path: '/become-seller',
+      //   label: 'menu-become-seller',
+      // },
     ],
   },
 ];
