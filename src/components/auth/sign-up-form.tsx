@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import Logo from "@components/ui/logo";
 import { useUI } from "@contexts/ui.context";
 /* @ts-ignore */
+import { signIn } from 'next-auth/react';
 import { ImGoogle2 } from "react-icons/im";
 // import { ImFacebook2 } from "react-icons/im/ImFacebook2";
 import Link from "@components/ui/link";
@@ -193,6 +194,7 @@ const SignUpForm: React.FC<Props> = ({ layout = "modal" }) => {
         type="submit"
         loading={false}
         disabled={isLoading}
+        onClick={() => signIn('google')}
         className="h-11 md:h-12 w-full mt-2.5 bg-google hover:bg-googleHover"
       >
         <ImGoogle2 className="text-sm sm:text-base ltr:mr-1.5 rtl:ml-1.5" />
