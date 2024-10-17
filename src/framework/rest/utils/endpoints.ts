@@ -14,7 +14,7 @@ export const API_ENDPOINTS = {
   // ORDER_STATUS: "order-status",
   LOGIN: 'token',
   SOCIAL_LOGIN: 'social-login-token',
-  REGISTER: 'register',
+  REGISTER: 'signup',
   FORGET_PASSWORD: 'forget-password',
   LOGOUT: 'logout',
   CHANGE_PASSWORD: 'change-password',

@@ -16,6 +16,10 @@ export default NextAuth({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
     }),
+    // FacebookProvider({
+    //   clientId: "942180414405634",
+    //   clientSecret: "527e9440d44c67abc69be4dee14fb935 ,
+    // })
   ],
 
   // The secret should be set to a reasonably long random string.

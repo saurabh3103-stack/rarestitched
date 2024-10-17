@@ -72,6 +72,7 @@ const SignUpForm: React.FC<Props> = ({ layout = "modal" }) => {
       router.push(`${ROUTES.LOGIN}`);
     }
   }
+  
 
   function onSubmit({ name, email, password }: SignUpInputType) {
     console.log(name,email,password)

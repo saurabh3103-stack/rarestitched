@@ -83,6 +83,8 @@ const Header: React.FC<Props> = ({ variant = 'default' }) => {
       shopUnderMaintenanceIsComing &&
       !isLoading &&
       shopData);
+
+     
   return (
     <header
       id="siteHeader"
