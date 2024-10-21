@@ -200,13 +200,22 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
                 <>
                   <div className="text-base font-semibold text-heading md:text-xl lg:text-2xl">
                     {price}
+                   
                   </div>
 
                   {basePrice && (
+                    <>
                     <del className="font-segoe text-gray-400 text-base lg:text-xl ltr:pl-2.5 rtl:pr-2.5 -mt-0.5 md:mt-0">
                       {basePrice}
+                     
                     </del>
+                     <span className="text-red-700 font-bold ltr:pl-2 rtl:pr-2">
+                     {Math.round(((parseFloat(basePrice.replace('₹', '')) - parseFloat(price.replace('₹', ''))) / parseFloat(basePrice.replace('₹', ''))) * 100)}% off
+                   </span>
+                   </>
+                    
                   )}
+                  
                 </>
               )}
             </div>

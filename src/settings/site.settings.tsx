@@ -34,7 +34,7 @@ export const siteSettings = {
   },
   chatButtonUrl: 'https://www.facebook.com/redqinc',
   defaultLanguage: 'en',
-  currency: 'USD',
+  currency: 'INR',
   site_header: {
     languageMenu: [
       {
