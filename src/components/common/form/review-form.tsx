@@ -5,29 +5,60 @@ import TextArea from '@components/ui/text-area';
 import ReactStars from 'react-rating-stars-component';
 import { CheckBox } from '@components/ui/checkbox';
 import { useTranslation } from 'next-i18next';
+import { useState } from 'react';
 
 interface ReviewFormValues {
   name: string;
   email: string;
   cookie: string;
   message: string;
+  rating: number; 
+  productID: string; // Product ID is passed as a prop
+  userID: string; // Add the rating field here
 }
 
-const ReviewForm: React.FC = () => {
+const ReviewForm: React.FC = ({productID,userID}) => {
+  console.log(productID,userID)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ReviewFormValues>();
+  
+  const [newRating, setNewRating] = useState<number>(0); // Store the rating state
 
-  function onSubmit(values: ReviewFormValues) {
-    // Handle form submission here
-    // console.log(values, "review");
-  }
-
-  const ratingChanged = (newRating: any) => {
-    // Handle rating change here
-    // console.log(newRating);
+  const onSubmit = async (values: ReviewFormValues) => {
+    const reviewData = {
+      ...values,
+      rating: newRating,
+      product_id: productID,
+      user_id: userID,
+    };
+  
+    console.log(reviewData, 'review');
+  
+    try {
+      const response = await fetch('http://localhost:3000/api/products', {
+        method: 'POST', // Use POST method to send data
+        headers: {
+          'Content-Type': 'application/json', // Set the content type
+        },
+        body: JSON.stringify(reviewData), // Convert reviewData to JSON
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const result = await response.json(); // Parse the response data
+      console.log(result, 'Response from API'); // Log the API response
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    }
+  };
+  const ratingChanged = (newRating: number) => {
+    setNewRating(newRating); // Set the new rating
+    console.log(newRating);
   };
 
   const { t } = useTranslation();

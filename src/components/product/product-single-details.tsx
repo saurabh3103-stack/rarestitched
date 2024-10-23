@@ -9,7 +9,7 @@ import { ProductAttributes } from './product-attributes';
 import isEmpty from 'lodash/isEmpty';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { FaChevronDown, FaChevronUp, FaShoppingCart, FaStar } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaShoppingCart } from 'react-icons/fa';
 import Link from '@components/ui/link';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
@@ -23,6 +23,7 @@ import { ROUTES } from '@lib/routes';
 import dynamic from 'next/dynamic';
 import { useSanitizeContent } from '@lib/sanitize-content';
 import ReviewForm from "@components/common/form/review-form"; // Import the ReviewForm
+import { IoBagCheckOutline } from "react-icons/io5";
 
 const FavoriteButton = dynamic(
   () => import('@components/product/favorite-button'),
@@ -47,7 +48,9 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   });
 
   const variations = getVariations(product?.variations!);
-
+  const [productId, setProductId] = useState(null);
+  const [userId, setUserId] = useState(null);
+  
   const isSelected = !isEmpty(variations)
     ? !isEmpty(attributes) &&
       Object.keys(variations).every((variation) => attributes.hasOwnProperty(variation))
@@ -101,16 +104,16 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   const content = useSanitizeContent({ description: product?.description });
 
   const [currentImage, setCurrentImage] = useState<string>(
-    '/assets/placeholder/products/product-gallery.svg'
+    combineImages[0]?.original || combineImages[0]?.image?.original || '/assets/placeholder/products/product-gallery.svg'
   );
 
+  // Update currentImage whenever product changes
   useEffect(() => {
-    if (combineImages.length > 0) {
-      setCurrentImage(
-        combineImages[0].original || combineImages[0].image?.original || '/assets/placeholder/products/product-gallery.svg'
-      );
-    }
-  }, [combineImages]);
+    // Reset currentImage when product changes
+    setCurrentImage(
+      combineImages[0]?.original || combineImages[0]?.image?.original || '/assets/placeholder/products/product-gallery.svg'
+    );
+  }, [product]); // Depend on product to trigger update
   
   const router = useRouter();
 
@@ -119,33 +122,41 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
     router.push('/checkout');
   }
 
-   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
 
-  const handleToggleReviewModal = () => {
-    setShowReviewModal(!showReviewModal);
+  const handleToggleReviewForm = () => {
+    
+    setShowReviewForm(!showReviewForm);
   };
   return (
     <div className="items-start block grid-cols-9 pb-10 lg:grid gap-x-10 xl:gap-x-14 pt-7 lg:pb-14 2xl:pb-20 ">
       <div className="col-span-5 grid grid-cols-5 gap-2.5">
         {/* Thumbnails column (col-1) */}
         <div className="col-span-1 flex flex-col items-start">
-          {(combineImages?.length > 1 ? combineImages : product.variation_options)?.map((item, index) => {
-            const imageSrc = item?.original || item?.image?.original || '/assets/placeholder/products/product-gallery.svg';
-            return (
-              <div
-                key={index}
-                className="relative mb-2 rounded-lg overflow-hidden border border-gray-300 shadow-md transition-transform duration-200 hover:scale-105 cursor-pointer "
-              >
-                <img
-                  src={imageSrc}
-                  alt={`Thumbnail ${index}`}
-                  onClick={() => setCurrentImage(imageSrc)}
-                  className="w-full h-full object-cover rounded-lg border border-gray-300"
-                />
-              </div>
-            );
-          })}
-        </div>
+      {(combineImages?.length > 1 ? combineImages : product.variation_options)?.map((item, index) => {
+        // Store product.id and item.user_id in state variables
+        if (!productId && !userId) {
+          setProductId(product.id);
+          setUserId(item.user_id);
+        }
+
+        const imageSrc = item?.original || item?.image?.original || '/assets/placeholder/products/product-gallery.svg';
+
+        return (
+          <div
+            key={index}
+            className="relative mb-2 rounded-lg overflow-hidden border border-gray-300 shadow-md transition-transform duration-200 hover:scale-105 cursor-pointer"
+          >
+            <img
+              src={imageSrc}
+              alt={`Thumbnail ${index}`}
+              onClick={() => setCurrentImage(imageSrc)}
+              className="w-full h-full object-cover rounded-lg border border-gray-300"
+            />
+          </div>
+        );
+      })}
+    </div>
 
         {/* Main image column (col-4) */}
         <div className="col-span-4">
@@ -261,11 +272,12 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
               <Button
                 onClick={addToCart}
                 variant="slim"
-                className={`w-full text-white ${
-                  !isSelected
-                    ? 'bg-gray-400 hover:bg-gray-400'
-                    : 'bg-green-500 hover:bg-green-600' // Change bg to green with hover effect
-                }`}
+                className={`w-full text-white`}
+                // ${
+                //   !isSelected
+                //     ? 'bg-gray-400 hover:bg-gray-400'
+                //     : 'bg-green-500 hover:bg-green-600' // Change bg to green with hover effect
+                // }
                 disabled={
                   !isSelected ||
                   !product?.quantity ||
@@ -289,11 +301,13 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
               <Button
                 onClick={handleBuyToCart} // Use the new function to navigate to checkout
                 variant="slim"
-                className={`w-full text-white ${
-                  !isSelected
-                    ? 'bg-gray-400 hover:bg-gray-400'
-                    : 'bg-red-600 hover:bg-red-700' // Change bg to red with hover effect
-                }`}
+                className={`w-full text-white `}
+                //    ${
+                //   !isSelected
+                //     ? 'bg-gray-400 hover:bg-gray-400'
+                //     : 'bg-red-600 hover:bg-red-700'
+                // }
+                
                 disabled={
                   !isSelected ||
                   !product?.quantity ||
@@ -303,6 +317,8 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                 }
                 // loading={addToCartLoader}
               >
+                <IoBagCheckOutline className="w-5 h-5 mr-2" ></IoBagCheckOutline>
+               
                 <span className="py-2 3xl:px-8">
                   {product?.quantity ||
                   (!isEmpty(selectedVariation) && selectedVariation?.quantity)
@@ -394,34 +410,28 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
         {/* Review Form Section */}
         <div>
-  {/* Other components */}
-  <button
-    className="flex justify-between items-center w-1/2 bg-yellow-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 transition-all duration-300 ease-in-out transform active:scale-95"
-    onClick={handleToggleReviewModal}
-  >
-    <h3 className="text-lg font-bold mb-0">Rate us</h3>
-    <span className="flex items-center ml-2">
-      <FaStar size={24} />
-    </span>
-  </button>
-
-  {/* Modal */}
-  {showReviewModal && (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-4 rounded-lg shadow-lg max-h-[90vh] overflow-y-auto w-full md:w-1/2">
-        <h2 className="text-xl font-semibold mb-4">Submit Your Review</h2>
-        <ReviewForm />
-        <button
-          className="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg"
-          onClick={handleToggleReviewModal}
-        >
-          Close
-        </button>
-      </div>
+      {/* Other components */}
+    
+      <button
+        className="flex justify-between items-center w-full bg-sky-500 text-white py-2 px-4 rounded focus:outline-none hover:bg-sky-600 transition-colors"
+        onClick={handleToggleReviewForm}
+      >
+        <h3 className="text-lg font-bold mb-0">
+          {'Rate us'}
+        </h3>
+        <span className="flex items-center ml-2">
+          {showReviewForm ? <AiOutlineMinus size={24} /> : <AiOutlinePlus size={24} />}
+        </span>
+      </button>
+      <div>
+      {productId && userId ? (
+        <ReviewForm productID={productId} userID={userId} />
+      ) : (
+        <p>Loading...</p> // Or any fallback UI when IDs are missing
+      )}
     </div>
-  )}
-</div>
-
+    
+    </div>
       </div>
     </div>
   );
