@@ -1,3 +1,4 @@
+import { useEffect, useState, useCallback } from 'react';
 import Counter from '@components/common/counter';
 import { ProductAttributes } from '@components/product/product-attributes';
 import VariationPrice from '@components/product/product-variant-price';
@@ -18,41 +19,29 @@ import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-const FavoriteButton = dynamic(
-  () => import('@components/product/favorite-button'),
-  { ssr: false },
-);
-import { useSanitizeContent } from '@lib/sanitize-content';
 import { FaStar } from 'react-icons/fa';
+const FavoriteButton = dynamic(() => import('@components/product/favorite-button'), { ssr: false });
+import { useSanitizeContent } from '@lib/sanitize-content';
 
 export default function ProductPopup({ productSlug }: { productSlug: string }) {
   const { t } = useTranslation('common');
   const { closeModal, openSidebar } = useUI();
-  const { data: product, isLoading: loading }: any = useProduct({
-    slug: productSlug,
-  });
-  const openCart = useCallback(() => {
-    return openSidebar({
-      view: 'DISPLAY_CART',
-    });
-  }, []);
+  const { data: product, isLoading: loading }: any = useProduct({ slug: productSlug });
+  const openCart = useCallback(() => openSidebar({ view: 'DISPLAY_CART' }), []);
   const router = useRouter();
   const { addItemToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [attributes, setAttributes] = useState<{ [key: string]: string }>({});
-  const [viewCartBtn, setViewCartBtn] = useState<boolean>(false);
-  const [addToCartLoader, setAddToCartLoader] = useState<boolean>(false);
+  const [viewCartBtn, setViewCartBtn] = useState(false);
+  const [addToCartLoader, setAddToCartLoader] = useState(false);
   const { me } = useUser();
-
   const { price, basePrice } = usePrice({
     amount: product?.sale_price ? product?.sale_price : product?.price!,
     baseAmount: product?.price,
   });
 
   const variations = getVariations(product?.variations!);
-
   const isSelected = !isEmpty(variations)
     ? !isEmpty(attributes) &&
       Object.keys(variations).every((variation) =>
@@ -70,9 +59,29 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
     );
   }
 
+  // State to store the overall rating
+  const [overallRating, setOverallRating] = useState<string | null>(null);
+
+  // Fetch reviews and update overall rating
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(`https://fun2sh.deificindia.com/reviews?product_id=${product.id}`);
+        const data = await response.json();
+        // Convert rating to fixed decimal format
+        setOverallRating(parseFloat(data.overall_rating).toFixed(1));
+      } catch (error) {
+        console.error('Failed to fetch reviews:', error);
+      }
+    };
+
+    if (product?.id) {
+      fetchReviews();
+    }
+  }, [product?.id]);
+
   function addToCart() {
     if (!isSelected) return;
-    // to show btn feedback while product carting
     setAddToCartLoader(true);
     setTimeout(() => {
       setAddToCartLoader(false);
@@ -82,7 +91,6 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
     addItemToCart(item, quantity);
 
     toast(t('add-to-cart'), {
-      //@ts-ignore
       type: 'dark',
       progressClassName: 'fancy-progress-bar',
       position: 'top-right',
@@ -96,13 +104,10 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
 
   function navigateToProductPage() {
     closeModal();
-    router.push(`${ROUTES.PRODUCT}/${productSlug}`, undefined, {
-      locale: router.locale,
-    });
+    router.push(`${ROUTES.PRODUCT}/${productSlug}`, undefined, { locale: router.locale });
   }
 
   function handleAttribute(attribute: any) {
-    // Reset Quantity
     if (!isMatch(attributes, attribute)) {
       setQuantity(1);
     }
@@ -123,7 +128,9 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
       openCart();
     }, 300);
   }
+
   const content = useSanitizeContent({ description: product?.description });
+
   if (loading) {
     return (
       <div className="relative flex items-center justify-center overflow-hidden bg-white w-96 h-96">
@@ -131,11 +138,13 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
       </div>
     );
   }
+
   const productImage = !isEmpty(selectedVariation)
     ? isEmpty(selectedVariation?.image)
       ? product?.image
       : selectedVariation?.image
     : product?.image;
+
   return (
     <div className="bg-white rounded-lg">
       <div className="flex flex-col lg:flex-row w-full md:w-[650px] lg:w-[960px] mx-auto overflow-hidden">
@@ -143,7 +152,7 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
           <Image
             fill
             src={
-              productImage?.original ??
+              productImage?.original ?? 
               '/assets/placeholder/products/product-thumbnail.svg'
             }
             alt={product.name}
@@ -176,39 +185,38 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
               </span>
             )}
 
-{content ? (
-  <div>
-    <div
-      className="text-sm leading-6 md:text-body md:leading-7 react-editor-description"
-      dangerouslySetInnerHTML={{
-        __html:
-          content?.length > 200
-            ? content?.substring(0, 200) + '...'
-            : content,
-      }}
-    />
-    <div
-      className="product-rating-button"
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        backgroundColor: '#f0f0f0',
-        padding: '5px 10px',
-        borderRadius: '20px',
-        cursor: 'pointer',
-        marginTop: '10px',
-      }}
-    >
-      <span style={{ marginRight: '5px' }}>4</span> {/* Display rating number */}
-      <FaStar color="gold" /> {/* Display static star icon */}
-    </div>
-  </div>
-) : (
-  ''
-)}
+            {content ? (
+              <div>
+                <div
+                  className="text-sm leading-6 md:text-body md:leading-7 react-editor-description"
+                  dangerouslySetInnerHTML={{
+                    __html: 
+                      content?.length > 200 
+                        ? content?.substring(0, 200) + '...' 
+                        : content,
+                  }}
+                />
+                <div
+                  className="product-rating-button"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    backgroundColor: '#f0f0f0',
+                    padding: '5px 10px',
+                    borderRadius: '20px',
+                    cursor: 'pointer',
+                    marginTop: '10px',
+                  }}
+                >
+                  <span style={{ marginRight: '5px' }}>{overallRating ?? 'N/A'}</span>
+                  <FaStar color="gold" />
+                </div>
+              </div>
+            ) : (
+              ''
+            )}
 
-
-            <div className="flex items-center mt-3">
+<div className="flex items-center mt-3">
               {!isEmpty(variations) ? (
                 <VariationPrice
                   selectedVariation={selectedVariation}

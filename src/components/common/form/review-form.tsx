@@ -126,3 +126,25 @@ const ReviewForm: React.FC<{ productID: number; userID: number }> = ({ productID
 };
 
 export default ReviewForm;
+
+
+// useEffect(() => {
+//   const fetchReviews = async () => {
+//     try {
+//       const response = await fetch(`https://fun2sh.deificindia.com/reviews?product_id=${product.id}`);
+//       const data = await response.json();
+      
+//       setReviews(data.reviews.data); 
+//       console.log(data.reviews.data)// Assuming the reviews are in the "data" field
+//     } catch (error) {
+//       console.error("Error fetching reviews:", error);
+//     }
+//   };
+
+//   fetchReviews();
+// }, [product]);
+
+
+
+
+

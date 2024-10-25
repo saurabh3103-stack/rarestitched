@@ -53,6 +53,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   const [addToCartLoader, setAddToCartLoader] = useState<boolean>(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const[overallRating,setOverallRating]=useState(null)
   const [showReviews, setShowReviews] = useState(false);
 
   const { price, basePrice } = usePrice({
@@ -89,6 +90,8 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   //   fetchData();
   // }, ); // Empty dependency array ensures this runs only once after the initial render// Empty dependency array ensures this runs only once after the initial render
 
+
+ 
   const isSelected = !isEmpty(variations)
     ? !isEmpty(attributes) &&
       Object.keys(variations).every((variation) =>
@@ -179,30 +182,30 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
     setReviews((prevReviews) => [...prevReviews, newReview]);
   };
 
-  // Fetch reviews dynamically
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await fetch(
-          `https://fun2sh.deificindia.com/reviews?product_id=${product.id}`,
-        );
-        console.log(response.json());
-        const data = await response.json();
 
-        setReviews(data.data); // Assuming the reviews are in the "data" field
-      } catch (error) {
-        console.error('Error fetching reviews:', error);
-      }
-    };
-
-    fetchReviews();
-  }, [productId]);
 
   // Function to toggle the reviews visibility
   const handleToggleReviews = () => {
     setShowReviews((prev) => !prev);
   };
 
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(`https://fun2sh.deificindia.com/reviews?product_id=${product.id}`);
+        const data = await response.json();
+        setOverallRating(data.overall_rating)
+        
+        setReviews(data.reviews.data); 
+        console.log(data.reviews.data)// Assuming the reviews are in the "data" field
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+  
+    fetchReviews();
+  }, [product]);
   return (
     <div className="items-start block grid-cols-9 pb-10 lg:grid gap-x-10 xl:gap-x-14 pt-7 lg:pb-14 2xl:pb-20 ">
       <div className="col-span-5 grid grid-cols-5 gap-2.5">
@@ -322,7 +325,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   marginTop: '10px',
                 }}
               >
-                <span style={{ marginRight: '5px' }}>4</span>{' '}
+                <span style={{ marginRight: '5px' }}>{overallRating}</span>{' '}
                 {/* Display rating number */}
                 <FaStar color="gold" /> {/* Display static star icon */}
               </div>
