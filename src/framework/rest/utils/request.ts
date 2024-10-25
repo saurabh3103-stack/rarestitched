@@ -40,12 +40,15 @@ request.interceptors.request.use(
 
 export class HttpClient {
   static async get<T>(url: string, params?: unknown) {
+
     const response = await request.get<T>(url, { params });
+    // console.log(response.data)
     return response.data;
   }
 
   static async post<T>(url: string, data: unknown, options?: any) {
     const response = await request.post<T>(url, data, options);
+
     return response.data;
   }
 

@@ -9,7 +9,12 @@ import { ProductAttributes } from './product-attributes';
 import isEmpty from 'lodash/isEmpty';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { FaChevronDown, FaChevronUp, FaShoppingCart } from 'react-icons/fa';
+import {
+  FaChevronDown,
+  FaChevronUp,
+  FaShoppingCart,
+  FaStar,
+} from 'react-icons/fa';
 import Link from '@components/ui/link';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
@@ -22,12 +27,16 @@ import isMatch from 'lodash/isMatch';
 import { ROUTES } from '@lib/routes';
 import dynamic from 'next/dynamic';
 import { useSanitizeContent } from '@lib/sanitize-content';
-import ReviewForm from "@components/common/form/review-form"; // Import the ReviewForm
-import { IoBagCheckOutline } from "react-icons/io5";
+import ReviewForm from '@components/common/form/review-form'; // Import the ReviewForm
+import { IoBagCheckOutline } from 'react-icons/io5';
+import axios from 'axios';
+
+import { useUser } from '@framework/auth';
+import { User } from '@type/index';
 
 const FavoriteButton = dynamic(
   () => import('@components/product/favorite-button'),
-  { ssr: false }
+  { ssr: false },
 );
 
 type Props = {
@@ -36,11 +45,15 @@ type Props = {
 
 const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   const { t } = useTranslation();
+
   const { width } = useWindowSize();
   const { addItemToCart } = useCart();
   const [attributes, setAttributes] = useState<{ [key: string]: string }>({});
   const [quantity, setQuantity] = useState(1);
   const [addToCartLoader, setAddToCartLoader] = useState<boolean>(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const [showReviews, setShowReviews] = useState(false);
 
   const { price, basePrice } = usePrice({
     amount: product?.sale_price ? product?.sale_price : product?.price!,
@@ -49,17 +62,47 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
   const variations = getVariations(product?.variations!);
   const [productId, setProductId] = useState(null);
-  const [userId, setUserId] = useState(null);
   
+  const { me } = useUser();
+  const [id, setId] = useState(null);
+  useEffect(() => {
+    if (me?.id) {
+      setId(me.id);
+      
+      
+      // Set id only once when `me` is available
+    }
+  }, [me]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get('https://fun2sh.deificindia.com/me');
+  //       const userId = response.data.id;
+  //       // console.log(response) // Extracting the `id` from the response
+  //       setId(userId);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, ); // Empty dependency array ensures this runs only once after the initial render// Empty dependency array ensures this runs only once after the initial render
+
   const isSelected = !isEmpty(variations)
     ? !isEmpty(attributes) &&
-      Object.keys(variations).every((variation) => attributes.hasOwnProperty(variation))
+      Object.keys(variations).every((variation) =>
+        attributes.hasOwnProperty(variation),
+      )
     : true;
 
   let selectedVariation: any = {};
   if (isSelected) {
     selectedVariation = product?.variation_options?.find((o: any) =>
-      isEqual(o.options.map((v: any) => v.value).sort(), Object.values(attributes).sort())
+      isEqual(
+        o.options.map((v: any) => v.value).sort(),
+        Object.values(attributes).sort(),
+      ),
     );
   }
 
@@ -102,19 +145,25 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   // Combine image and gallery
   const combineImages = [...product?.gallery, product?.image];
   const content = useSanitizeContent({ description: product?.description });
+  // {
+  //   console.log(product.id);
+  // }
 
   const [currentImage, setCurrentImage] = useState<string>(
-    combineImages[0]?.original || combineImages[0]?.image?.original || '/assets/placeholder/products/product-gallery.svg'
+    combineImages[0]?.original ||
+      combineImages[0]?.image?.original ||
+      '/assets/placeholder/products/product-gallery.svg',
   );
 
   // Update currentImage whenever product changes
   useEffect(() => {
-    // Reset currentImage when product changes
     setCurrentImage(
-      combineImages[0]?.original || combineImages[0]?.image?.original || '/assets/placeholder/products/product-gallery.svg'
+      combineImages[0]?.original ||
+        combineImages[0]?.image?.original ||
+        '/assets/placeholder/products/product-gallery.svg',
     );
-  }, [product]); // Depend on product to trigger update
-  
+  }, [product]);
+
   const router = useRouter();
 
   function handleBuyToCart() {
@@ -122,41 +171,67 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
     router.push('/checkout');
   }
 
-  const [showReviewForm, setShowReviewForm] = useState(false);
-
   const handleToggleReviewForm = () => {
-    
     setShowReviewForm(!showReviewForm);
   };
+
+  const handleAddReview = (newReview) => {
+    setReviews((prevReviews) => [...prevReviews, newReview]);
+  };
+
+  // Fetch reviews dynamically
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(
+          `https://fun2sh.deificindia.com/reviews?product_id=${product.id}`,
+        );
+        console.log(response.json());
+        const data = await response.json();
+
+        setReviews(data.data); // Assuming the reviews are in the "data" field
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      }
+    };
+
+    fetchReviews();
+  }, [productId]);
+
+  // Function to toggle the reviews visibility
+  const handleToggleReviews = () => {
+    setShowReviews((prev) => !prev);
+  };
+
   return (
     <div className="items-start block grid-cols-9 pb-10 lg:grid gap-x-10 xl:gap-x-14 pt-7 lg:pb-14 2xl:pb-20 ">
       <div className="col-span-5 grid grid-cols-5 gap-2.5">
         {/* Thumbnails column (col-1) */}
         <div className="col-span-1 flex flex-col items-start">
-      {(combineImages?.length > 1 ? combineImages : product.variation_options)?.map((item, index) => {
-        // Store product.id and item.user_id in state variables
-        if (!productId && !userId) {
-          setProductId(product.id);
-          setUserId(item.user_id);
-        }
+          {(combineImages?.length > 1
+            ? combineImages
+            : product.variation_options
+          )?.map((item, index) => {
+            const imageSrc =
+              item?.original ||
+              item?.image?.original ||
+              '/assets/placeholder/products/product-gallery.svg';
 
-        const imageSrc = item?.original || item?.image?.original || '/assets/placeholder/products/product-gallery.svg';
-
-        return (
-          <div
-            key={index}
-            className="relative mb-2 rounded-lg overflow-hidden border border-gray-300 shadow-md transition-transform duration-200 hover:scale-105 cursor-pointer"
-          >
-            <img
-              src={imageSrc}
-              alt={`Thumbnail ${index}`}
-              onClick={() => setCurrentImage(imageSrc)}
-              className="w-full h-full object-cover rounded-lg border border-gray-300"
-            />
-          </div>
-        );
-      })}
-    </div>
+            return (
+              <div
+                key={index}
+                className="relative mb-2 rounded-lg overflow-hidden border border-gray-300 shadow-md transition-transform duration-200 hover:scale-105 cursor-pointer"
+              >
+                <img
+                  src={imageSrc}
+                  alt={`Thumbnail ${index}`}
+                  onClick={() => setCurrentImage(imageSrc)}
+                  className="w-full h-full object-cover rounded-lg border border-gray-300"
+                />
+              </div>
+            );
+          })}
+        </div>
 
         {/* Main image column (col-4) */}
         <div className="col-span-4">
@@ -169,6 +244,52 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
             />
           </div>
         </div>
+
+        {/* Customer Reviews and Ratings Section */}
+        <h2 className="text-lg font-semibold mt-4 col-span-5">
+          Customer Reviews and Ratings
+        </h2>
+
+        {/* Button for toggling all reviews */}
+        <Button
+          variant="slim"
+          onClick={handleToggleReviews}
+          className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
+        >
+          {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
+        </Button>
+
+        {/* Display the reviews if toggled on */}
+        {showReviews && (
+          <div className="mt-4 col-span-5">
+            {reviews?.length > 0 ? (
+              reviews.map((review) => (
+                <div key={review.id} className="border-b border-gray-300 py-4">
+                  <h3 className="font-bold">{review.name}</h3>{' '}
+                  {/* Assuming `user_id` can be replaced with `name` */}
+                  <p className="text-sm">{review.comment}</p>
+                  <p className="text-sm text-gray-500 flex items-center">
+                    Rating:
+                    <span className="ml-2 flex">
+                      {Array.from({ length: review.rating }, (_, index) => (
+                        <FaStar key={index} className="text-yellow-500" />
+                      ))}
+                      {Array.from({ length: 5 - review.rating }, (_, index) => (
+                        <FaStar
+                          key={index + review.rating}
+                          className="text-gray-300"
+                        />
+                      ))}
+                    </span>
+                    <span className="ml-2">{review.rating} / 5</span>
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-600">No reviews yet.</p>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="col-span-4 pt-8 lg:pt-0">
@@ -182,12 +303,30 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
             </div>
           </div>
           {content ? (
-            <div
-              className="text-sm leading-6 text-body lg:text-base lg:leading-8 react-editor-description"
-              dangerouslySetInnerHTML={{
-                __html: content,
-              }}
-            />
+            <div>
+              <div
+                className="text-sm leading-6 text-body lg:text-base lg:leading-8 react-editor-description"
+                dangerouslySetInnerHTML={{
+                  __html: content,
+                }}
+              />
+              <div
+                className="product-rating-button"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  backgroundColor: '#f0f0f0',
+                  padding: '5px 10px',
+                  borderRadius: '20px',
+                  cursor: 'pointer',
+                  marginTop: '10px',
+                }}
+              >
+                <span style={{ marginRight: '5px' }}>4</span>{' '}
+                {/* Display rating number */}
+                <FaStar color="gold" /> {/* Display static star icon */}
+              </div>
+            </div>
           ) : (
             ''
           )}
@@ -210,7 +349,13 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                       {basePrice}
                     </del>
                     <span className="text-red-700 font-bold ltr:pl-2 rtl:pr-2">
-                      {Math.round(((parseFloat(basePrice.replace('₹', '')) - parseFloat(price.replace('₹', ''))) / parseFloat(basePrice.replace('₹', ''))) * 100)}% off
+                      {Math.round(
+                        ((parseFloat(basePrice.replace('₹', '')) -
+                          parseFloat(price.replace('₹', ''))) /
+                          parseFloat(basePrice.replace('₹', ''))) *
+                          100,
+                      )}
+                      % off
                     </span>
                   </>
                 )}
@@ -223,8 +368,11 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
           {isEmpty(variations) && (
             <>
               {Number(product.quantity) > 0 ? (
-                <div className="flex items-center space-x-2"> {/* Flex for text and counter */}
-                  <span className="font-bold mx-1">Quantity:</span> {/* Added text */}
+                <div className="flex items-center space-x-2">
+                  {' '}
+                  {/* Flex for text and counter */}
+                  <span className="font-bold mx-1">Quantity:</span>{' '}
+                  {/* Added text */}
                   <Counter
                     quantity={quantity}
                     onIncrement={() => setQuantity((prev) => prev + 1)}
@@ -245,13 +393,17 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
           {!isEmpty(selectedVariation) && (
             <>
-              {selectedVariation?.is_disable || selectedVariation.quantity === 0 ? (
+              {selectedVariation?.is_disable ||
+              selectedVariation.quantity === 0 ? (
                 <div className="text-base text-red-500 whitespace-nowrap ltr:lg:ml-7 rtl:lg:mr-7">
                   {t('text-out-stock')}
                 </div>
               ) : (
-                <div className="flex items-center space-x-2"> {/* Flex for text and counter */}
-                  <span className="font-medium">Quantity:</span> {/* Added text */}
+                <div className="flex items-center space-x-2">
+                  {' '}
+                  {/* Flex for text and counter */}
+                  <span className="font-medium">Quantity:</span>{' '}
+                  {/* Added text */}
                   <Counter
                     quantity={quantity}
                     onIncrement={() => setQuantity((prev) => prev + 1)}
@@ -259,7 +411,9 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                       setQuantity((prev) => (prev !== 1 ? prev - 1 : 1))
                     }
                     disableDecrement={quantity === 1}
-                    disableIncrement={Number(selectedVariation.quantity) === quantity}
+                    disableIncrement={
+                      Number(selectedVariation.quantity) === quantity
+                    }
                   />
                 </div>
               )}
@@ -282,7 +436,8 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   !isSelected ||
                   !product?.quantity ||
                   product.status.toLowerCase() != 'publish' ||
-                  (!isEmpty(selectedVariation) && !selectedVariation?.quantity) ||
+                  (!isEmpty(selectedVariation) &&
+                    !selectedVariation?.quantity) ||
                   (!isEmpty(selectedVariation) && selectedVariation?.is_disable)
                 }
                 loading={addToCartLoader}
@@ -307,18 +462,19 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                 //     ? 'bg-gray-400 hover:bg-gray-400'
                 //     : 'bg-red-600 hover:bg-red-700'
                 // }
-                
+
                 disabled={
                   !isSelected ||
                   !product?.quantity ||
                   product.status.toLowerCase() != 'publish' ||
-                  (!isEmpty(selectedVariation) && !selectedVariation?.quantity) ||
+                  (!isEmpty(selectedVariation) &&
+                    !selectedVariation?.quantity) ||
                   (!isEmpty(selectedVariation) && selectedVariation?.is_disable)
                 }
                 // loading={addToCartLoader}
               >
-                <IoBagCheckOutline className="w-5 h-5 mr-2" ></IoBagCheckOutline>
-               
+                <IoBagCheckOutline className="w-5 h-5 mr-2"></IoBagCheckOutline>
+
                 <span className="py-2 3xl:px-8">
                   {product?.quantity ||
                   (!isEmpty(selectedVariation) && selectedVariation?.quantity)
@@ -409,29 +565,29 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
         </div>
 
         {/* Review Form Section */}
-        <div>
-      {/* Other components */}
-    
-      <button
-        className="flex justify-between items-center w-full bg-sky-500 text-white py-2 px-4 rounded focus:outline-none hover:bg-sky-600 transition-colors"
-        onClick={handleToggleReviewForm}
-      >
-        <h3 className="text-lg font-bold mb-0">
-          {'Rate us'}
-        </h3>
-        <span className="flex items-center ml-2">
-          {showReviewForm ? <AiOutlineMinus size={24} /> : <AiOutlinePlus size={24} />}
-        </span>
-      </button>
-      <div>
-      {productId && userId ? (
-        <ReviewForm productID={productId} userID={userId} />
-      ) : (
-        <p>Loading...</p> // Or any fallback UI when IDs are missing
-      )}
-    </div>
-    
-    </div>
+
+        <div className="col-span-9 mt-10">
+          {/* Button to toggle the review form */}
+          <Button
+            onClick={handleToggleReviewForm}
+            className="mt-4 w-half py-2 text-white rounded-md shadow-md transition duration-200"
+          >
+            {showReviewForm ? 'Hide Review Form' : 'Add a Review'}
+          </Button>
+
+          {/* Display the review form if toggled on */}
+
+          {showReviewForm && (
+            <ReviewForm
+              onAddReview={handleAddReview}
+              productID={product.id}
+              userID={id}
+            />
+          )}
+          {/* {console.log(product.shop)} */}
+
+          {/* Display the reviews if toggled on */}
+        </div>
       </div>
     </div>
   );

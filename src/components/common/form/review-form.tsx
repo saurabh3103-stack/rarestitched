@@ -6,25 +6,27 @@ import ReactStars from 'react-rating-stars-component';
 import { CheckBox } from '@components/ui/checkbox';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
+import axios from 'axios'; // Import Axios
 
 interface ReviewFormValues {
   name: string;
   email: string;
   cookie: string;
-  message: string;
+  comment: string; // Updated from message to comment
   rating: number; 
-  productID: string; // Product ID is passed as a prop
-  userID: string; // Add the rating field here
+  productID: number; // Product ID is passed as a prop
+  userID: number; // Add the rating field here
 }
 
-const ReviewForm: React.FC = ({productID,userID}) => {
-  console.log(productID,userID)
+const ReviewForm: React.FC<{ productID: number; userID: number }> = ({ productID, userID }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ReviewFormValues>();
+  console.log(productID,userID)
   
+
   const [newRating, setNewRating] = useState<number>(0); // Store the rating state
 
   const onSubmit = async (values: ReviewFormValues) => {
@@ -32,30 +34,25 @@ const ReviewForm: React.FC = ({productID,userID}) => {
       ...values,
       rating: newRating,
       product_id: productID,
-      user_id: userID,
+      user_idd: userID,
     };
-  
-    console.log(reviewData, 'review');
-  
+    console.log(reviewData)
+   
+   
+
     try {
-      const response = await fetch('http://localhost:3000/api/products', {
-        method: 'POST', // Use POST method to send data
+      const response = await axios.post('http://fun2sh.deificindia.com/reviews/store', reviewData, {
         headers: {
           'Content-Type': 'application/json', // Set the content type
         },
-        body: JSON.stringify(reviewData), // Convert reviewData to JSON
       });
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-  
-      const result = await response.json(); // Parse the response data
-      console.log(result, 'Response from API'); // Log the API response
+
+      console.log(response.data, 'Response from API'); // Log the API response
     } catch (error) {
       console.error('Error submitting review:', error);
     }
   };
+
   const ratingChanged = (newRating: number) => {
     setNewRating(newRating); // Set the new rating
     console.log(newRating);
@@ -78,14 +75,14 @@ const ReviewForm: React.FC = ({productID,userID}) => {
             count={5}
             onChange={ratingChanged}
             size={20}
-            color="#c6c6c6"
-            activeColor="#202020"
+            color="#c6c6c6"       // Gray color for inactive stars
+            activeColor="#f59e0b"  // Yellow color for active (filled) stars
           />
         </div>
         <TextArea
           labelKey="forms:label-message-star"
-          {...register('message', { required: 'Message is required' })}
-          errorKey={errors.message?.message}
+          {...register('comment', { required: 'Comment is required' })} // Updated to comment
+          errorKey={errors.comment?.message}
         />
         <div className="flex flex-col md:flex-row space-y-5 md:space-y-0">
           <Input

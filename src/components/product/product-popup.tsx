@@ -25,6 +25,7 @@ const FavoriteButton = dynamic(
   { ssr: false },
 );
 import { useSanitizeContent } from '@lib/sanitize-content';
+import { FaStar } from 'react-icons/fa';
 
 export default function ProductPopup({ productSlug }: { productSlug: string }) {
   const { t } = useTranslation('common');
@@ -175,19 +176,37 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
               </span>
             )}
 
-            {content ? (
-              <div
-                className="text-sm leading-6 md:text-body md:leading-7 react-editor-description"
-                dangerouslySetInnerHTML={{
-                  __html:
-                    content?.length > 200
-                      ? content?.substring(0, 200) + '...'
-                      : content,
-                }}
-              />
-            ) : (
-              ''
-            )}
+{content ? (
+  <div>
+    <div
+      className="text-sm leading-6 md:text-body md:leading-7 react-editor-description"
+      dangerouslySetInnerHTML={{
+        __html:
+          content?.length > 200
+            ? content?.substring(0, 200) + '...'
+            : content,
+      }}
+    />
+    <div
+      className="product-rating-button"
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        backgroundColor: '#f0f0f0',
+        padding: '5px 10px',
+        borderRadius: '20px',
+        cursor: 'pointer',
+        marginTop: '10px',
+      }}
+    >
+      <span style={{ marginRight: '5px' }}>4</span> {/* Display rating number */}
+      <FaStar color="gold" /> {/* Display static star icon */}
+    </div>
+  </div>
+) : (
+  ''
+)}
+
 
             <div className="flex items-center mt-3">
               {!isEmpty(variations) ? (
