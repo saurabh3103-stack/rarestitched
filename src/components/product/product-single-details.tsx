@@ -24,13 +24,14 @@ import isEqual from 'lodash/isEqual';
 import VariationPrice from '@components/product/product-variant-price';
 import { useTranslation } from 'next-i18next';
 import isMatch from 'lodash/isMatch';
+import { useCallback } from 'react';
 import { ROUTES } from '@lib/routes';
 import dynamic from 'next/dynamic';
 import { useSanitizeContent } from '@lib/sanitize-content';
 import ReviewForm from '@components/common/form/review-form'; // Import the ReviewForm
 import { IoBagCheckOutline } from 'react-icons/io5';
 import axios from 'axios';
-
+import { useUI } from '@contexts/ui.context';
 import { useUser } from '@framework/auth';
 import { User } from '@type/index';
 
@@ -54,7 +55,8 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
   const[overallRating,setOverallRating]=useState(null)
-  const [showReviews, setShowReviews] = useState(false);
+  const [showReviews, setShowReviews] = useState(true);
+  const { closeModal, openSidebar } = useUI();
 
   const { price, basePrice } = usePrice({
     amount: product?.sale_price ? product?.sale_price : product?.price!,
@@ -122,7 +124,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
       //@ts-ignore
       type: 'dark',
       progressClassName: 'fancy-progress-bar',
-      position: width > 768 ? 'bottom-right' : 'top-right',
+      position: width > 768 ? 'top-right' : 'top-right',
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -168,10 +170,12 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   }, [product]);
 
   const router = useRouter();
-
+  const openCart = useCallback(() => openSidebar({ view: 'DISPLAY_CART' }), []);
   function handleBuyToCart() {
-    if (!isSelected) return;
-    router.push('/checkout');
+    // if (!isSelected) return;
+    // router.push('/checkout');
+    addToCart()
+    openCart();
   }
 
   const handleToggleReviewForm = () => {
@@ -569,7 +573,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
         {/* Review Form Section */}
 
-        <div className="col-span-9 mt-10">
+        <div className="col-span-9">
           {/* Button to toggle the review form */}
           <Button
             onClick={handleToggleReviewForm}

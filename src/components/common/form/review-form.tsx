@@ -7,6 +7,7 @@ import { CheckBox } from '@components/ui/checkbox';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import axios from 'axios'; // Import Axios
+import { toast } from 'react-toastify';
 
 interface ReviewFormValues {
   name: string;
@@ -36,23 +37,73 @@ const ReviewForm: React.FC<{ productID: number; userID: number }> = ({ productID
       product_id: productID,
       user_idd: userID,
     };
-    console.log(reviewData)
-   
-   
-
+  
+    console.log(reviewData);
+  
     try {
-      const response = await axios.post('http://fun2sh.deificindia.com/reviews/store', reviewData, {
-        headers: {
-          'Content-Type': 'application/json', // Set the content type
-        },
-      });
-
+      const response = await axios.post(
+        'http://fun2sh.deificindia.com/reviews/store',
+        reviewData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
       console.log(response.data, 'Response from API'); // Log the API response
+  
+      if (response.data.status === 3) {
+        toast('You have already submitted your review', {
+          type: 'dark',
+          progressClassName: 'fancy-progress-bar',
+          position: window.innerWidth > 768 ? 'bottom-right' : 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }else if(response.data.status === 2) {
+          toast('Sorry u can not rate an unorderd product', {
+            type: 'dark',
+            progressClassName: 'fancy-progress-bar',
+            position: window.innerWidth > 768 ? 'bottom-right' : 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+      
+       else {
+        // Handle other status cases if needed
+        toast('Review submitted successfully!', {
+          type: 'success',
+          progressClassName: 'fancy-progress-bar',
+          position: window.innerWidth > 768 ? 'bottom-right' : 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
     } catch (error) {
       console.error('Error submitting review:', error);
+      toast('Failed to submit review', {
+        type: 'error',
+        progressClassName: 'fancy-progress-bar',
+        position: window.innerWidth > 768 ? 'bottom-right' : 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
-
   const ratingChanged = (newRating: number) => {
     setNewRating(newRating); // Set the new rating
     console.log(newRating);
