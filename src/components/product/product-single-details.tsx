@@ -199,7 +199,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
       try {
         const response = await fetch(`https://fun2sh.deificindia.com/reviews?product_id=${product.id}`);
         const data = await response.json();
-        setOverallRating(data.overall_rating)
+         setOverallRating(parseFloat(data.overall_rating).toFixed(1));
         
         setReviews(data.reviews.data); 
         console.log(data.reviews.data)// Assuming the reviews are in the "data" field
@@ -252,51 +252,54 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
           </div>
         </div>
 
-        {/* Customer Reviews and Ratings Section */}
-        <h2 className="text-lg font-semibold mt-4 col-span-5">
-          Customer Reviews and Ratings
-        </h2>
+        {width >= 1024 && (
+  <>
+    {/* Customer Reviews and Ratings Section */}
+    <h2 className="text-lg font-semibold mt-4 col-span-5">
+      Customer Reviews and Ratings
+    </h2>
 
-        {/* Button for toggling all reviews */}
-        <Button
-          variant="slim"
-          onClick={handleToggleReviews}
-          className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
-        >
-          {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
-        </Button>
+    {/* Button for toggling all reviews */}
+    <Button
+      variant="slim"
+      onClick={handleToggleReviews}
+      className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
+    >
+      {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
+    </Button>
 
-        {/* Display the reviews if toggled on */}
-        {showReviews && (
-          <div className="mt-4 col-span-5">
-            {reviews?.length > 0 ? (
-              reviews.map((review) => (
-                <div key={review.id} className="border-b border-gray-300 py-4">
-                  <h3 className="font-bold">{review.name}</h3>{' '}
-                  {/* Assuming `user_id` can be replaced with `name` */}
-                  <p className="text-sm">{review.comment}</p>
-                  <p className="text-sm text-gray-500 flex items-center">
-                    Rating:
-                    <span className="ml-2 flex">
-                      {Array.from({ length: review.rating }, (_, index) => (
-                        <FaStar key={index} className="text-yellow-500" />
-                      ))}
-                      {Array.from({ length: 5 - review.rating }, (_, index) => (
-                        <FaStar
-                          key={index + review.rating}
-                          className="text-gray-300"
-                        />
-                      ))}
-                    </span>
-                    <span className="ml-2">{review.rating} / 5</span>
-                  </p>
-                </div>
-              ))
-            ) : (
-              <p className="text-gray-600">No reviews yet.</p>
-            )}
-          </div>
+    {/* Display the reviews if toggled on */}
+    {showReviews && (
+      <div className="mt-4 col-span-5">
+        {reviews?.length > 0 ? (
+          reviews.map((review) => (
+            <div key={review.id} className="border-b border-gray-300 py-4">
+              <h3 className="font-bold">{review.name}</h3>
+              <p className="text-sm">{review.comment}</p>
+              <p className="text-sm text-gray-500 flex items-center">
+                Rating:
+                <span className="ml-2 flex">
+                  {Array.from({ length: review.rating }, (_, index) => (
+                    <FaStar key={index} className="text-yellow-500" />
+                  ))}
+                  {Array.from({ length: 5 - review.rating }, (_, index) => (
+                    <FaStar
+                      key={index + review.rating}
+                      className="text-gray-300"
+                    />
+                  ))}
+                </span>
+                <span className="ml-2">{review.rating} / 5</span>
+              </p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600">No reviews yet.</p>
         )}
+      </div>
+    )}
+  </>
+)}
       </div>
 
       <div className="col-span-4 pt-8 lg:pt-0">
@@ -594,6 +597,54 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
           {/* {console.log(product.shop)} */}
 
           {/* Display the reviews if toggled on */}
+          {width < 1024 && (
+  <>
+    {/* Customer Reviews and Ratings Section */}
+    <h2 className="text-lg font-semibold mt-4 col-span-5">
+      Customer Reviews and Ratings
+    </h2>
+
+    {/* Button for toggling all reviews */}
+    <Button
+      variant="slim"
+      onClick={handleToggleReviews}
+      className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
+    >
+      {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
+    </Button>
+
+    {/* Display the reviews if toggled on */}
+    {showReviews && (
+      <div className="mt-4 col-span-5">
+        {reviews?.length > 0 ? (
+          reviews.map((review) => (
+            <div key={review.id} className="border-b border-gray-300 py-4">
+              <h3 className="font-bold">{review.name}</h3>
+              <p className="text-sm">{review.comment}</p>
+              <p className="text-sm text-gray-500 flex items-center">
+                Rating:
+                <span className="ml-2 flex">
+                  {Array.from({ length: review.rating }, (_, index) => (
+                    <FaStar key={index} className="text-yellow-500" />
+                  ))}
+                  {Array.from({ length: 5 - review.rating }, (_, index) => (
+                    <FaStar
+                      key={index + review.rating}
+                      className="text-gray-300"
+                    />
+                  ))}
+                </span>
+                <span className="ml-2">{review.rating} / 5</span>
+              </p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600">No reviews yet.</p>
+        )}
+      </div>
+    )}
+  </>
+)}
         </div>
       </div>
     </div>
