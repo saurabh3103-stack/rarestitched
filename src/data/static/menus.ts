@@ -957,58 +957,58 @@ export const menu = [
 ];
 
 export const mobileMenu = [
-  {
-    id: 1,
-    path: '/',
-    label: 'menu-demos',
-    subMenu: [
-      {
-        id: 1,
-        path: '/',
-        label: 'menu-modern',
-      },
-      {
-        id: 2,
-        path: '/standard',
-        label: 'menu-standard',
-      },
-      {
-        id: 3,
-        path: '/minimal',
-        label: 'menu-minimal',
-      },
-      {
-        id: 4,
-        path: '/vintage',
-        label: 'menu-vintage',
-      },
-      {
-        id: 5,
-        path: '/classic',
-        label: 'menu-classic',
-      },
-      {
-        id: 6,
-        path: '/trendy',
-        label: 'menu-trendy',
-      },
-      {
-        id: 7,
-        path: '/elegant',
-        label: 'menu-elegant',
-      },
-      {
-        id: 8,
-        path: '/refined',
-        label: 'menu-refined',
-      },
-      {
-        id: 9,
-        path: '/fashion',
-        label: 'menu-fashion',
-      },
-    ],
-  },
+  // {
+  //   id: 1,
+  //   path: '/',
+  //   label: 'menu-demos',
+  //   subMenu: [
+  //     {
+  //       id: 1,
+  //       path: '/',
+  //       label: 'menu-modern',
+  //     },
+  //     {
+  //       id: 2,
+  //       path: '/standard',
+  //       label: 'menu-standard',
+  //     },
+  //     {
+  //       id: 3,
+  //       path: '/minimal',
+  //       label: 'menu-minimal',
+  //     },
+  //     {
+  //       id: 4,
+  //       path: '/vintage',
+  //       label: 'menu-vintage',
+  //     },
+  //     {
+  //       id: 5,
+  //       path: '/classic',
+  //       label: 'menu-classic',
+  //     },
+  //     {
+  //       id: 6,
+  //       path: '/trendy',
+  //       label: 'menu-trendy',
+  //     },
+  //     {
+  //       id: 7,
+  //       path: '/elegant',
+  //       label: 'menu-elegant',
+  //     },
+  //     {
+  //       id: 8,
+  //       path: '/refined',
+  //       label: 'menu-refined',
+  //     },
+  //     {
+  //       id: 9,
+  //       path: '/fashion',
+  //       label: 'menu-fashion',
+  //     },
+  //   ],
+  // },
   {
     id: 2,
     path: '/search?category=men',
@@ -1748,93 +1748,93 @@ export const mobileMenu = [
     path: '/shops',
     label: 'menu-shops',
   },
-  {
-    id: 7,
-    path: '/',
-    label: 'menu-pages',
-    subMenu: [
-      {
-        id: 1,
-        path: '/',
-        label: 'menu-users',
-        subMenu: [
-          {
-            id: 1,
-            path: '/my-account',
-            label: 'menu-my-account',
-          },
-          {
-            id: 2,
-            path: '/signin',
-            label: 'menu-sign-in',
-          },
-          {
-            id: 3,
-            path: '/signup',
-            label: 'menu-sign-up',
-          },
-          {
-            id: 4,
-            path: '/forget-password',
-            label: 'menu-forget-password',
-          },
-        ],
-      },
-      {
-        id: 2,
-        path: '/offers',
-        label: 'menu-offers',
-      },
-      {
-        id: 3,
-        path: '/faq',
-        label: 'menu-faq',
-      },
-      {
-        id: 4,
-        path: '/privacy',
-        label: 'menu-privacy-policy',
-      },
-      {
-        id: 5,
-        path: '/terms',
-        label: 'menu-terms-condition',
-      },
-      {
-        id: 6,
-        path: '/contact-us',
-        label: 'menu-contact-us',
-      },
-      {
-        id: 7,
-        path: '/checkout',
-        label: 'menu-checkout',
-      },
-      {
-        id: 8,
-        path: '/collections/on-sale',
-        label: 'menu-collection',
-      },
-      {
-        id: 9,
-        path: '/search',
-        label: 'menu-category',
-      },
-      {
-        id: 10,
-        path: '/my-account/orders',
-        label: 'menu-order',
-      },
-      {
-        id: 11,
-        path: '/404',
-        label: 'menu-404',
-      },
+  // {
+  //   id: 7,
+  //   path: '/',
+  //   label: 'menu-pages',
+  //   subMenu: [
+  //     {
+  //       id: 1,
+  //       path: '/',
+  //       label: 'menu-users',
+  //       subMenu: [
+  //         {
+  //           id: 1,
+  //           path: '/my-account',
+  //           label: 'menu-my-account',
+  //         },
+  //         {
+  //           id: 2,
+  //           path: '/signin',
+  //           label: 'menu-sign-in',
+  //         },
+  //         {
+  //           id: 3,
+  //           path: '/signup',
+  //           label: 'menu-sign-up',
+  //         },
+  //         {
+  //           id: 4,
+  //           path: '/forget-password',
+  //           label: 'menu-forget-password',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: 2,
+  //       path: '/offers',
+  //       label: 'menu-offers',
+  //     },
+  //     {
+  //       id: 3,
+  //       path: '/faq',
+  //       label: 'menu-faq',
+  //     },
+  //     {
+  //       id: 4,
+  //       path: '/privacy',
+  //       label: 'menu-privacy-policy',
+  //     },
+      // {
+      //   id: 5,
+      //   path: '/terms',
+      //   label: 'menu-terms-condition',
+      // },
+      // {
+      //   id: 6,
+      //   path: '/contact-us',
+      //   label: 'menu-contact-us',
+      // },
+      // {
+      //   id: 7,
+      //   path: '/checkout',
+      //   label: 'menu-checkout',
+      // },
+      // {
+      //   id: 8,
+      //   path: '/collections/on-sale',
+      //   label: 'menu-collection',
+      // },
+      // {
+      //   id: 9,
+      //   path: '/search',
+      //   label: 'menu-category',
+      // },
+      // {
+      //   id: 10,
+      //   path: '/my-account/orders',
+      //   label: 'menu-order',
+      // },
+      // {
+      //   id: 11,
+      //   path: '/404',
+      //   label: 'menu-404',
+      // },
       // {
       //   id: 12,
       //   path: '/become-seller',
       //   label: 'menu-become-seller',
       // },
-    ],
-  },
+    // ],
+  // },
 ];

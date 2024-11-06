@@ -170,7 +170,7 @@ const ProductCard: FC<ProductProps> = ({
             display: 'inline-flex',
             alignItems: 'center',
             backgroundColor: '#f0f0f0',
-            padding: '5px 10px',
+            padding: '5px',
             borderRadius: '20px',
             cursor: 'pointer',
             marginTop: '10px',
@@ -178,8 +178,8 @@ const ProductCard: FC<ProductProps> = ({
         >
           {overallRating !== null ? (
             <>
-              <span style={{ marginRight: '5px' }}>{overallRating.toFixed(1)}</span> {/* Display dynamic rating */}
-              <FaStar color="gold" /> {/* Display star icon */}
+              <span className='fw-bold' style={{ marginRight: '3px',fontSize:"1rem" }}>{overallRating.toFixed(1)}</span> {/* Display dynamic rating */}
+              <FaStar color="gold" size={15}/> {/* Display star icon */}
             </>
           ) : (
             <span>Loading...</span> // Optional loading state

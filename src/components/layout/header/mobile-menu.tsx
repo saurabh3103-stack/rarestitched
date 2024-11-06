@@ -54,6 +54,7 @@ export default function MobileMenu() {
               className="block w-full"
               onClick={closeSidebar}
             >
+              {console.log(data.label)}
               {t(`${data.label}`)}
             </span>
           </Link>
