@@ -23,8 +23,10 @@ import { toast } from 'react-toastify';
 import { FaStar } from 'react-icons/fa';
 const FavoriteButton = dynamic(() => import('@components/product/favorite-button'), { ssr: false });
 import { useSanitizeContent } from '@lib/sanitize-content';
+import { cn } from '@lib/cn';
 
 export default function ProductPopup({ productSlug }: { productSlug: string }) {
+ 
   const { t } = useTranslation('common');
   const { closeModal, openSidebar } = useUI();
   const { data: product, isLoading: loading }: any = useProduct({ slug: productSlug });
@@ -61,12 +63,14 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
 
   // State to store the overall rating
   const [overallRating, setOverallRating] = useState<string | null>(null);
-
+  const [imageHighLight, setImageHighLight] = useState<String | null>(null);
   // Fetch reviews and update overall rating
   useEffect(() => {
     const fetchReviews = async () => {
       try {
         const response = await fetch(`https://fun2sh.deificindia.com/reviews?product_id=${product.id}`);
+       setImageHighLight(product.product_category)
+       
         const data = await response.json();
         // Convert rating to fixed decimal format
         setOverallRating(parseFloat(data.overall_rating).toFixed(1));
@@ -159,6 +163,27 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
             className="object-cover"
             sizes="(max-width: 768px) 100vw"
           />
+           {imageHighLight && (
+           
+    <div
+   
+      className={cn(
+        "absolute top-0 left-0 text-white text-sm font-semibold px-3 py-1 rounded-br-md",
+        {
+          "bg-blue-500": imageHighLight === "Discounted",
+          "bg-green-500": imageHighLight === "Most Trending",
+          "bg-red-500": imageHighLight !== "Discounted" && imageHighLight !== "Most Trending"
+        }
+      )}
+    >
+
+
+      
+      {imageHighLight}
+     
+    </div>
+   
+  )}
         </div>
 
         <div className="flex flex-col w-full p-5 md:p-8">

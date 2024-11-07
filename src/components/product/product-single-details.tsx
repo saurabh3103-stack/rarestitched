@@ -34,6 +34,7 @@ import axios from 'axios';
 import { useUI } from '@contexts/ui.context';
 import { useUser } from '@framework/auth';
 import { User } from '@type/index';
+import { cn } from '@lib/cn';
 
 const FavoriteButton = dynamic(
   () => import('@components/product/favorite-button'),
@@ -192,13 +193,14 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   const handleToggleReviews = () => {
     setShowReviews((prev) => !prev);
   };
-
+  const [imageHighLight, setImageHighLight] = useState<String | null>(null);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
         const response = await fetch(`https://fun2sh.deificindia.com/reviews?product_id=${product.id}`);
         const data = await response.json();
+        setImageHighLight(product.product_category)
          setOverallRating(parseFloat(data.overall_rating).toFixed(1));
         
         setReviews(data.reviews.data); 
@@ -235,6 +237,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   onClick={() => setCurrentImage(imageSrc)}
                   className="w-full h-full object-cover rounded-lg border border-gray-300"
                 />
+              
               </div>
             );
           })}
@@ -249,6 +252,21 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
               className="img-fluid w-full h-full object-contain"
               style={{ maxHeight: '600px' }}
             />
+             {imageHighLight && (
+    <div
+      className={cn(
+        "absolute top-0 left-0 text-white text-sm font-semibold px-3 py-1 rounded-br-md",
+       {
+          "bg-blue-500": imageHighLight === "Discounted",
+          "bg-green-500": imageHighLight === "Most Trending",
+          "bg-red-500": imageHighLight !== "Discounted" && imageHighLight !== "Most Trending"
+        }
+      )}
+    >
+      {imageHighLight}
+     
+    </div>
+  )}
           </div>
         </div>
 

@@ -20,7 +20,11 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
       className="relative inline-block ltr:text-left rtl:text-right"
     >
       <Menu.Button className="flex items-center focus:outline-0" as="div">
+      {
+          console.log(me)
+        }
         <Avatar
+       
           src={
             me?.profile?.avatar?.thumbnail ?? siteSettings?.avatar?.placeholder
           }

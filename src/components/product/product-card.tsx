@@ -47,17 +47,24 @@ const ProductCard: FC<ProductProps> = ({
   });
 
   const [overallRating, setOverallRating] = useState<number | null>(null);
+  const [imageHighLight, setImageHighLight] = useState<String | null>(null);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
         const response = await fetch(`https://fun2sh.deificindia.com/reviews?product_id=${product.id}`);
         const data = await response.json();
+   
+        setImageHighLight(product.product_category)
         setOverallRating(data.overall_rating);
+        
       } catch (error) {
         console.error('Error fetching reviews:', error);
       }
     };
+
+
+
 
     fetchReviews();
   }, [product.id]);
@@ -114,22 +121,41 @@ const ProductCard: FC<ProductProps> = ({
           imageContentClassName
         )}
       >
-        <Image
-          src={image?.original ?? siteSettings?.product?.placeholderImage()}
-          fill
-          loading={imgLoading}
-          quality={100}
-          alt={name || 'Product Image'}
-          className={cn('bg-gray-300 object-cover', {
-            'rounded-md transition duration-200 ease-in group-hover:rounded-b-none':
-              variant === 'grid' || variant === 'gridSmall',
-            'transition duration-150 ease-linear transform group-hover:scale-105':
-              variant === 'gridSlim' || variant === 'gridSlimLarge',
-            'ltr:rounded-l-md rtl:rounded-r-md transition duration-200 ease-linear transform group-hover:scale-105':
-              variant === 'list',
-          })}
-          sizes="(max-width: 768px) 100vw"
-        />
+       <div className="">
+  <Image
+    src={image?.original ?? siteSettings?.product?.placeholderImage()}
+    fill
+    loading={imgLoading}
+    quality={100}
+    alt={name || 'Product Image'}
+    className={cn('bg-gray-300 object-cover', {
+      'rounded-md transition duration-200 ease-in group-hover:rounded-b-none':
+        variant === 'grid' || variant === 'gridSmall',
+      'transition duration-150 ease-linear transform group-hover:scale-105':
+        variant === 'gridSlim' || variant === 'gridSlimLarge',
+      'ltr:rounded-l-md rtl:rounded-r-md transition duration-200 ease-linear transform group-hover:scale-105':
+        variant === 'list',
+    })}
+    sizes="(max-width: 768px) 100vw"
+  />
+
+  {/* Sale Badge with Conditions */}
+  {imageHighLight && (
+    <div
+      className={cn(
+        "absolute top-0 left-0 text-white text-sm font-semibold px-3 py-1 rounded-br-md",
+        {
+          "bg-blue-500": imageHighLight === "Discounted",
+          "bg-green-500": imageHighLight === "Most Trending",
+          "bg-red-500": imageHighLight !== "Discounted" && imageHighLight !== "Most Trending"
+        }
+      )}
+    >
+      {imageHighLight}
+      {console.log(imageHighLight==="Most Trending")}
+    </div>
+  )}
+</div>
       </div>
 
       <div
@@ -165,26 +191,40 @@ const ProductCard: FC<ProductProps> = ({
 
         {/* Dynamic Star Rating */}
         <div
-          className="product-rating-button"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            backgroundColor: '#f0f0f0',
-            padding: '5px',
-            borderRadius: '20px',
-            cursor: 'pointer',
-            marginTop: '10px',
-          }}
-        >
-          {overallRating !== null ? (
-            <>
-              <span className='fw-bold' style={{ marginRight: '3px',fontSize:"1rem" }}>{overallRating.toFixed(1)}</span> {/* Display dynamic rating */}
-              <FaStar color="gold" size={15}/> {/* Display star icon */}
-            </>
-          ) : (
-            <span>Loading...</span> // Optional loading state
-          )}
-        </div>
+  className="product-rating-button"
+  style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0',
+    padding: '4px 8px', // Reduced padding for more compact space
+    borderRadius: '15px', // Smaller border radius for a more compact look
+    cursor: 'pointer',
+    marginTop: '10px',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)', // Subtle shadow for a cleaner look
+    transition: 'background-color 0.3s', // Smooth hover effect
+    fontSize: '0.75rem', // Further reduced font size
+  }}
+  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e0e0e0'} // Hover effect
+  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f0f0f0'} // Revert on mouse leave
+>
+  {overallRating !== null ? (
+    <>
+      <span
+        className='fw-bold'
+        style={{
+          marginRight: '3px', // Reduced space between text and star
+          color: '#333', // Slightly darker color for text
+        }}
+      >
+        {overallRating.toFixed(1)}
+      </span>
+      <FaStar color="gold" size={14} /> {/* Reduced star size for compact display */}
+    </>
+  ) : (
+    <span style={{ color: '#999' }}>Loading...</span> // Optional loading state with lighter color
+  )}
+</div>
+
 
         <div
           className={`text-heading font-semibold text-sm sm:text-base mt-1.5 space-x-1 rtl:space-x-reverse ${
