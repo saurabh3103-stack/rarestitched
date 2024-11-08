@@ -63,6 +63,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
     amount: product?.sale_price ? product?.sale_price : product?.price!,
     baseAmount: product?.price,
   });
+  console.log(product);
 
   const variations = getVariations(product?.variations!);
   const [productId, setProductId] = useState(null);
@@ -209,35 +210,84 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
     fetchReviews();
   }, [product]);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+
   return (
     <div className="items-start block grid-cols-9 pb-10 lg:grid gap-x-10 xl:gap-x-14 pt-7 lg:pb-14 2xl:pb-20 ">
       <div className="col-span-5 grid grid-cols-5 gap-2.5">
         {/* Thumbnails column (col-1) */}
-        <div className="col-span-1 flex flex-col items-start">
-          {(combineImages?.length > 1
-            ? combineImages
-            : product.variation_options
-          )?.map((item, index) => {
-            const imageSrc =
-              item?.original ||
-              item?.image?.original ||
-              '/assets/placeholder/products/product-gallery.svg';
+         {/* // style={{ minHeight: '100px' }}  */}<>
+         <div
+            className="col-span-1 flex flex-col items-start custom-scrollbar"
+            style={{
+              maxHeight: '60vh', // Max height set to 50% of the viewport height for a more responsive layout
+              overflowY: 'auto', // Enable vertical scrolling if content overflows
+            }}
+          
+          >
+            {(combineImages?.length > 1
+              ? combineImages
+              : product.variation_options
+            )?.map((item, index) => {
+              const imageSrc =
+                item?.original ||
+                item?.image?.original ||
+                '/assets/placeholder/products/product-gallery.svg';
 
-            return (
-              <div
-                key={index}
-                className="relative mb-2 rounded-lg overflow-hidden border border-gray-300 shadow-md transition-transform duration-200 hover:scale-105 cursor-pointer"
-              >
-                <img
-                  src={imageSrc}
-                  alt={`Thumbnail ${index}`}
-                  onClick={() => setCurrentImage(imageSrc)}
-                  className="w-full h-full object-cover rounded-lg border border-gray-300"
-                />
-              </div>
-            );
-          })}
-        </div>
+              return (
+                <div
+                  key={index}
+                  style={{
+                    minWidth: '80px',
+                    minHeight: '80px',
+                    maxWidth: '100px',
+                    maxHeight: '100px',
+                    display: 'flex', // Aligns image within container
+                    alignItems: 'center', // Centers image vertically
+                    justifyContent: 'center', // Centers image horizontally
+                  }}
+                  className="relative mb-2 rounded-lg overflow-hidden border border-gray-300 shadow-md transition-transform duration-200 hover:scale-105 cursor-pointer"
+                >
+                  <img
+                    src={imageSrc}
+                    alt={`Thumbnail ${index}`}
+                    onClick={() => setCurrentImage(imageSrc)}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          <style>
+            {`
+          /* Webkit-based browsers (Chrome, Safari) */
+          .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+          }
+
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f0f0f0;
+          }
+
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #a0a0a0;
+            border-radius: 4px;
+          }
+
+          /* Firefox */
+          .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #a0a0a0 #f0f0f0;
+          }
+        `}
+          </style>
+        </>
 
         {/* Main image column (col-4) */}
         <div className="col-span-4">
@@ -412,6 +462,46 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                     disableDecrement={quantity === 1}
                     disableIncrement={Number(product.quantity) === quantity}
                   />
+                  {product?.size_chart && (
+                    <div>
+                      <div className="w-full">
+                        <button
+                          type="button"
+                          onClick={handleShow}
+                          className="text-white bg-black border border-gray-300 focus:outline-none hover:bg-gray-800 active:bg-black focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2"
+                          style={{
+                            backgroundColor: 'black !important',
+                          }}
+                        >
+                          Size Chart
+                        </button>
+                      </div>
+
+                      {show && (
+                        <div
+                          className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50"
+                          onClick={handleClose}
+                        >
+                          <div
+                            className="bg-white rounded-lg p-4 relative overflow-hidden w-full max-w-3xl mx-4 sm:mx-8 lg:mx-auto"
+                            onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside
+                          >
+                            <button
+                              className="absolute top-2 right-2 text-xl font-bold text-gray-700"
+                              onClick={handleClose}
+                            >
+                              &times;
+                            </button>
+                            <img
+                              src="https://www.adiricha.com/wp-content/uploads/2024/03/Adiricha-Men-Shirt-Size-Chart.jpg"
+                              alt="Size Chart"
+                              className="w-full h-auto object-contain"
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="text-base text-red-500 whitespace-nowrap ltr:lg:ml-7 rtl:lg:mr-7">
@@ -607,7 +697,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
               <img
                 src="https://cdn-icons-png.flaticon.com/128/11153/11153370.png"
                 alt="Icon"
-               className="w-14 h-14"
+                className="w-14 h-14"
               />
               <span className="mt-1 text-xs font-semibold">
                 Easy Returns & Refunds

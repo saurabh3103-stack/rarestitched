@@ -31,6 +31,7 @@ const FAQAccordion: React.FC<FAQProps> = ({
       ) : (
         <>
           <Accordion items={faqs} translatorNS="faq" />
+          {console.log(faqs)}
           {hasNextPage && (
             <div className="mt-8 grid place-content-center md:mt-10">
               <Button

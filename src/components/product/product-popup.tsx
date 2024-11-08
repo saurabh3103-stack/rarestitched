@@ -278,12 +278,16 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
   </div>
 
   {/* Saved Amount */}
-  <div className="text-sm font-semibold text-green-600 md:text-base lg:text-lg mr-2">
-    {`₹${(
+<div className="text-sm font-semibold text-green-600 md:text-base lg:text-lg mr-2">
+  {basePrice && price ? (
+    `₹${(
       parseFloat(basePrice.replace('₹', '')) - 
       parseFloat(price.replace('₹', ''))
-    ).toFixed(2)}`}
-  </div>
+    ).toFixed(2)}`
+  ) : (
+    "N/A" // Fallback text if either basePrice or price is missing
+  )}
+</div>
 
   {/* Clap Icon */}
   <div className="text-yellow-500">
