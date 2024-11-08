@@ -143,7 +143,7 @@ const ProductCard: FC<ProductProps> = ({
   {imageHighLight && (
     <div
       className={cn(
-        "absolute top-0 left-0 text-white text-sm font-semibold px-3 py-1 rounded-br-md",
+        "absolute top-0 left-0 text-white text-xs px-2 py-1 rounded-br-md",
         {
           "bg-blue-500": imageHighLight === "Discounted",
           "bg-green-500": imageHighLight === "Most Trending",
@@ -241,14 +241,14 @@ const ProductCard: FC<ProductProps> = ({
             </>
           ) : (
             <>
-              <span className="inline-block">{price}</span>
+              <span className="text-sm">{price}</span>
 
               {basePrice && (
                 <>
-                  <del className="font-normal text-gray-800 sm:text-base ltr:pl-1 rtl:pr-1">
+                  <del className="text-xs text-gray-800  ">
                     {basePrice}
                   </del>
-                  <span className="text-red-600 font-normal ltr:pl-2 rtl:pr-2">
+                  <span className=" text-xxs text-red-600 ">
                     {Math.round(
                       ((parseFloat(basePrice.replace('₹', '')) -
                         parseFloat(price.replace('₹', ''))) /

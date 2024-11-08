@@ -20,15 +20,15 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
       className="relative inline-block ltr:text-left rtl:text-right"
     >
       <Menu.Button className="flex items-center focus:outline-0" as="div">
-      {
-          console.log(me)
-        }
+      
         <Avatar
        
           src={
             me?.profile?.avatar?.thumbnail ?? siteSettings?.avatar?.placeholder
           }
-          title="user name"
+          title={
+            me?.name
+          }
           className="h-[38px] w-[38px] border-border-200"
         />
         <span className="sr-only">{t('user-avatar')}</span>
@@ -71,6 +71,7 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
                       )}
                     >
                       {t(name)}
+                      {console.log(slug,name)}
                     </Link>
                   </div>
                 )}

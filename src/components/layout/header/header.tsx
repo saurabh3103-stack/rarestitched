@@ -24,6 +24,8 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaTruck } from 'react-icons/fa';
+import Link from '@components/ui/link';
 import { useWindowSize } from 'react-use';
 const CartButton = dynamic(() => import('@components/cart/cart-button'), {
   ssr: false,
@@ -84,12 +86,14 @@ const Header: React.FC<Props> = ({ variant = 'default' }) => {
       !isLoading &&
       shopData);
 
-     
   return (
     <header
       id="siteHeader"
       ref={siteHeaderRef}
-      className={classNames("w-full relative z-20", !isAlertMessage? "h-16 sm:h-20 lg:h-24": "custom-height-control")}
+      className={classNames(
+        'w-full relative z-20',
+        !isAlertMessage ? 'h-16 sm:h-20 lg:h-24' : 'custom-height-control',
+      )}
     >
       {width >= RESPONSIVE_WIDTH &&
       underMaintenanceIsComing &&
@@ -210,6 +214,16 @@ const Header: React.FC<Props> = ({ variant = 'default' }) => {
 						</div> */}
 
             <CartButton />
+            <div className="flex flex-col items-center">
+              <Link
+                href="/my-account/orders"
+                className="flex flex-col items-center gap-1   rounded-lg   transition-colors"
+              >
+                <FaTruck className="text-lg" />
+                <span className="text-xxs font-bold text-gray-600 font-sans">Track Your Order</span>
+              </Link>
+            </div>
+
             <LoginButton />
           </div>
         </div>

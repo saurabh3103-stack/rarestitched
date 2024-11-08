@@ -45,6 +45,7 @@ export default function Home() {
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
           classNameInner="aspect-[3.15/1]"
         />
+         <NewArrivalsProductFeed />
         <BrandGridBlock sectionHeading="text-top-brands" />
         <BannerCard
           data={banner[1]}
@@ -58,7 +59,7 @@ export default function Home() {
           data={productBanner}
         />
         <ExclusiveBlock />
-        <NewArrivalsProductFeed />
+        {/* <NewArrivalsProductFeed /> */}
         <DownloadApps />
         <Support />
         <Instagram />

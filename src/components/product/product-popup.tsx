@@ -20,6 +20,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { PiHandsClapping } from "react-icons/pi";
 import { FaStar } from 'react-icons/fa';
 const FavoriteButton = dynamic(() => import('@components/product/favorite-button'), { ssr: false });
 import { useSanitizeContent } from '@lib/sanitize-content';
@@ -168,7 +169,7 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
     <div
    
       className={cn(
-        "absolute top-0 left-0 text-white text-sm font-semibold px-3 py-1 rounded-br-md",
+        "absolute top-0 left-0 text-white text-xs px-2 py-1 rounded-br-md",
         {
           "bg-blue-500": imageHighLight === "Discounted",
           "bg-green-500": imageHighLight === "Most Trending",
@@ -271,6 +272,26 @@ export default function ProductPopup({ productSlug }: { productSlug: string }) {
                 </>
               )}
             </div>
+            <div className="flex flex-row items-center mt-4">
+  <div className="text-sm font-semibold text-heading md:text-base lg:text-lg mr-2">
+    You are Saving:
+  </div>
+
+  {/* Saved Amount */}
+  <div className="text-sm font-semibold text-green-600 md:text-base lg:text-lg mr-2">
+    {`₹${(
+      parseFloat(basePrice.replace('₹', '')) - 
+      parseFloat(price.replace('₹', ''))
+    ).toFixed(2)}`}
+  </div>
+
+  {/* Clap Icon */}
+  <div className="text-yellow-500">
+    {/* Font Awesome Clap Icon */}
+    <PiHandsClapping size={25}></PiHandsClapping>
+  </div>
+</div>
+
           </div>
 
           {Object.keys(variations).map((variation) => {

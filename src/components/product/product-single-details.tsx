@@ -55,7 +55,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   const [addToCartLoader, setAddToCartLoader] = useState<boolean>(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
-  const[overallRating,setOverallRating]=useState(null)
+  const [overallRating, setOverallRating] = useState(null);
   const [showReviews, setShowReviews] = useState(true);
   const { closeModal, openSidebar } = useUI();
 
@@ -66,14 +66,13 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
   const variations = getVariations(product?.variations!);
   const [productId, setProductId] = useState(null);
-  
+
   const { me } = useUser();
   const [id, setId] = useState(null);
   useEffect(() => {
     if (me?.id) {
       setId(me.id);
-      
-      
+
       // Set id only once when `me` is available
     }
   }, [me]);
@@ -93,8 +92,6 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   //   fetchData();
   // }, ); // Empty dependency array ensures this runs only once after the initial render// Empty dependency array ensures this runs only once after the initial render
 
-
- 
   const isSelected = !isEmpty(variations)
     ? !isEmpty(attributes) &&
       Object.keys(variations).every((variation) =>
@@ -175,7 +172,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   function handleBuyToCart() {
     // if (!isSelected) return;
     // router.push('/checkout');
-    addToCart()
+    addToCart();
     openCart();
   }
 
@@ -187,8 +184,6 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
     setReviews((prevReviews) => [...prevReviews, newReview]);
   };
 
-
-
   // Function to toggle the reviews visibility
   const handleToggleReviews = () => {
     setShowReviews((prev) => !prev);
@@ -198,18 +193,20 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch(`https://fun2sh.deificindia.com/reviews?product_id=${product.id}`);
+        const response = await fetch(
+          `https://fun2sh.deificindia.com/reviews?product_id=${product.id}`,
+        );
         const data = await response.json();
-        setImageHighLight(product.product_category)
-         setOverallRating(parseFloat(data.overall_rating).toFixed(1));
-        
-        setReviews(data.reviews.data); 
-        console.log(data.reviews.data)// Assuming the reviews are in the "data" field
+        setImageHighLight(product.product_category);
+        setOverallRating(parseFloat(data.overall_rating).toFixed(1));
+
+        setReviews(data.reviews.data);
+        console.log(data.reviews.data); // Assuming the reviews are in the "data" field
       } catch (error) {
-        console.error("Error fetching reviews:", error);
+        console.error('Error fetching reviews:', error);
       }
     };
-  
+
     fetchReviews();
   }, [product]);
   return (
@@ -237,7 +234,6 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   onClick={() => setCurrentImage(imageSrc)}
                   className="w-full h-full object-cover rounded-lg border border-gray-300"
                 />
-              
               </div>
             );
           })}
@@ -245,79 +241,85 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
         {/* Main image column (col-4) */}
         <div className="col-span-4">
-          <div className="relative rounded-lg overflow-hidden border border-gray-200 shadow-lg">
+          <div className="relative rounded-lg overflow-hidden w-full h-full border border-gray-200 shadow-lg">
             <img
               src={currentImage}
               alt="Selected"
-              className="img-fluid w-full h-full object-contain"
-              style={{ maxHeight: '600px' }}
+              className="object-cover w-full h-full max-h-[400px] md:max-h-[500px] lg:max-h-[600px]"
             />
-             {imageHighLight && (
-    <div
-      className={cn(
-        "absolute top-0 left-0 text-white text-sm font-semibold px-3 py-1 rounded-br-md",
-       {
-          "bg-blue-500": imageHighLight === "Discounted",
-          "bg-green-500": imageHighLight === "Most Trending",
-          "bg-red-500": imageHighLight !== "Discounted" && imageHighLight !== "Most Trending"
-        }
-      )}
-    >
-      {imageHighLight}
-     
-    </div>
-  )}
+            {imageHighLight && (
+              <div
+                className={cn(
+                  'absolute top-0 left-0 text-white text-xs px-2 py-1 rounded-br-md',
+                  {
+                    'bg-blue-500': imageHighLight === 'Discounted',
+                    'bg-green-500': imageHighLight === 'Most Trending',
+                    'bg-red-500': !['Discounted', 'Most Trending'].includes(
+                      imageHighLight,
+                    ),
+                  },
+                )}
+              >
+                {imageHighLight}
+              </div>
+            )}
           </div>
         </div>
 
         {width >= 1024 && (
-  <>
-    {/* Customer Reviews and Ratings Section */}
-    <h2 className="text-lg font-semibold mt-4 col-span-5">
-      Customer Reviews and Ratings
-    </h2>
+          <>
+            {/* Customer Reviews and Ratings Section */}
+            <h2 className="text-lg font-semibold mt-4 col-span-5">
+              Customer Reviews and Ratings
+            </h2>
 
-    {/* Button for toggling all reviews */}
-    <Button
-      variant="slim"
-      onClick={handleToggleReviews}
-      className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
-    >
-      {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
-    </Button>
+            {/* Button for toggling all reviews */}
+            <Button
+              variant="slim"
+              onClick={handleToggleReviews}
+              className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
+            >
+              {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
+            </Button>
 
-    {/* Display the reviews if toggled on */}
-    {showReviews && (
-      <div className="mt-4 col-span-5">
-        {reviews?.length > 0 ? (
-          reviews.map((review) => (
-            <div key={review.id} className="border-b border-gray-300 py-4">
-              <h3 className="font-bold">{review.name}</h3>
-              <p className="text-sm">{review.comment}</p>
-              <p className="text-sm text-gray-500 flex items-center">
-                Rating:
-                <span className="ml-2 flex">
-                  {Array.from({ length: review.rating }, (_, index) => (
-                    <FaStar key={index} className="text-yellow-500" />
-                  ))}
-                  {Array.from({ length: 5 - review.rating }, (_, index) => (
-                    <FaStar
-                      key={index + review.rating}
-                      className="text-gray-300"
-                    />
-                  ))}
-                </span>
-                <span className="ml-2">{review.rating} / 5</span>
-              </p>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-600">No reviews yet.</p>
+            {/* Display the reviews if toggled on */}
+            {showReviews && (
+              <div className="mt-4 col-span-5">
+                {reviews?.length > 0 ? (
+                  reviews.map((review) => (
+                    <div
+                      key={review.id}
+                      className="border-b border-gray-300 py-4"
+                    >
+                      <h3 className="font-bold">{review.name}</h3>
+                      <p className="text-sm">{review.comment}</p>
+                      <p className="text-sm text-gray-500 flex items-center">
+                        Rating:
+                        <span className="ml-2 flex">
+                          {Array.from({ length: review.rating }, (_, index) => (
+                            <FaStar key={index} className="text-yellow-500" />
+                          ))}
+                          {Array.from(
+                            { length: 5 - review.rating },
+                            (_, index) => (
+                              <FaStar
+                                key={index + review.rating}
+                                className="text-gray-300"
+                              />
+                            ),
+                          )}
+                        </span>
+                        <span className="ml-2">{review.rating} / 5</span>
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-600">No reviews yet.</p>
+                )}
+              </div>
+            )}
+          </>
         )}
-      </div>
-    )}
-  </>
-)}
       </div>
 
       <div className="col-span-4 pt-8 lg:pt-0">
@@ -513,9 +515,9 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
             </div>
           </div>
         </div>
-
         <div className="py-6">
           <ul className="pb-1 space-y-5 text-sm">
+            {/* Existing code */}
             {product?.sku && (
               <li>
                 <span className="inline-block font-semibold text-heading ltr:pr-2 rtl:pl-2">
@@ -524,7 +526,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                 {product?.sku}
               </li>
             )}
-
+            {/* Categories */}
             {product?.categories &&
               Array.isArray(product.categories) &&
               product.categories.length > 0 && (
@@ -532,7 +534,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   <span className="inline-block font-semibold text-heading ltr:pr-2 rtl:pl-2">
                     Category:
                   </span>
-                  {product.categories.map((category: any, index: number) => (
+                  {product.categories.map((category, index) => (
                     <Link
                       key={index}
                       href={`${ROUTES.CATEGORY}/${category?.slug}`}
@@ -545,7 +547,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   ))}
                 </li>
               )}
-
+            {/* Tags */}
             {product?.tags &&
               Array.isArray(product.tags) &&
               product.tags.length > 0 && (
@@ -553,11 +555,11 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   <span className="inline-block font-semibold text-heading ltr:pr-2 rtl:pl-2">
                     Tags:
                   </span>
-                  {product.tags.map((tag: any) => (
+                  {product.tags.map((tag) => (
                     <Link
                       key={tag.id}
                       href={`${ROUTES.COLLECTIONS}/${tag?.slug}`}
-                      className="inline-block ltr:pr-1.5 rtl:pl-1.5 transition hover :underline hover:text-heading ltr:last:pr-0 rtl:last:pl-0"
+                      className="inline-block ltr:pr-1.5 rtl:pl-1.5 transition hover:underline hover:text-heading ltr:last:pr-0 rtl:last:pl-0"
                     >
                       {tag.name}
                       <span className="text-heading">,</span>
@@ -565,7 +567,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   ))}
                 </li>
               )}
-
+            {/* Brand */}
             <li>
               <span className="inline-block font-semibold text-heading ltr:pr-2 rtl:pl-2">
                 {t('text-brand-colon')}
@@ -577,7 +579,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                 {product?.type?.name}
               </Link>
             </li>
-
+            {/* Shop */}
             <li>
               <span className="inline-block font-semibold text-heading ltr:pr-2 rtl:pl-2">
                 {t('text-shop-colon')}
@@ -590,6 +592,38 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
               </Link>
             </li>
           </ul>
+
+          {/* New section for Secure Payment, Easy Returns & Refunds, and 100% Genuine Product */}
+          <div className="flex justify-between mt-6">
+            <div className="flex flex-col items-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/5163/5163977.png"
+                alt="Icon"
+                className="w-14 h-14"
+              />
+              <span className="mt-1 text-xs font-semibold">Free Shipping</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/11153/11153370.png"
+                alt="Icon"
+               className="w-14 h-14"
+              />
+              <span className="mt-1 text-xs font-semibold">
+                Easy Returns & Refunds
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/5650/5650931.png"
+                alt="Icon"
+                className="w-14 h-14"
+              />
+              <span className="mt-1 text-xs font-semibold">
+                100% Genuine Product
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Review Form Section */}
@@ -616,53 +650,65 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
           {/* Display the reviews if toggled on */}
           {width < 1024 && (
-  <>
-    {/* Customer Reviews and Ratings Section */}
-    <h2 className="text-lg font-semibold mt-4 col-span-5">
-      Customer Reviews and Ratings
-    </h2>
+            <>
+              {/* Customer Reviews and Ratings Section */}
+              <h2 className="text-lg font-semibold mt-4 col-span-5">
+                Customer Reviews and Ratings
+              </h2>
 
-    {/* Button for toggling all reviews */}
-    <Button
-      variant="slim"
-      onClick={handleToggleReviews}
-      className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
-    >
-      {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
-    </Button>
+              {/* Button for toggling all reviews */}
+              <Button
+                variant="slim"
+                onClick={handleToggleReviews}
+                className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
+              >
+                {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
+              </Button>
 
-    {/* Display the reviews if toggled on */}
-    {showReviews && (
-      <div className="mt-4 col-span-5">
-        {reviews?.length > 0 ? (
-          reviews.map((review) => (
-            <div key={review.id} className="border-b border-gray-300 py-4">
-              <h3 className="font-bold">{review.name}</h3>
-              <p className="text-sm">{review.comment}</p>
-              <p className="text-sm text-gray-500 flex items-center">
-                Rating:
-                <span className="ml-2 flex">
-                  {Array.from({ length: review.rating }, (_, index) => (
-                    <FaStar key={index} className="text-yellow-500" />
-                  ))}
-                  {Array.from({ length: 5 - review.rating }, (_, index) => (
-                    <FaStar
-                      key={index + review.rating}
-                      className="text-gray-300"
-                    />
-                  ))}
-                </span>
-                <span className="ml-2">{review.rating} / 5</span>
-              </p>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-600">No reviews yet.</p>
-        )}
-      </div>
-    )}
-  </>
-)}
+              {/* Display the reviews if toggled on */}
+              {showReviews && (
+                <div className="mt-4 col-span-5">
+                  {reviews?.length > 0 ? (
+                    reviews.map((review) => (
+                      <div
+                        key={review.id}
+                        className="border-b border-gray-300 py-4"
+                      >
+                        <h3 className="font-bold">{review.name}</h3>
+                        <p className="text-sm">{review.comment}</p>
+                        <p className="text-sm text-gray-500 flex items-center">
+                          Rating:
+                          <span className="ml-2 flex">
+                            {Array.from(
+                              { length: review.rating },
+                              (_, index) => (
+                                <FaStar
+                                  key={index}
+                                  className="text-yellow-500"
+                                />
+                              ),
+                            )}
+                            {Array.from(
+                              { length: 5 - review.rating },
+                              (_, index) => (
+                                <FaStar
+                                  key={index + review.rating}
+                                  className="text-gray-300"
+                                />
+                              ),
+                            )}
+                          </span>
+                          <span className="ml-2">{review.rating} / 5</span>
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-600">No reviews yet.</p>
+                  )}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
