@@ -10,7 +10,7 @@ import { useCart } from '@store/quick-cart/cart.context';
 
 const Coupon = ({ subtotal }: { subtotal: number }) => {
   const { t } = useTranslation('common');
-  const [hasCoupon, setHasCoupon] = useState(false);
+  const [hasCoupon, setHasCoupon] = useState(true);
   const { items, total } = useCart();
   const [coupon, applyCoupon] = useAtom(couponAtom);
   const {
@@ -60,6 +60,12 @@ const Coupon = ({ subtotal }: { subtotal: number }) => {
   }
 
   return (
+    <div className="w-full">
+    {hasCoupon && (
+      <p className="text-[13px] font-bold mb-2 text-heading">
+        {t('Have a coupon?')}
+      </p>
+    )}
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
@@ -69,7 +75,7 @@ const Coupon = ({ subtotal }: { subtotal: number }) => {
         {...register('code', { required: 'text-coupon-required' })}
         placeholder={t('text-enter-coupon')}
         variant="outline"
-        className="mb-4 sm:mb-0 ltr:sm:mr-2.5 ltr:lg:mr-4 rtl:sm:ml-2.5 rtl:lg:ml-4 flex-1 w-full"
+        className="mb-4 mt-3 sm:mb-0 ltr:sm:mr-2.5 ltr:lg:mr-4 rtl:sm:ml-2.5 rtl:lg:ml-4 flex-1 w-full"
         dimension="small"
         error={t(formError?.code!)}
       />
@@ -77,11 +83,12 @@ const Coupon = ({ subtotal }: { subtotal: number }) => {
         loading={loading}
         disabled={loading}
         variant="custom"
-        className="w-full sm:w-40 lg:w-auto h-[46px] lg:px-5 bg-heading text-white hover:bg-gray-600"
+        className="w-full mt-3 sm:w-40 lg:w-auto h-[46px] lg:px-5 bg-heading text-white hover:bg-gray-600"
       >
         {t('text-apply')}
       </Button>
     </form>
+  </div>
   );
 };
 

@@ -32,10 +32,10 @@ const PaymentGroupOption: React.FC<PaymentGroupOptionProps> = ({
     <RadioGroup.Option value={value} key={value}>
       {({ checked }) => (
         <div
-          className={cn(
-            'relative flex h-full w-full cursor-pointer items-center justify-center rounded-[8px] border border-[#F3F3F3] p-4 text-center shadow-600',
-            checked && '!border-[#212121]'
-          )}
+        className={cn(
+          'relative flex h-full w-full cursor-pointer items-center justify-center rounded-[8px] border border-[#F3F3F3] p-4 text-center shadow-600',
+          checked && 'bg-green-100 border-green-700 text-green-900'
+        )}
         >
           {icon ? (
             <>{icon}</>

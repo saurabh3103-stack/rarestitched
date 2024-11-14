@@ -1,34 +1,34 @@
 {
   "env": {
-    "NEXT_PUBLIC_REST_API_ENDPOINT": "Add your REST API",
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "Stripe Payment Key",
-    "NEXT_PUBLIC_GOOGLE_MAP_API_KEY": "Google Map Key",
-    "NEXT_PUBLIC_SITE_URL": "Shop Frontend URL",
-    "NEXTAUTH_URL": "Shop Frontend URL",
-    "SECRET": "Random 32 Hash Key",
-    "GOOGLE_CLIENT_ID": "Google Client Key",
-    "GOOGLE_CLIENT_SECRET": "Google Client Secret",
+    "NEXT_PUBLIC_REST_API_ENDPOINT": "https://fun2sh.deificindia.com/",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "",
+    "NEXT_PUBLIC_GOOGLE_MAP_API_KEY": "",
+    "NEXT_PUBLIC_SITE_URL": "http://localhost:3003",
+    "NEXTAUTH_URL": "http://localhost:3003",
+    "SECRET": "your_generated_secret_key",
+    "GOOGLE_CLIENT_ID": "550233852716-rc537gqe6u8h4iqh668uu2c0s82j7l4n.apps.googleusercontent.com",
+    "GOOGLE_CLIENT_SECRET": "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",
     "REVALIDATE_DURATION": "120",
     "NEXT_PUBLIC_DEFAULT_LANGUAGE": "en",
     "NEXT_PUBLIC_ENABLE_MULTI_LANG": "false",
     "NEXT_PUBLIC_AVAILABLE_LANGUAGES": "en",
-    "NEXT_PUBLIC_PAYPAL_CLIENT_TOKEN": "Paypal Payment Key"
+    "NEXT_PUBLIC_PAYPAL_CLIENT_TOKEN": ""
   },
   "build": {
     "env": {
-      "NEXT_PUBLIC_REST_API_ENDPOINT": "Add your REST API",
-      "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "Stripe Payment Key",
-      "NEXT_PUBLIC_GOOGLE_MAP_API_KEY": "Google Map Key",
-      "NEXT_PUBLIC_SITE_URL": "Shop Frontend URL",
-      "NEXTAUTH_URL": "Shop Frontend URL",
-      "SECRET": "Random 32 Hash Key",
-      "GOOGLE_CLIENT_ID": "Google Client Key",
-      "GOOGLE_CLIENT_SECRET": "Google Client Secret",
+      "NEXT_PUBLIC_REST_API_ENDPOINT": "https://fun2sh.deificindia.com/",
+      "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "",
+      "NEXT_PUBLIC_GOOGLE_MAP_API_KEY": "",
+      "NEXT_PUBLIC_SITE_URL": "http://localhost:3003",
+      "NEXTAUTH_URL": "http://localhost:3003",
+      "SECRET": "your_generated_secret_key",
+      "GOOGLE_CLIENT_ID": "550233852716-rc537gqe6u8h4iqh668uu2c0s82j7l4n.apps.googleusercontent.com",
+      "GOOGLE_CLIENT_SECRET": "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",
       "REVALIDATE_DURATION": "120",
       "NEXT_PUBLIC_DEFAULT_LANGUAGE": "en",
       "NEXT_PUBLIC_ENABLE_MULTI_LANG": "false",
       "NEXT_PUBLIC_AVAILABLE_LANGUAGES": "en",
-      "NEXT_PUBLIC_PAYPAL_CLIENT_TOKEN": "Paypal Payment Key"
+      "NEXT_PUBLIC_PAYPAL_CLIENT_TOKEN": ""
     }
   }
 }
