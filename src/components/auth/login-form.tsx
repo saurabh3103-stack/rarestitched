@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 // import { ImGoogle2 } from "react-icons/im";
 import { ImFacebook2 } from 'react-icons/im';
 import { useTranslation } from 'next-i18next';
+
+import { ImGoogle2 } from "react-icons/im";
 import * as yup from 'yup';
 import Input from '@components/ui/input';
 import PasswordInput from '@components/ui/password-input';
@@ -19,6 +21,7 @@ import { ROUTES } from '@lib/routes';
 import { MobileIcon } from '@components/icons/mobile-icon';
 import { useSettings } from '@framework/settings';
 import { AnonymousIcon } from '@components/icons/anonymous-icon';
+import { useRegister } from "@framework/auth";
 
 interface LoginInputType {
   email: string;
@@ -50,6 +53,7 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
   const isCheckout = router.pathname.includes('checkout');
   const { t } = useTranslation();
   const { mutate: login, isLoading: loading, serverError } = useLogin();
+  const { mutate: signUp, isLoading }: any = useRegister();
 
   const guestCheckout = data?.options?.guestCheckout!;
 
@@ -205,14 +209,25 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
           {t('common:text-login-with-facebook')}
         </Button>
 
-        <Button
+        {/*<Button
           className="h-11 md:h-12 w-full mt-1.5"
           disabled={loading}
           onClick={handleOtpLogin}
         >
           <MobileIcon className="h-5 ltr:mr-2 rtl:ml-2 text-light" />
           {t('text-login-mobile')}
-        </Button>
+        </Button> */}
+
+<Button
+  type="submit"
+  loading={false}
+  disabled={isLoading}
+  onClick={() => signIn('google')}
+  className="h-11 md:h-12 w-full mt-2.5 bg-red-800 hover:bg-red-700 text-white border border-transparent rounded-md flex items-center justify-center"
+>
+  <ImGoogle2 className="text-sm sm:text-base ltr:mr-1.5 rtl:ml-1.5" />
+  {t("common:text-login-with-google")}
+</Button>
         {isCheckout && guestCheckout && (
           <Button
             className="h-11 w-full !bg-pink-700 !text-light hover:!bg-pink-800 sm:h-12"

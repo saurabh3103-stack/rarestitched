@@ -30,6 +30,7 @@ export default function PhoneNumberForm({
   variant = 'default',
 }: PhoneNumberFormProps) {
   const { t } = useTranslation('common');
+  
 
   return (
     <Form<FormValues>
@@ -50,7 +51,9 @@ export default function PhoneNumberForm({
               control={control}
               render={({ field }) => (
                 <PhoneInput
-                  country="us"
+                onlyCountries={["in", "pk", "lk", "ca"]} // Limit dropdown to India, Pakistan, Sri Lanka, Canada
+                // preferredCountries={["in", "pk"]}// Show Pakistan and India at the top
+                  country="in"
                   inputClass={twMerge(
                     classNames(
                       '!p-0 ltr:!pr-4 rtl:!pl-4 ltr:!pl-14 rtl:!pr-14 !flex !items-center !w-full !appearance-none !transition !duration-300 !ease-in-out !text-heading !text-sm focus:!outline-none focus:!ring-0 !border !border-gray-300 !rounded focus:!border-accent !h-[52px]',

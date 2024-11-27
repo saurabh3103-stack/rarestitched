@@ -10,6 +10,7 @@ import { extractEndpoint } from '@lib/use-url';
 const WidgetSocial: FC = () => {
   const { t } = useTranslation();
   const settings = useSettings();
+  console.log(settings?.contactDetails)
 
   const socials = settings?.contactDetails?.socials;
 
@@ -34,7 +35,7 @@ const WidgetSocial: FC = () => {
               className="transition-colors duration-200 hover:text-black"
               target='_blank'
             >
-              {extractEndpoint(social?.url)}
+              {social.icon.split('Icon')[0]}
             </Link>
           </li>
         ))}

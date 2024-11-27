@@ -56,5 +56,7 @@ export const useSettings = () => {
   if (context === undefined) {
     throw new Error(`useSettings must be used within a SettingsProvider`);
   }
+  console.log(context)
+  console.log(context.contactDetails)
   return context;
 };

@@ -13,6 +13,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        google: '#c1351d', // Dark red color for Google login button
+        googleHover: '#9e2a2f',
         body: '#5A5A5A',
         heading: '#212121',
         input: '#1D1E1F',

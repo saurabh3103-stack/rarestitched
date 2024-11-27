@@ -42,7 +42,7 @@ const ReviewForm: React.FC<{ productID: number; userID: number }> = ({ productID
   
     try {
       const response = await axios.post(
-        'http://fun2sh.deificindia.com/reviews/store',
+        'https://fun2sh.deificindia.com/reviews/store',
         reviewData,
         {
           headers: {

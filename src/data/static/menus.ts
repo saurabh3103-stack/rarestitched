@@ -54,7 +54,7 @@ export const menu = [
   {
     id: 2,
     path: '/search?category=men',
-    label: 'menu-men-wear',
+    label: 'Mens',
     columns: [
       {
         id: 1,
@@ -62,37 +62,33 @@ export const menu = [
           {
             id: 1,
             path: '/search?category=men',
-            label: 'menu-top-wear',
+            label: 'Summer Collection',
             columnItemItems: [
+             
               {
                 id: 1,
                 path: '/search?category=men',
-                label: 'menu-t-shirt',
+                label: 'DropShoulder Hoodies',
               },
               {
                 id: 2,
                 path: '/search?category=men',
-                label: 'menu-casual-shirts',
+                label: 'Non Zipper Hoodies',
               },
               {
                 id: 3,
                 path: '/search?category=men',
-                label: 'menu-formal-shirts',
+                label: 'Cotton Hoodies',
               },
               {
                 id: 4,
                 path: '/search?category=men',
-                label: 'menu-blazwers-coats',
+                label: 'Sweatshirts',
               },
               {
                 id: 5,
                 path: '/search?category=men',
-                label: 'menu-suits',
-              },
-              {
-                id: 6,
-                path: '/search?category=men',
-                label: 'menu-jackets',
+                label: 'menu-blazers',
               },
             ],
           },
@@ -100,12 +96,8 @@ export const menu = [
             id: 2,
             path: '/search?category=men',
             label: 'menu-belt-scarves',
-          },
-          {
-            id: 3,
-            path: '/search?category=men',
-            label: 'menu-watches-wearables',
-          },
+           
+          }
         ],
       },
       {
@@ -114,38 +106,29 @@ export const menu = [
           {
             id: 1,
             path: '/search?category=men',
-            label: 'menu-western-wear',
+            label: 'Winter Collection',
             columnItemItems: [
               {
                 id: 1,
                 path: '/search?category=men',
-                label: 'menu-dresses',
+                label: 'Oversized Tshirt',
               },
               {
                 id: 2,
                 path: '/search?category=men',
-                label: 'menu-jumpsuits',
+                label: 'Oversized dropshoulder Tshirt',
               },
               {
                 id: 3,
                 path: '/search?category=men',
-                label: 'menu-tops-shirts',
+                label: 'Polo Tshirt',
               },
               {
                 id: 4,
                 path: '/search?category=men',
-                label: 'menu-shorts-skirts',
+                label: 'RoundCheck Tshirt',
               },
-              {
-                id: 5,
-                path: '/search?category=men',
-                label: 'menu-shurgs',
-              },
-              {
-                id: 6,
-                path: '/search?category=men',
-                label: 'menu-blazers',
-              },
+            
             ],
           },
           {
@@ -158,6 +141,7 @@ export const menu = [
             path: '/search?category=men',
             label: 'menu-sunglasses-frames',
           },
+         
         ],
       },
       {
@@ -166,7 +150,7 @@ export const menu = [
           {
             id: 1,
             path: '/search?category=sneakers',
-            label: 'menu-footwear',
+            label: 'Footwear',
             columnItemItems: [
               {
                 id: 1,
@@ -193,184 +177,36 @@ export const menu = [
           {
             id: 2,
             path: '/search?category=sports',
-            label: 'menu-sports-active-wear',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=sports',
-                label: 'menu-clothing',
-              },
-              {
-                id: 2,
-                path: '/search?category=sports',
-                label: 'menu-footwear',
-              },
-              {
-                id: 3,
-                path: '/search?category=sports',
-                label: 'menu-sports-accessories',
-              },
-            ],
+            label: 'BagPack & HandBag',
+           
           },
         ],
       },
-      {
-        id: 4,
-        columnItems: [
-          {
-            id: 1,
-            path: '/search?category=women',
-            label: 'menu-lingerie-sleepwear',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-bra',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-briefs',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-sleepwear',
-              },
-            ],
-          },
-          {
-            id: 2,
-            path: '/search?category=women',
-            label: 'menu-belt-scarves',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-makeup',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-skincare',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-premium-beauty',
-              },
-              {
-                id: 4,
-                path: '/search?category=women',
-                label: 'menu-lipsticks',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 5,
-        columnItems: [
-          {
-            id: 1,
-            path: '/search?category=watch',
-            label: 'menu-gadgets',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=watch',
-                label: 'menu-smart-wearables',
-              },
-              {
-                id: 2,
-                path: '/search?category=watch',
-                label: 'menu-headphones',
-              },
-            ],
-          },
-          {
-            id: 2,
-            path: '/search?category=watch',
-            label: 'menu-jewellers',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=watch',
-                label: 'menu-fashion-jewellers',
-              },
-              {
-                id: 2,
-                path: '/search?category=watch',
-                label: 'menu-fine-jewellers',
-              },
-            ],
-          },
-          {
-            id: 3,
-            path: '/search?category=bags',
-            label: 'menu-backpacks',
-          },
-          {
-            id: 4,
-            path: '/search?category=bags',
-            label: 'menu-handbags-wallets',
-          },
-        ],
-      },
+     
     ],
   },
+
   {
     id: 3,
     path: '/search?category=women',
-    label: 'menu-women-wear',
+    label: 'Womens',
     columns: [
       {
         id: 1,
         columnItems: [
           {
             id: 1,
-            path: '/search?category=bags',
-            label: 'menu-gadgets',
+            path: '/search?category=women',
+            label: 'Summer Collection',
             columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=watch',
-                label: 'menu-smart-wearables',
-              },
-              {
-                id: 2,
-                path: '/search?category=sports',
-                label: 'menu-headphones',
-              },
+              { id: 1, path: '/search?category=women', label: 'DropShoulder Hoodies' },
+              { id: 2, path: '/search?category=women', label: 'Non Zipper Hoodies' },
+              { id: 3, path: '/search?category=women', label: 'Cotton Hoodies' },
+              { id: 4, path: '/search?category=women', label: 'Sweatshirts' },
+              { id: 5, path: '/search?category=women', label: 'Blazers' },
             ],
           },
-          {
-            id: 2,
-            path: '/search?category=watch',
-            label: 'menu-jewellers',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=watch',
-                label: 'menu-fashion-jewellers',
-              },
-              {
-                id: 2,
-                path: '/search?category=watch',
-                label: 'menu-fine-jewellers',
-              },
-            ],
-          },
-          {
-            id: 3,
-            path: '/search?category=bags',
-            label: 'menu-backpacks',
-          },
-          {
-            id: 4,
-            path: '/search?category=watch',
-            label: 'menu-handbags-wallets',
-          },
+          { id: 2, path: '/search?category=women', label: 'Belt & Scarves' },
         ],
       },
       {
@@ -379,50 +215,16 @@ export const menu = [
           {
             id: 1,
             path: '/search?category=women',
-            label: 'menu-top-wear',
+            label: 'Winter Collection',
             columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-t-shirt',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-casual-shirts',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-formal-shirts',
-              },
-              {
-                id: 4,
-                path: '/search?category=women',
-                label: 'menu-blazwers-coats',
-              },
-              {
-                id: 5,
-                path: '/search?category=women',
-                label: 'menu-suits',
-              },
-              {
-                id: 6,
-                path: '/search?category=women',
-                label: 'menu-jackets',
-              },
+              { id: 1, path: '/search?category=women', label: 'Oversized Tshirt' },
+              { id: 2, path: '/search?category=women', label: 'Oversized DropShoulder Tshirt' },
+              { id: 3, path: '/search?category=women', label: 'Polo Tshirt' },
+              { id: 4, path: '/search?category=women', label: 'RoundCheck Tshirt' },
             ],
           },
-          {
-            id: 2,
-            path: '/search?category=women',
-            label: 'menu-belt-scarves',
-          },
-          {
-            id: 3,
-            path: '/search?category=women',
-            label: 'menu-watches-wearables',
-          },
+          { id: 2, path: '/search?category=women', label: 'Plus Size' },
+          { id: 3, path: '/search?category=women', label: 'Sunglasses & Frames' },
         ],
       },
       {
@@ -430,214 +232,45 @@ export const menu = [
         columnItems: [
           {
             id: 1,
-            path: '/search?category=women',
-            label: 'menu-footwear',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-flats',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-casual-shoes',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-heels',
-              },
-              {
-                id: 4,
-                path: '/search?category=women',
-                label: 'menu-boots',
-              },
-            ],
-          },
-          {
-            id: 2,
             path: '/search?category=sneakers',
-            label: 'menu-sports-active-wear',
+            label: 'Footwear',
             columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=sneakers',
-                label: 'menu-clothing',
-              },
-              {
-                id: 2,
-                path: '/search?category=sneakers',
-                label: 'menu-footwear',
-              },
-              {
-                id: 3,
-                path: '/search?category=sneakers',
-                label: 'menu-sports-accessories',
-              },
+              { id: 1, path: '/search?category=sneakers', label: 'Flats' },
+              { id: 2, path: '/search?category=sneakers', label: 'Casual Shoes' },
+              { id: 3, path: '/search?category=sneakers', label: 'Heels' },
+              { id: 4, path: '/search?category=sneakers', label: 'Boots' },
             ],
           },
-        ],
-      },
-      {
-        id: 4,
-        columnItems: [
-          {
-            id: 1,
-            path: '/search?category=women',
-            label: 'menu-western-wear',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-dresses',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-jumpsuits',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-tops-shirts',
-              },
-              {
-                id: 4,
-                path: '/search?category=women',
-                label: 'menu-shorts-skirts',
-              },
-              {
-                id: 5,
-                path: '/search?category=women',
-                label: 'menu-shurgs',
-              },
-              {
-                id: 6,
-                path: '/search?category=women',
-                label: 'menu-blazers',
-              },
-            ],
-          },
-          {
-            id: 2,
-            path: '/search?category=women',
-            label: 'menu-plus-size',
-          },
-          {
-            id: 3,
-            path: '/search?category=women',
-            label: 'menu-sunglasses-frames',
-          },
-        ],
-      },
-      {
-        id: 5,
-        columnItems: [
-          {
-            id: 1,
-            path: '/search?category=women',
-            label: 'menu-lingerie-sleepwear',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-bra',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-briefs',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-sleepwear',
-              },
-            ],
-          },
-          {
-            id: 2,
-            path: '/search?category=women',
-            label: 'menu-belt-scarves',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-makeup',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-skincare',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-premium-beauty',
-              },
-              {
-                id: 4,
-                path: '/search?category=women',
-                label: 'menu-lipsticks',
-              },
-            ],
-          },
+          { id: 2, path: '/search?category=bags', label: 'BagPack & HandBag' },
         ],
       },
     ],
-  },
+  }
+,  
   {
-    id: 4,
-    path: '/search?category=men',
-    label: 'menu-casual-wear',
+    id: 3,
+    path: '/search?category=mugs',
+    label: 'Mugs',
     columns: [
       {
         id: 1,
         columnItems: [
           {
             id: 1,
-            path: '/search?category=watch',
-            label: 'menu-gadgets',
+            path: '/search?category=mugs',
+            label: 'Coffee Mugs',
             columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=watch',
-                label: 'menu-smart-wearables',
-              },
-              {
-                id: 2,
-                path: '/search?category=sports',
-                label: 'menu-headphones',
-              },
+              { id: 1, path: '/search?category=mugs', label: 'Classic Mugs' },
+              { id: 2, path: '/search?category=mugs', label: 'Travel Mugs' },
+              { id: 3, path: '/search?category=mugs', label: 'Ceramic Mugs' },
+              { id: 4, path: '/search?category=mugs', label: 'Custom Mugs' },
+              { id: 5, path: '/search?category=mugs', label: 'Printed Mugs' },
             ],
           },
           {
             id: 2,
-            path: '/search?category=watch',
-            label: 'menu-jewellers',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=watch',
-                label: 'menu-fashion-jewellers',
-              },
-              {
-                id: 2,
-                path: '/search?category=watch',
-                label: 'menu-fine-jewellers',
-              },
-            ],
-          },
-          {
-            id: 3,
-            path: '/search?category=bags',
-            label: 'menu-backpacks',
-          },
-          {
-            id: 4,
-            path: '/search?category=bags',
-            label: 'menu-handbags-wallets',
+            path: '/search?category=mugs',
+            label: 'Specialty Mugs',
           },
         ],
       },
@@ -646,50 +279,24 @@ export const menu = [
         columnItems: [
           {
             id: 1,
-            path: '/search?category=men',
-            label: 'menu-top-wear',
+            path: '/search?category=mugs',
+            label: 'Gift Mugs',
             columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=men',
-                label: 'menu-t-shirt',
-              },
-              {
-                id: 2,
-                path: '/search?category=men',
-                label: 'menu-casual-shirts',
-              },
-              {
-                id: 3,
-                path: '/search?category=men',
-                label: 'menu-formal-shirts',
-              },
-              {
-                id: 4,
-                path: '/search?category=men',
-                label: 'menu-blazwers-coats',
-              },
-              {
-                id: 5,
-                path: '/search?category=men',
-                label: 'menu-suits',
-              },
-              {
-                id: 6,
-                path: '/search?category=men',
-                label: 'menu-jackets',
-              },
+              { id: 1, path: '/search?category=mugs', label: 'Couple Mugs' },
+              { id: 2, path: '/search?category=mugs', label: 'Birthday Mugs' },
+              { id: 3, path: '/search?category=mugs', label: 'Anniversary Mugs' },
+              { id: 4, path: '/search?category=mugs', label: 'Holiday Mugs' },
             ],
           },
           {
             id: 2,
-            path: '/search?category=men',
-            label: 'menu-belt-scarves',
+            path: '/search?category=mugs',
+            label: 'Collector’s Mugs',
           },
           {
             id: 3,
-            path: '/search?category=watch',
-            label: 'menu-watches-wearables',
+            path: '/search?category=mugs',
+            label: 'Limited Edition Mugs',
           },
         ],
       },
@@ -698,168 +305,325 @@ export const menu = [
         columnItems: [
           {
             id: 1,
-            path: '/search?category=sneakers',
-            label: 'menu-footwear',
+            path: '/search?category=mugs',
+            label: 'Office Mugs',
             columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=sneakers',
-                label: 'menu-flats',
-              },
-              {
-                id: 2,
-                path: '/search?category=sneakers',
-                label: 'menu-casual-shoes',
-              },
-              {
-                id: 3,
-                path: '/search?category=sneakers',
-                label: 'menu-heels',
-              },
-              {
-                id: 4,
-                path: '/search?category=sneakers',
-                label: 'menu-boots',
-              },
+              { id: 1, path: '/search?category=mugs', label: 'Corporate Mugs' },
+              { id: 2, path: '/search?category=mugs', label: 'Inspirational Mugs' },
+              { id: 3, path: '/search?category=mugs', label: 'Logo Mugs' },
+              { id: 4, path: '/search?category=mugs', label: 'Minimalist Mugs' },
             ],
           },
           {
             id: 2,
-            path: '/search?category=men',
-            label: 'menu-sports-active-wear',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=men',
-                label: 'menu-clothing',
-              },
-              {
-                id: 2,
-                path: '/search?category=men',
-                label: 'menu-footwear',
-              },
-              {
-                id: 3,
-                path: '/search?category=sports',
-                label: 'menu-sports-accessories',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 4,
-        columnItems: [
-          {
-            id: 1,
-            path: '/search?category=men',
-            label: 'menu-western-wear',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=men',
-                label: 'menu-dresses',
-              },
-              {
-                id: 2,
-                path: '/search?category=men',
-                label: 'menu-jumpsuits',
-              },
-              {
-                id: 3,
-                path: '/search?category=men',
-                label: 'menu-tops-shirts',
-              },
-              {
-                id: 4,
-                path: '/search?category=men',
-                label: 'menu-shorts-skirts',
-              },
-              {
-                id: 5,
-                path: '/search?category=men',
-                label: 'menu-shurgs',
-              },
-              {
-                id: 6,
-                path: '/search?category=men',
-                label: 'menu-blazers',
-              },
-            ],
-          },
-          {
-            id: 2,
-            path: '/search?category=women',
-            label: 'menu-plus-size',
-          },
-          {
-            id: 3,
-            path: '/search?category=sunglass',
-            label: 'menu-sunglasses-frames',
-          },
-        ],
-      },
-      {
-        id: 5,
-        columnItems: [
-          {
-            id: 1,
-            path: '/search?category=women',
-            label: 'menu-lingerie-sleepwear',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-bra',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-briefs',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-sleepwear',
-              },
-            ],
-          },
-          {
-            id: 2,
-            path: '/search?category=women',
-            label: 'menu-belt-scarves',
-            columnItemItems: [
-              {
-                id: 1,
-                path: '/search?category=women',
-                label: 'menu-makeup',
-              },
-              {
-                id: 2,
-                path: '/search?category=women',
-                label: 'menu-skincare',
-              },
-              {
-                id: 3,
-                path: '/search?category=women',
-                label: 'menu-premium-beauty',
-              },
-              {
-                id: 4,
-                path: '/search?category=women',
-                label: 'menu-lipsticks',
-              },
-            ],
+            path: '/search?category=mugs',
+            label: 'Eco-Friendly Mugs',
           },
         ],
       },
     ],
-  },
-  {
-    id: 5,
-    path: '/search',
-    label: 'menu-search',
-  },
+  }
+,  
+{
+  id: 3,
+  path: '/search?category=Accessories',
+  label: 'Accessories',
+  columns: [
+    {
+      id: 1,
+      columnItems: [
+        {
+          id: 1,
+          path: '/search?category=women',
+          label: 'Jewelry Collection',
+          columnItemItems: [
+            {
+              id: 1,
+              path: '/search?category=women',
+              label: 'Necklaces',
+            },
+            {
+              id: 2,
+              path: '/search?category=women',
+              label: 'Bracelets',
+            },
+            {
+              id: 3,
+              path: '/search?category=women',
+              label: 'Earrings',
+            },
+            {
+              id: 4,
+              path: '/search?category=women',
+              label: 'Rings',
+            },
+            {
+              id: 5,
+              path: '/search?category=women',
+              label: 'Anklets',
+            },
+          ],
+        },
+        {
+          id: 2,
+          path: '/search?category=women',
+          label: 'Scarves & Belts',
+        },
+      ],
+    },
+    {
+      id: 2,
+      columnItems: [
+        {
+          id: 1,
+          path: '/search?category=women',
+          label: 'Winter Accessories',
+          columnItemItems: [
+            {
+              id: 1,
+              path: '/search?category=women',
+              label: 'Gloves',
+            },
+            {
+              id: 2,
+              path: '/search?category=women',
+              label: 'Beanies',
+            },
+            {
+              id: 3,
+              path: '/search?category=women',
+              label: 'Mittens',
+            },
+            {
+              id: 4,
+              path: '/search?category=women',
+              label: 'Wool Scarves',
+            },
+          ],
+        },
+        {
+          id: 2,
+          path: '/search?category=women',
+          label: 'Hats & Caps',
+        },
+        {
+          id: 3,
+          path: '/search?category=women',
+          label: 'Sunglasses',
+        },
+      ],
+    },
+    {
+      id: 3,
+      columnItems: [
+        {
+          id: 1,
+          path: '/search?category=women',
+          label: 'Bags & Purses',
+          columnItemItems: [
+            {
+              id: 1,
+              path: '/search?category=women',
+              label: 'Handbags',
+            },
+            {
+              id: 2,
+              path: '/search?category=women',
+              label: 'Tote Bags',
+            },
+            {
+              id: 3,
+              path: '/search?category=women',
+              label: 'Clutches',
+            },
+            {
+              id: 4,
+              path: '/search?category=women',
+              label: 'Wallets',
+            },
+          ],
+        },
+        {
+          id: 2,
+          path: '/search?category=women',
+          label: 'Footwear Accessories',
+        },
+      ],
+    },
+  ],
+}
+,
+  
+{
+  id: 4,
+  path: '/search?category=mobile-covers',
+  label: 'Mobile Covers',
+  columns: [
+    {
+      id: 1,
+      columnItems: [
+        {
+          id: 1,
+          path: '/search?category=mobile-covers',
+          label: 'Material Types',
+          columnItemItems: [
+            {
+              id: 1,
+              path: '/search?category=mobile-covers',
+              label: 'Silicone Covers',
+            },
+            {
+              id: 2,
+              path: '/search?category=mobile-covers',
+              label: 'Plastic Covers',
+            },
+            {
+              id: 3,
+              path: '/search?category=mobile-covers',
+              label: 'Leather Covers',
+            },
+            {
+              id: 4,
+              path: '/search?category=mobile-covers',
+              label: 'Metal Covers',
+            },
+            {
+              id: 5,
+              path: '/search?category=mobile-covers',
+              label: 'Fabric Covers',
+            },
+          ],
+        },
+        {
+          id: 2,
+          path: '/search?category=mobile-covers',
+          label: 'Protection Features',
+          columnItemItems: [
+            {
+              id: 1,
+              path: '/search?category=mobile-covers',
+              label: 'Shockproof',
+            },
+            {
+              id: 2,
+              path: '/search?category=mobile-covers',
+              label: 'Waterproof',
+            },
+            {
+              id: 3,
+              path: '/search?category=mobile-covers',
+              label: 'Anti-Scratch',
+            },
+            {
+              id: 4,
+              path: '/search?category=mobile-covers',
+              label: 'Dustproof',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 2,
+      columnItems: [
+        {
+          id: 1,
+          path: '/search?category=mobile-covers',
+          label: 'Styles & Designs',
+          columnItemItems: [
+            {
+              id: 1,
+              path: '/search?category=mobile-covers',
+              label: 'Plain Covers',
+            },
+            {
+              id: 2,
+              path: '/search?category=mobile-covers',
+              label: 'Printed Covers',
+            },
+            {
+              id: 3,
+              path: '/search?category=mobile-covers',
+              label: 'Customizable Covers',
+            },
+            {
+              id: 4,
+              path: '/search?category=mobile-covers',
+              label: 'Transparent Covers',
+            },
+          ],
+        },
+        {
+          id: 2,
+          path: '/search?category=mobile-covers',
+          label: 'Brand Specific',
+          columnItemItems: [
+            {
+              id: 1,
+              path: '/search?category=mobile-covers',
+              label: 'iPhone Covers',
+            },
+            {
+              id: 2,
+              path: '/search?category=mobile-covers',
+              label: 'Samsung Covers',
+            },
+            {
+              id: 3,
+              path: '/search?category=mobile-covers',
+              label: 'OnePlus Covers',
+            },
+            {
+              id: 4,
+              path: '/search?category=mobile-covers',
+              label: 'Xiaomi Covers',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 3,
+      columnItems: [
+        {
+          id: 1,
+          path: '/search?category=mobile-covers',
+          label: 'Additional Features',
+          columnItemItems: [
+            {
+              id: 1,
+              path: '/search?category=mobile-covers',
+              label: 'Ring Holders',
+            },
+            {
+              id: 2,
+              path: '/search?category=mobile-covers',
+              label: 'Magnetic Covers',
+            },
+            {
+              id: 3,
+              path: '/search?category=mobile-covers',
+              label: 'Kickstand Covers',
+            },
+            {
+              id: 4,
+              path: '/search?category=mobile-covers',
+              label: 'Wallet Covers',
+            },
+          ],
+        },
+        {
+          id: 2,
+          path: '/search?category=mobile-covers',
+          label: 'Combo Offers',
+        },
+      ],
+    },
+  ],
+},
+
+  
+ 
   {
     id: 7,
     path: '/',
@@ -949,11 +713,11 @@ export const menu = [
       // },
     ],
   },
-  {
-    id: 8,
-    path: '/shops',
-    label: 'menu-shops',
-  },
+  // {
+  //   id: 8,
+  //   path: '/shops',
+  //   label: 'menu-shops',
+  // },
 ];
 
 export const mobileMenu = [
