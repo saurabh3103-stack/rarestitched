@@ -21,10 +21,10 @@ const WidgetLink: FC<Props> = ({ className, data }) => {
   const { t } = useTranslation('footer');
   return (
     <div className={`${className}`}>
-      <h4 className="mb-5 text-sm font-semibold text-heading md:text-base xl:text-lg 2xl:mb-6 3xl:mb-7">
+      <h4 className="mb-5 text-sm text-yellow-300 font-semibold text-heading md:text-base xl:text-lg 2xl:mb-6 3xl:mb-7">
         {t(`${widgetTitle}`)}
       </h4>
-      <ul className="text-xs md:text-[13px] lg:text-sm text-body flex flex-col space-y-3 lg:space-y-3.5">
+      <ul className="text-xs md:text-[13px] text-white lg:text-sm text-body flex flex-col space-y-3 lg:space-y-3.5">
         {lists.map((list) => (
           <li
             key={`widget-list--key${list.id}`}

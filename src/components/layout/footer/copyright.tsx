@@ -25,15 +25,15 @@ const Copyright = () => {
     iyzico: <IyzicoIcon className="h-4 w-auto" />,
   };
   return (
-    <div className="border-t border-gray-300 pt-5 pb-16 sm:pb-20 md:pb-5 mb-2 sm:mb-0">
-      <Container className="flex flex-col-reverse md:flex-row text-center md:justify-between">
+    <div className="border-t border-gray-700 bg-black py-6">
+      <Container className="flex flex-col-reverse md:flex-row items-center md:justify-between text-center md:text-left">
         {isLoading ? (
           <Spinner simple />
         ) : (
-          <p className="text-body text-xs md:text-[13px] lg:text-sm leading-6">
+          <p className="text-white text-sm md:text-base leading-6 mb-4 md:mb-0">
             ©{date.getFullYear()}{' '}
             <Link
-              className="font-semibold text-gray-700 transition-colors duration-200 ease-in-out hover:text-body"
+              className="font-semibold text-yellow-500 hover:text-yellow-400 transition-colors duration-200"
               href={data?.options?.siteLink ?? ROUTES?.HOME}
             >
               {data?.options?.siteTitle}
@@ -41,7 +41,7 @@ const Copyright = () => {
             . {data?.options?.copyrightText}{' '}
             {data?.options?.externalText ? (
               <Link
-                className="font-semibold text-gray-700 transition-colors duration-200 ease-in-out hover:text-body"
+                className="font-semibold text-yellow-500 hover:text-yellow-400 transition-colors duration-200"
                 href={data?.options?.externalLink ?? ROUTES?.HOME}
               >
                 {data?.options?.externalText}

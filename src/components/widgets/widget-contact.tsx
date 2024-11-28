@@ -12,15 +12,15 @@ const WidgetContact: FC = () => {
 
   return (
     <div>
-      <h4 className="mb-5 text-sm font-semibold text-heading md:text-base xl:text-lg 2xl:mb-6 3xl:mb-7">
+      <h4 className="mb-5 text-sm text-yellow-300 font-semibold text-heading md:text-base xl:text-lg 2xl:mb-6 3xl:mb-7">
         {t(`text-contact`)}
       </h4>
-      <ul className="text-xs md:text-[13px] lg:text-sm text-body flex flex-col space-y-3 lg:space-y-3.5">
+      <ul className="text-xs md:text-[13px] lg:text-sm text-body flex flex-col space-y-3 lg:space-y-3.5 text-white">
         {ROUTES?.CONTACT && (
           <li className="flex items-baseline">
             <Link
               href={ROUTES.CONTACT}
-              className="transition-colors duration-200 hover:text-black"
+              className="transition-colors duration-200 hover:text-black text-white"
             >
               {t(`text-page-contact-us`)}
             </Link>
