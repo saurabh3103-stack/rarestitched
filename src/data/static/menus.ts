@@ -67,27 +67,27 @@ export const menu = [
              
               {
                 id: 1,
-                path: '/search?category=men',
+                path: '/search?category=hoodies',
                 label: 'DropShoulder Hoodies',
               },
               {
                 id: 2,
-                path: '/search?category=men',
+                path: '/search?category=hoodies',
                 label: 'Non Zipper Hoodies',
               },
               {
                 id: 3,
-                path: '/search?category=men',
+                path: '/search?category=hoodies',
                 label: 'Cotton Hoodies',
               },
               {
                 id: 4,
-                path: '/search?category=men',
+                path: '/search?category=hoodies',
                 label: 'Sweatshirts',
               },
               {
                 id: 5,
-                path: '/search?category=men',
+                path: '/search?category=hoodies',
                 label: 'menu-blazers',
               },
             ],
@@ -110,22 +110,22 @@ export const menu = [
             columnItemItems: [
               {
                 id: 1,
-                path: '/search?category=men',
+                path: '/search?category=oversized-tshirts',
                 label: 'Oversized Tshirt',
               },
               {
                 id: 2,
-                path: '/search?category=men',
+                path: '/search?category=oversized-tshirts',
                 label: 'Oversized dropshoulder Tshirt',
               },
               {
                 id: 3,
-                path: '/search?category=men',
+                path: '/search?category=t-shirt',
                 label: 'Polo Tshirt',
               },
               {
                 id: 4,
-                path: '/search?category=men',
+                path: '/search?category=t-shirt',
                 label: 'RoundCheck Tshirt',
               },
             

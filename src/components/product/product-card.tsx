@@ -6,6 +6,8 @@ import { useUI } from '@contexts/ui.context';
 import usePrice from '@lib/use-price';
 import { Product } from '@type/index';
 import { siteSettings } from '@settings/site.settings';
+import { useRouter } from 'next/router';
+import { ROUTES } from '@lib/routes';
 
 interface ProductProps {
   product: Product;
@@ -69,20 +71,17 @@ const ProductCard: FC<ProductProps> = ({
     fetchReviews();
   }, [product.id]);
 
-  function handlePopupView() {
-    
-    if(overallRating){
-      setModalData(product.slug,overallRating)
-      setModalView('PRODUCT_VIEW');
-    return openModal();
-    }
-    else{
-      setModalData(product.slug,);
-      setModalView('PRODUCT_VIEW');
-      return openModal();
+  const router = useRouter();
 
+
+  function handlePopupView(slug: string | undefined) {
+    if (!slug) {
+      console.error('Product slug is missing.');
+      return;
     }
-   
+    router.push(`${ROUTES.PRODUCT}/${slug}`, undefined, { locale: router.locale })
+      .then(() => console.log('Navigation successful.'))
+      .catch(err => console.error('Navigation error:', err));
   }
 
   return (
@@ -101,7 +100,7 @@ const ProductCard: FC<ProductProps> = ({
         },
         className
       )}
-      onClick={handlePopupView}
+      onClick={() => handlePopupView(product?.slug)}
       title={name}
     >
       <div

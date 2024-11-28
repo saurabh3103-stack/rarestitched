@@ -36,6 +36,8 @@ import { useUI } from '@contexts/ui.context';
 import { useUser } from '@framework/auth';
 import { User } from '@type/index';
 import { cn } from '@lib/cn';
+import ImageModal from './ImageModal';
+
 
 const FavoriteButton = dynamic(
   () => import('@components/product/favorite-button'),
@@ -67,7 +69,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   console.log(product);
 
   const variations = getVariations(product?.variations!);
-  const [productId, setProductId] = useState(null);
+ 
 
   const { me } = useUser();
   const [id, setId] = useState(null);
@@ -86,21 +88,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('https://fun2sh.deificindia.com/me');
-  //       const userId = response.data.id;
-  //       // console.log(response) // Extracting the `id` from the response
-  //       setId(userId);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, ); // Empty dependency array ensures this runs only once after the initial render// Empty dependency array ensures this runs only once after the initial render
-
+ 
   const isSelected = !isEmpty(variations)
     ? !isEmpty(attributes) &&
       Object.keys(variations).every((variation) =>
@@ -177,8 +165,17 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
         '/assets/placeholder/products/product-gallery.svg',
     );
   }, [product]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const router = useRouter();
+  const handleImageClick = (imageSrc) => {
+    setCurrentImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+ 
   const openCart = useCallback(() => openSidebar({ view: 'DISPLAY_CART' }), []);
   function handleBuyToCart() {
     // if (!isSelected) return;
@@ -226,7 +223,26 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // const data="shirt"
+
   {console.log(product.short_description)}
+  const getImageUrl = (size) => {
+    console.log("get image url size",size)
+    switch (size) {
+      case 't-shirt':
+        return 'https://i.etsystatic.com/20535934/r/il/a053ac/2662500323/il_570xN.2662500323_fpxo.jpg';
+      case 'shirt':
+        return 'https://www.adiricha.com/wp-content/uploads/2024/03/Adiricha-Men-Shirt-Size-Chart.jpg';
+      case 'oversized-tshirt':
+        return 'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/2/23/80a08961-748a-4bc1-8643-4f8a60d4c68a.png';
+      case 'hoodie':
+        return 'https://i.etsystatic.com/27841497/r/il/5fff9f/3468684465/il_1588xN.3468684465_g93u.jpg';
+      case 'oversized-hoodie':
+        return 'https://www.adiricha.com/wp-content/uploads/2024/03/Oversized-Hoodie-Size-Chart.jpg';
+      default:
+        return 'https://www.adiricha.com/wp-content/uploads/2024/03/Default-Size-Chart.jpg';
+    }
+  };
   return (
     <div className="items-start block grid-cols-9 pb-10 lg:grid gap-x-10 xl:gap-x-14 pt-7 lg:pb-14 2xl:pb-20 ">
       <div className="col-span-5 grid grid-cols-5 gap-2.5">
@@ -303,6 +319,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
         <div className="col-span-4">
           <div className="relative rounded-lg overflow-hidden w-full h-full border border-gray-200 shadow-lg">
             <img
+            onClick={() => handleImageClick(currentImage)}
               src={currentImage}
               alt="Selected"
               className="object-cover w-full h-full max-h-[400px] md:max-h-[500px] lg:max-h-[600px]"
@@ -324,6 +341,14 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
               </div>
             )}
           </div>
+          {isModalOpen && (
+        <ImageModal
+
+        images={combineImages}
+          imageSrc={currentImage}
+          onClose={handleCloseModal}
+        />
+      )}
         </div>
 
         {width >= 1024 && (
@@ -474,6 +499,8 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                     disableIncrement={Number(product.quantity) === quantity}
                   />
                   {product?.size_chart && (
+
+                  
                     <div>
                       <div className="w-full">
                         <button
@@ -484,11 +511,13 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                             backgroundColor: 'black !important',
                           }}
                         >
+                         
                           Size Chart
                         </button>
                       </div>
 
                       {show && (
+
                         <div
                           className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50"
                           onClick={handleClose}
@@ -504,7 +533,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                               &times;
                             </button>
                             <img
-                              src="https://www.adiricha.com/wp-content/uploads/2024/03/Adiricha-Men-Shirt-Size-Chart.jpg"
+                              src={getImageUrl(product.size_chart)}
                               alt="Size Chart"
                               className="w-full h-auto object-contain"
                             />
@@ -883,3 +912,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 };
 
 export default ProductSingleDetails;
+
+
+
+
