@@ -44,10 +44,10 @@ const ProductsWithFlashSale: React.FC<Props> = ({
       className={`grid grid-cols-1 gap-5 md:gap-14 xl:gap-7 xl:grid-cols-7 2xl:grid-cols-9 ${className}`}
     >
       <div className="px-4 pt-6 pb-5 border border-gray-300 rounded-lg xl:col-span-5 2xl:col-span-7 md:pt-7 lg:pt-9 xl:pt-7 2xl:pt-9 md:px-5 lg:px-7 lg:pb-7">
-        <SectionHeader
+        {/* <SectionHeader
           sectionHeading="text-top-products"
           categorySlug="/search"
-        />
+        /> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5 xl:gap-7 xl:-mt-1.5 2xl:mt-0">
           {error ? (
             <Alert message={error?.message} />

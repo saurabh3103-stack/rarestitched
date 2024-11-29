@@ -19,6 +19,7 @@ import Widgets from "./widgets";
 import Copyright from "./copyright";
 import { footer } from "./data";
 
+
 const { widgets } = footer;
 
 const Footer: React.FC = () => (

@@ -23,6 +23,7 @@ import {
   modernDemoBanner as banner,
   modernDemoProductBanner as productBanner,
 } from '@data/static/banners';
+import Link from 'next/link';
 
 export { getStaticProps } from '@framework/homepage/modern';
 import Marquee from "react-fast-marquee";
@@ -30,33 +31,16 @@ import Marquee from "react-fast-marquee";
 export default function Home() {
   return (
     <>
-    {/* <Marquee className="bg-black p-2 m-1 shadow-lg">
+    
+    <Marquee className="bg-black py-2 my-2 shadow-lg">
       <div className="flex items-center space-x-4">
         <p className="text-white text-lg font-semibold flex-1">
-          <span className="font-extrabold text-2xl text-yellow-400">
-            THE WINTER DISCOUNT SEASON IS ON
-          </span>
+          <Link href="/collections/winter-collection">
+            <span className="font-bold text-sm text-yellow-300" style={{ fontSize: "15px", fontWeight: "300" }}>
+              THE WINTER DISCOUNT SEASON IS ON
+            </span>
+          </Link>
           <br />
-          <span className="text-lg">
-            BUY RIGHT NOW AND USE COUPON{" "}
-            <strong className="text-red-500">Deific-20</strong> TO GET UP TO{" "}
-            <em className="font-bold text-green-500">50% DISCOUNT</em>
-          </span>
-        </p>
-      </div>
-    </Marquee> */}
-         <Marquee className="bg-black py-2 my-2 shadow-lg">
-      <div className="flex items-center space-x-4">
-        <p className="text-white text-lg font-semibold flex-1">
-          <span className="font-bold text-sm text-yellow-300" style={{fontSize:"15px",fontWeight:"300"}}>
-            THE WINTER DISCOUNT SEASON IS ON
-          </span>
-          <br />
-          {/* <span className="text-lg">
-            BUY RIGHT NOW AND USE COUPON{" "}
-            <strong className="text-red-500">Deific-20</strong> TO GET UP TO{" "}
-            <em className="font-bold text-green-500">50% DISCOUNT</em>
-          </span> */}
         </p>
       </div>
     </Marquee>

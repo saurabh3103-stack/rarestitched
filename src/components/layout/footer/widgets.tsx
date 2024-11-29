@@ -2,7 +2,10 @@ import Container from "@components/ui/container";
 import WidgetLink from "@components/widgets/widget-link";
 import WidgetSocial from "@components/widgets/widget-social";
 import WidgetContact from "@components/widgets/widget-contact";
-
+// import WidgetMen from "@components/widgets/Widget-category"
+import WidgetMen from "@components/widgets/Widget-category";
+import WidgetWinter from "@components/widgets/Widget-winter";
+import WidgetMugs from "@components/widgets/Widget-mugs";
 interface WidgetsProps {
   widgets: {
     id: number;
@@ -13,18 +16,29 @@ interface WidgetsProps {
 
 const Widgets: React.FC<{ widgets: any[] }> = ({ widgets }) => (
   <Container>
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 md:gap-8 lg:gap-x-10 xl:gap-6 pb-10 md:pb-16 lg:pb-20">
-      {/* Section Title */}
-      <h2 className="col-span-full text-yellow-500 text-lg md:text-xl lg:text-2xl font-bold mb-4">
-        Stay Connected
-      </h2>
-      <WidgetSocial />
-      <WidgetContact />
-      {widgets.map((widget, index) => (
-        <WidgetLink data={widget} key={`widget-link-${index}`}  />
-      ))}
-    </div>
-  </Container>
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 md:gap-8 lg:gap-x-10 xl:gap-6 pb-5 md:pb-5 lg:pb-5">
+    {/* Section Title */}
+    <h2 className="col-span-full text-yellow-500 text-lg md:text-xl lg:text-2xl font-bold mb-4">
+      Stay Connected
+    </h2>
+    <WidgetSocial />
+    <WidgetContact />
+    {widgets.map((widget, index) => (
+      <WidgetLink data={widget} key={`widget-link-${index}`} />
+    ))}
+  </div>
+
+  {/* Border line between sections */}
+  <div className="mb-6 border-t border-yellow-500"></div>
+
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 md:gap-8 lg:gap-x-10 xl:gap-6 pb-10 md:pb-16 lg:pb-20">
+    {/* Section Title */}
+    <WidgetMen />
+    <WidgetWinter />
+    <WidgetMugs />
+  </div>
+</Container>
+
 );
 
 export default Widgets;

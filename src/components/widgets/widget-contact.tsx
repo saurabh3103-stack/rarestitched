@@ -20,7 +20,7 @@ const WidgetContact: FC = () => {
           <li className="flex items-baseline">
             <Link
               href={ROUTES.CONTACT}
-              className="transition-colors duration-200 hover:text-black text-white"
+              className="transition-colors duration-200 hover:text-white text-white"
             >
               {t(`text-page-contact-us`)}
             </Link>

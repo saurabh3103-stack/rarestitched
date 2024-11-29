@@ -1,6 +1,7 @@
 import Text from "@components/ui/text";
 import Link from "@components/ui/link";
 import { useTranslation } from "next-i18next";
+import { IoEyeOutline } from "react-icons/io5";
 
 interface Props {
 	sectionHeading: string;
@@ -22,9 +23,10 @@ const SectionHeader: React.FC<Props> = ({
 			{categorySlug && (
 				<Link
 					href={categorySlug}
-					className="text-xs lg:text-sm xl:text-base text-heading mt-0.5 lg:mt-1"
+					className="flex items-center  font-semibold  transition duration-200"
 				>
-					{t("text-see-all-product")}
+					<span className="mr-2">See All</span>
+					<IoEyeOutline className=" transition duration-200" />
 				</Link>
 			)}
 		</div>

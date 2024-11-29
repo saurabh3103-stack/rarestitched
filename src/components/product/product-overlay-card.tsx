@@ -5,6 +5,9 @@ import { Product } from '@type/index';
 import { useSettings } from '@contexts/settings.context';
 import cn from 'classnames';
 
+import { useRouter } from 'next/router';
+import { ROUTES } from '@lib/routes';
+
 interface ProductProps {
   product: Product;
   index: number;
@@ -57,13 +60,20 @@ const ProductOverlayCard: React.FC<ProductProps> = ({
   const { price: maxPrice } = usePrice({
     amount: product.max_price as number,
   });
+ // function handlePopupView() {
+  //   setModalData(product.slug);
+  //   setModalView('PRODUCT_VIEW');
+  //   return openModal();
+  // }
+ 
 
+  const router = useRouter();
   function handlePopupView() {
-    setModalData(product.slug);
-    setModalView('PRODUCT_VIEW');
-    return openModal();
+   
+    router.push(`${ROUTES.PRODUCT}/${product.slug}`, undefined, { locale: router.locale })
+      .then(() => console.log('Navigation successful.'))
+      .catch(err => console.error('Navigation error:', err));
   }
-
   return (
     <div
       onClick={handlePopupView}

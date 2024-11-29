@@ -10,7 +10,8 @@ import isEmpty from 'lodash/isEmpty';
 import NotFoundItem from '@components/404/not-found-item';
 import Carousel from '@components/ui/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
-
+import Link from 'next/link';
+import { IoEyeOutline } from 'react-icons/io5';
 interface ProductsProps {
   sectionHeading?: string;
   className?: string;
@@ -74,6 +75,13 @@ const WinterSeasonProducts: React.FC<ProductsProps> = ({
     >
       <div className="flex flex-wrap items-center justify-between mb-5 md:mb-6">
         <SectionHeader sectionHeading={sectionHeading} className="mb-0" />
+        <Link
+        href={`/collections/${winterSeasonSettings?.slug}`}
+        className="flex items-center  font-semibold  transition duration-200"
+      >
+        <span className="mr-2">See All</span>
+        <IoEyeOutline className=" transition duration-200" />
+      </Link>
       </div>
       {error ? (
         <Alert message={error?.message} />
