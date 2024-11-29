@@ -43,7 +43,7 @@ export default function MobileMenu() {
     menuIndex,
     className = '',
   }: any) =>
-    data.label && (
+    data.label && data.label !== 'menu-shops' && (
       <li className={`mb-0.5 ${className}`}>
         <div className="flex items-center justify-between">
           <Link
