@@ -858,7 +858,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                 onClick={handleToggleReviews}
                 className="mt-4 w-full py-2 text-white rounded-md shadow-md transition duration-200 col-span-5"
               >
-                {showReviews ? 'Hide All Reviews' : 'Show All Reviews'}
+                {showReviews ? 'Show All Reviews' : 'Show All Reviews'}
               </Button>
 
               {/* Display the reviews if toggled on */}
