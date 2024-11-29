@@ -15,6 +15,7 @@ interface ProductsProps {
   uniqueKey?: string;
 }
 
+
 const ProductsBlock: React.FC<ProductsProps> = ({
   sectionHeading,
   categorySlug,
@@ -23,9 +24,18 @@ const ProductsBlock: React.FC<ProductsProps> = ({
   loading,
   error,
   uniqueKey,
-}) => {
+}) =>
+   {
+     
   return (
+
+
+    
     <div className={className}>
+
+     
+
+      
       <SectionHeader
         sectionHeading={sectionHeading}
         categorySlug={categorySlug}

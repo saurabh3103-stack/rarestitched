@@ -45,7 +45,7 @@ const ProductsFeatured: React.FC<ProductsProps> = ({
     <div className={className}>
       <SectionHeader
         sectionHeading={sectionHeading}
-        categorySlug={categorySlug}
+        categorySlug={categorySlug="collections/featured-products"}
       />
 
       {error && <Alert message={error.message} />}

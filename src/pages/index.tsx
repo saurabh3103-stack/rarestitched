@@ -66,21 +66,22 @@ export default function Home() {
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
           classNameInner="aspect-[3.15/1]"
         />
-        <NewArrivalsProductFeed />
-
-         
-        <BrandGridBlock sectionHeading="text-top-brands" />
+         <BannerWithProducts
+          sectionHeading="text-on-selling-products"
+          categorySlug="/search"
+          data={productBanner}
+        />
         <BannerCard
           data={banner[1]}
           href={`${ROUTES.COLLECTIONS}/${banner[1].slug}`}
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
           classNameInner="aspect-[4.3/1]"
         />
-        <BannerWithProducts
-          sectionHeading="text-on-selling-products"
-          categorySlug="/search"
-          data={productBanner}
-        />
+        <NewArrivalsProductFeed />
+         
+        <BrandGridBlock sectionHeading="text-top-brands" />
+        
+       
         <ExclusiveBlock />
         {/* <NewArrivalsProductFeed /> */}
        
