@@ -38,7 +38,7 @@ const WidgetContact: FC = () => {
             {t('text-website')}:
             <Link
               href={contactDetails.website}
-              className="ml-1 transition-colors duration-200 hover:text-black"
+              className="ml-1 transition-colors duration-200 "
             >
               {contactDetails.website}
             </Link>

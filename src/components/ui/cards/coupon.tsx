@@ -71,7 +71,7 @@ const CouponCard: React.FC<CouponCardProps> = ({ coupon, className }) => {
               }))
             }
           >
-            <button className="text-sm font-semibold text-black transition-colors duration-200 hover:text-black focus:text-black focus:outline-0 ltr:text-right rtl:text-left">
+            <button className="text-sm font-semibold text-black transition-colors duration-200  focus:text-black focus:outline-0 ltr:text-right rtl:text-left">
               <span>{t('text-copy')}</span>
             </button>
           </CopyToClipboard>

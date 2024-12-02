@@ -32,7 +32,7 @@ const WidgetSocial: FC = () => {
             )}
             <Link
               href={social.url ? social.url : '#!'}
-              className="transition-colors duration-200 hover:text-black"
+              className="transition-colors duration-200 "
               target='_blank'
             >
               {social.icon.split('Icon')[0]}

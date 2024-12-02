@@ -37,7 +37,7 @@ const WidgetLink: FC<Props> = ({ className, data }) => {
             )}
             <Link
               href={list.path ? list.path : '#!'}
-              className="transition-colors duration-200 hover:text-black"
+              className="transition-colors duration-200 "
             >
               {t(`${list.title}`)}
             </Link>
