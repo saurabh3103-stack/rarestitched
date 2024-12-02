@@ -125,7 +125,7 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
         <div onClick={closeModal}>
           <Logo />
         </div>
-        <h2 className="mt-4 text-xl font-bold text-gray-800 md:text-lg sm:mb-8">
+        <h2 className="mt-4 text-xl font-bold text-gray-800 md:text-lg sm:mb-4">
   {t('common:login-helper')}
 </h2>
 <p className="text-lg text-gray-600 md:text-base sm:text-center">
