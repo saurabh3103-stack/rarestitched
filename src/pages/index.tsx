@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <>
     
-    <Marquee className="bg-black py-2 my-2 shadow-lg">
+    <Marquee className="bg-black py-1 my-1 shadow-lg">
       <div className="flex items-center space-x-4">
         <p className="text-white text-lg font-semibold flex-1">
           <Link href="/collections/winter-collection">

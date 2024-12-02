@@ -52,10 +52,16 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ columns }) => {
 										</Link>
 									</li>
 								))}
+
+								
 							</React.Fragment>
+							
 						))}
+						
 					</ul>
+					
 				))}
+				<img src="https://media-uk.landmarkshops.in/cdn-cgi/image/h=730,w=540,q=85,fit=cover/lifestyle/1000010653029-Green-1000010653029_01-2100.jpg" alt="" />
 			</div>
 		</div>
 	);

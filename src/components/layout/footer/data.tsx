@@ -105,7 +105,7 @@ export const footer = {
         // },
         {
           id: 1,
-          title: 'support@DeificDigital.in',
+          title: 'hello@deificdigital.com',
           path: 'https://deificdigital.com/',
         },
         {

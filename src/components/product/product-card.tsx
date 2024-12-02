@@ -169,19 +169,25 @@ const ProductCard: FC<ProductProps> = ({
           contactClassName
         )}
       >
-        <h2
-          className={cn('text-heading font-semibold truncate mb-1', {
-            'text-sm md:text-base':
-              variant === 'grid' || variant === 'gridSmall',
-            'md:mb-1.5 text-sm sm:text-base md:text-sm lg:text-base xl:text-lg':
-              variant === 'gridSlim',
-            'text-sm sm:text-base md:mb-1.5 pb-0': variant === 'listSmall',
-            'text-sm sm:text-base md:text-sm lg:text-base xl:text-lg md:mb-1.5':
-              variant === 'list',
-          })}
-        >
-          {name}
-        </h2>
+       <h2
+  className={cn('text-heading font-semibold truncate mb-1', {
+    'text-sm md:text-base':
+      variant === 'grid' || variant === 'gridSmall',
+    'md:mb-1.5 text-sm sm:text-base md:text-sm lg:text-base xl:text-lg':
+      variant === 'gridSlim',
+    'text-sm sm:text-base md:mb-1.5 pb-0': variant === 'listSmall',
+    'text-sm sm:text-base md:text-sm lg:text-base xl:text-lg md:mb-1.5':
+      variant === 'list',
+  })}
+>
+  {name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')}
+  {console.log(name)}
+</h2>
+
         {description && (
           <p className="text-body text-xs md:text-[13px] lg:text-sm leading-normal xl:leading-relaxed max-w-[250px] truncate">
             {description}

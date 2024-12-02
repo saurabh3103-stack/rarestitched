@@ -230,7 +230,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
     console.log("get image url size",size)
     switch (size) {
       case 't-shirt':
-        return 'https://i.etsystatic.com/20535934/r/il/a053ac/2662500323/il_570xN.2662500323_fpxo.jpg';
+        return 'https://www.adiricha.com/wp-content/uploads/2024/03/Adiricha-Men-Shirt-Size-Chart.jpg';
       case 'shirt':
         return 'https://www.adiricha.com/wp-content/uploads/2024/03/Adiricha-Men-Shirt-Size-Chart.jpg';
       case 'oversized-tshirt':
@@ -411,7 +411,12 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
         <div className="border-b border-gray-300 pb-7">
           <div className="flex w-full items-start justify-between space-x-8 rtl:space-x-reverse mb-2">
             <h2 className="text-heading text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold hover:text-black mb-3.5">
-              {product?.name}
+            
+              {product?.name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')}
             </h2>
             <div>
               <FavoriteButton productId={product?.id} />
@@ -465,12 +470,12 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                       {basePrice}
                     </del>
                     <span className="text-red-700 font-bold ltr:pl-2 rtl:pr-2">
-                      {Math.round(
-                        ((parseFloat(basePrice.replace('₹', '')) -
-                          parseFloat(price.replace('₹', ''))) /
-                          parseFloat(basePrice.replace('₹', ''))) *
-                          100,
-                      )}
+                    {Math.round(
+    ((parseFloat(basePrice.replace('₹', '').replace(',', '')) -
+      parseFloat(price.replace('₹', '').replace(',', ''))) /
+      parseFloat(basePrice.replace('₹', '').replace(',', ''))) *
+      100
+  )}
                       % off
                     </span>
                   </>

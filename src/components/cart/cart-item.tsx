@@ -58,7 +58,11 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
           href={`${ROUTES.PRODUCT}/${item?.slug}`}
           className="truncate text-sm text-heading mb-1.5 -mt-1"
         >
-          {generateCartItemName(item.name, item.attributes)}
+          {generateCartItemName(item.name, item.attributes)
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')}
         </Link>
         <span className="text-sm text-gray-400 mb-2.5">
           {t('text-unit-price')} : &nbsp;

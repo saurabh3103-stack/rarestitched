@@ -76,7 +76,11 @@ export default function WishlistItem({ product }: { product: Product }) {
               href={`${ROUTES.PRODUCT}/${product?.slug}`}
               locale={product?.language}
             >
-              {product?.name}
+              {product?.name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')}
             </Link>
           </h2>
 
