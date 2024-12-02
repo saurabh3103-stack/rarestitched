@@ -249,14 +249,16 @@ const ProductCard: FC<ProductProps> = ({
                 <>
                   <del className="text-xs text-gray-800  ">
                     {basePrice}
+                   
                   </del>
                   <span className=" text-xxs text-red-600 ">
                     {Math.round(
-                      ((parseFloat(basePrice.replace('₹', '')) -
-                        parseFloat(price.replace('₹', ''))) /
-                        parseFloat(basePrice.replace('₹', ''))) *
-                        100
-                    )}
+    ((parseFloat(basePrice.replace('₹', '').replace(',', '')) -
+      parseFloat(price.replace('₹', '').replace(',', ''))) /
+      parseFloat(basePrice.replace('₹', '').replace(',', ''))) *
+      100
+  )}
+                    
                     % off
                   </span>
                 </>
