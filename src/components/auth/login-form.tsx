@@ -125,9 +125,13 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
         <div onClick={closeModal}>
           <Logo />
         </div>
-        <p className="mt-2 mb-8 text-sm md:text-base text-body sm:mb-10">
-          {t('common:login-helper')}
-        </p>
+        <h2 className="mt-4 text-xl font-bold text-gray-800 md:text-lg sm:mb-8">
+  {t('common:login-helper')}
+</h2>
+<p className="text-lg text-gray-600 md:text-base sm:text-center">
+  Join us today and become a part of the exciting Fun2sh family!
+</p>
+
       </div>
 
       {serverError && (
@@ -240,7 +244,7 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
         )}
       </div>
 
-      <div className="mt-5 mb-1 text-sm text-center sm:text-base text-body">
+      {/* <div className="mt-5 mb-1 text-sm text-center sm:text-base text-body">
         {t('common:text-no-account')}{' '}
         <button
           type="button"
@@ -249,7 +253,7 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
         >
           {t('common:text-register')}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
