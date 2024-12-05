@@ -138,10 +138,10 @@ export const siteSettings = {
       name: 'text-account-address',
       icon: <ProfileIcon className="text-lg md:text-xl" />,
     },
-    {
-      slug: ROUTES.ACCOUNT_CHANGE_PASSWORD,
-      name: 'text-change-password',
-      icon: <ChangePasswordIcon className="text-lg md:text-xl" />,
-    },
+    // {
+    //   slug: ROUTES.ACCOUNT_CHANGE_PASSWORD,
+    //   name: 'text-change-password',
+    //   icon: <ChangePasswordIcon className="text-lg md:text-xl" />,
+    // },
   ],
 };

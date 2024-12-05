@@ -280,6 +280,46 @@ export const modernDemoBanner = [
   },
 ];
 
+
+
+// Demo TWO -> Modern Demo
+export const modernDemoBannerB = [
+  {
+    id: 1,
+    title: 'Winter Collection of Kid Items',
+    slug: 'winter-collection',
+    image: {
+      mobile: {
+        url: '/assets/images/banner/ayush.png',
+        width: 450,
+        height: 180,
+      },
+      desktop: {
+        url: '/assets/images/banner/ayush.png',
+        width: 1800,
+        height: 570,
+      },
+    },
+  },
+  {
+    id: 2,
+    title: 'Offer Off Everything',
+    slug: 'winter-offer',
+    image: {
+      mobile: {
+        url: '/assets/images/banner/banner-mobile-4.jpg',
+        width: 450,
+        height: 130,
+      },
+      desktop: {
+        url: '/assets/images/banner/banner-4.jpg',
+        width: 1800,
+        height: 420,
+      },
+    },
+  },
+];
+
 export const modernDemoProductBanner = [
   {
     id: 1,

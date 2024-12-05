@@ -16,12 +16,15 @@ import ExclusiveBlock from '@containers/exclusive-block';
 import Subscription from '@components/common/subscription';
 import NewArrivalsProductFeed from '@components/product/feeds/new-arrivals-product-feed';
 import WinterSeasonProducts from '@containers/WinterSeasonProducts';
+// import 
 import { ROUTES } from '@lib/routes';
+
 import {
   masonryBanner,
   promotionBanner,
   modernDemoBanner as banner,
   modernDemoProductBanner as productBanner,
+  modernDemoBannerB as bannerB,
 } from '@data/static/banners';
 import Link from 'next/link';
 
@@ -49,6 +52,12 @@ export default function Home() {
       <Container>
         <ProductsFlashSaleBlock />
       </Container>
+      <BannerCard
+          data={bannerB[0]}
+          href={`${ROUTES.COLLECTIONS}/${banner[0].slug}`}
+          className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
+          classNameInner="aspect-[3.15/1]"
+        />
 
       <Container>
        <WinterSeasonProducts></WinterSeasonProducts>
@@ -66,6 +75,7 @@ export default function Home() {
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
           classNameInner="aspect-[3.15/1]"
         />
+        
          <BannerWithProducts
           sectionHeading="text-on-selling-products"
           categorySlug="/search"
@@ -89,8 +99,10 @@ export default function Home() {
         <Support />
         <Instagram />
         <Subscription className="px-5 py-12 bg-opacity-0 sm:px-16 xl:px-0 md:py-14 xl:py-16" />
+      
       </Container>
       <Divider className="mb-0" />
+
     </>
   );
 }

@@ -26,6 +26,7 @@ export const ROUTES = {
   COLLECTIONS: '/collections',
   CATEGORY: '/category',
   ACCOUNT: '/my-account',
+  ABOUT:'/about',
   ACCOUNT_ADDRESS: '/my-account/address',
   ACCOUNT_ORDERS: '/my-account/orders',
   ACCOUNT_CHANGE_PASSWORD: '/my-account/change-password',

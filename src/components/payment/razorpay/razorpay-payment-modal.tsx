@@ -35,6 +35,7 @@ const RazorpayPaymentModal: React.FC<Props> = ({
     if (!checkScriptLoaded()) {
       await loadRazorpayScript();
     }
+    console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
     const options: RazorpayOptions = {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
       amount: paymentIntentInfo?.amount!,

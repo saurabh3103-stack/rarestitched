@@ -17,8 +17,9 @@ const WidgetSocial: FC = () => {
   return (
     <div>
       <h4 className="mb-5 text-sm  text-yellow-300 font-semibold text-heading md:text-base xl:text-lg 2xl:mb-6 3xl:mb-7">
-        {t(`footer:widget-title-social`)}
+        {'Connect With Us'}
       </h4>
+      
       <ul className="text-xs md:text-[13px] lg:text-sm text-body flex flex-col space-y-3 lg:space-y-3.5 text-white">
         {socials?.map((social: Social, index: number) => (
           <li key={`widget-list--key${index}`} className="flex items-baseline">
