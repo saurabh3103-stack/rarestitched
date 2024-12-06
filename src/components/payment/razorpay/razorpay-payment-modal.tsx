@@ -1,10 +1,11 @@
+// RazorpayPaymentModal Component
 import { useCallback, useEffect } from 'react';
 import useRazorpay, { RazorpayOptions } from '@lib/use-razorpay';
 import { formatAddress } from '@lib/format-address';
 import { useTranslation } from 'next-i18next';
 import { useSettings } from '@framework/settings';
 import Spinner from '@components/ui/loaders/spinner/spinner';
-import { useOrder, useOrderPayment } from '@framework/orders';
+import { useOrderPayment } from '@framework/orders';
 import { PaymentGateway, PaymentIntentInfo } from '@type/index';
 
 interface Props {
@@ -19,64 +20,52 @@ const RazorpayPaymentModal: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { loadRazorpayScript, checkScriptLoaded } = useRazorpay();
-  const { data, isLoading: isSettingsLoading } = useSettings();
-  const {
-    data: order,
-    isLoading,
-    refetch,
-  } = useOrder({
-    tracking_number: trackingNumber,
-  });
+  const { data: settings, isLoading: isSettingsLoading } = useSettings();
   const { createOrderPayment } = useOrderPayment();
-
-  const { customer_name, customer_contact, customer, billing_address, payment_gateway } = order!;
 
   const paymentHandle = useCallback(async () => {
     if (!checkScriptLoaded()) {
       await loadRazorpayScript();
     }
-    console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
+
     const options: RazorpayOptions = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-      amount: paymentIntentInfo?.amount!,
-      currency: paymentIntentInfo?.currency!,
-      name: customer_name!,
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
+      amount: paymentIntentInfo.amount!,
+      currency: paymentIntentInfo.currency!,
+      name: paymentIntentInfo.customer_name!,
       description: `${t('text-order')}#${trackingNumber}`,
-      image: data?.options?.logo?.original!,
-      order_id: paymentIntentInfo?.payment_id!,
+      image: settings?.options?.logo?.original,
+      order_id: paymentIntentInfo.payment_id!,
       handler: async () => {
-        createOrderPayment({
-          tracking_number: trackingNumber!,
-          payment_gateway: 'razorpay' as string,
+        await createOrderPayment({
+          tracking_number: trackingNumber,
+          payment_gateway: 'razorpay',
         });
       },
       prefill: {
-        ...(customer_name && { name: customer_name }),
-        ...(customer_contact && { contact: `+${customer_contact}` }),
-        ...(customer?.email && { email: customer?.email }),
+        name: paymentIntentInfo.customer_name,
+        contact: `+${paymentIntentInfo.customer_contact}`,
+        email: paymentIntentInfo.customer_email,
       },
       notes: {
-        address: formatAddress(billing_address as any),
+        address: formatAddress(paymentIntentInfo.billing_address),
       },
       modal: {
-        ondismiss: async () => {
-          await refetch();
-        },
+        ondismiss: () => console.log('Payment modal closed'),
       },
     };
-    const razorpay = (window as any).Razorpay(options);
-    return razorpay.open();
-  }, [isLoading, isSettingsLoading]);
+
+    const razorpay = new (window as any).Razorpay(options);
+    razorpay.open();
+  }, [paymentIntentInfo, settings, trackingNumber]);
 
   useEffect(() => {
-    if (!isLoading && !isSettingsLoading) {
-      (async () => {
-        await paymentHandle();
-      })();
+    if (!isSettingsLoading) {
+      paymentHandle();
     }
-  }, [isLoading, isSettingsLoading]);
+  }, [isSettingsLoading, paymentHandle]);
 
-  if (isLoading || isSettingsLoading) {
+  if (isSettingsLoading) {
     return <Spinner showText={false} />;
   }
 
@@ -84,3 +73,19 @@ const RazorpayPaymentModal: React.FC<Props> = ({
 };
 
 export default RazorpayPaymentModal;
+
+// useOrder Hook
+// import { useQuery } from 'react-query';
+// import client from '@framework/utils/index';
+
+// export const useOrder = (tracking_number) => {
+//   const { data, isLoading, error } = useQuery(
+//     ['order', tracking_number],
+//     () => client.orders.findOne(tracking_number),
+//     {
+//       enabled: !!tracking_number,
+//     }
+//   );
+
+//   return { data, isLoading, error };
+// };

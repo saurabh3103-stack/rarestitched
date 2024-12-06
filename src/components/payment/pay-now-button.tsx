@@ -11,6 +11,7 @@ interface Props {
 
 const PayNowButton: React.FC<Props> = ({ order, trackingNumber, buttonSize = 'small' }) => {
   const { t } = useTranslation();
+ 
   const { isLoading, getPaymentIntentQuery } = useGetPaymentIntent({
     tracking_number: order?.tracking_number as string,
     payment_gateway: order?.payment_gateway as string,

@@ -42,24 +42,63 @@ export const useOrders = (options: OrdersQueryOptionsType) => {
     error,
   };
 };
-
 export const useOrder = ({ tracking_number }: { tracking_number: string }) => {
-  const { data, isLoading, error, isFetching, refetch } = useQuery<
-    Order,
-    Error
-  >([API_ENDPOINTS.ORDER, tracking_number], () =>
-    client.orders.findOne(tracking_number)
+  // Declare a state variable to store the response globally within this hook
+  let response: Order | undefined;
+
+  const { isLoading, error, isFetching, data, refetch } = useQuery<Order, Error>(
+    [API_ENDPOINTS.ORDER, tracking_number],
+    async () => {
+      response = await client.orders.findOne(tracking_number);
+      console.log('Response from client.orders.findOne:', response); // Log the response
+      return response; // This is used to populate `data`
+    },
+    {
+      // The `select` option will modify the data returned by the query
+      select: (data) => {
+        response = data; // Update the `response` with `data` returned from the query
+        return data; // Return the modified data (response) to populate `data`
+      }
+    }
   );
 
   return {
-    data,
-    paginatorInfo: mapPaginatorData({ ...data }),
+    data: response, // Set the data to be the global `response`
+    paginatorInfo: data ? mapPaginatorData({ ...data }) : null,
     isLoading,
     isFetching,
     refetch,
     error,
   };
 };
+
+// const response=''
+// export const useOrder = ({ tracking_number }: { tracking_number: string }) => { 
+//   const { data, isLoading, error, isFetching, refetch } = useQuery<Order, Error>(
+//     [API_ENDPOINTS.ORDER, tracking_number],
+//     async () => {
+//       const response = await client.orders.findOne(tracking_number);
+//       console.log('Response from client.orders.findOne:', response); // Log the response
+//       return response; // Ensure the full response is returned
+//     }
+//   );
+
+//   // Log the value of `data` whenever it changes
+//   useEffect(() => {
+//     if (data) {
+//       console.log('Data after being set by the response:', data);
+//     }
+//   }, [data]); // Dependency array ensures this runs whenever `data` changes
+
+//   return {
+//     data,
+//     paginatorInfo: mapPaginatorData({ ...data }),
+//     isLoading,
+//     isFetching,
+//     refetch,
+//     error,
+//   };
+// };
 
 // export const useOrderStatusesQuery = () => {
 //   const { data, isLoading, error } = useQuery<any[], Error>(

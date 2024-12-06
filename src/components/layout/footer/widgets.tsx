@@ -16,7 +16,7 @@ interface WidgetsProps {
 
 const Widgets: React.FC<{ widgets: any[] }> = ({ widgets }) => (
   <Container>
-  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8 lg:gap-x-10 xl:gap-6 pb-5 md:pb-5 lg:pb-5">
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-x-10 xl:gap-6 pb-5 md:pb-5 lg:pb-5">
     {/* Section Title */}
     <h2 className="col-span-full text-yellow-500 text-lg md:text-xl lg:text-2xl font-bold mb-4">
       Stay Connected

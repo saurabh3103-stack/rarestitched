@@ -14,7 +14,7 @@ export const API_ENDPOINTS = {
   // ORDER_STATUS: "order-status",
   LOGIN: 'token',
   SOCIAL_LOGIN: 'social-login-token',
-  REGISTER: 'signup',
+  REGISTER: 'register',
   FORGET_PASSWORD: 'forget-password',
   LOGOUT: 'logout',
   CHANGE_PASSWORD: 'change-password',
@@ -52,5 +52,4 @@ export const API_ENDPOINTS = {
   USERS_UPDATE_EMAIL: '/update-email',
   SHOP_MAINTENANCE_EVENT: 'shop-maintenance-event',
   BECAME_SELLER: 'became-seller',
-  ABOUT:'/about'
 };

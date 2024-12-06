@@ -64,32 +64,32 @@ export const footer = {
         
       ],
     },
-    {
-      id: 5,
-      widgetTitle: 'widget-title-our-information',
-      lists: [
-        {
-          id: 1,
-          title: 'link-privacy',
-          path: '/privacy',
-        },
-        {
-          id: 2,
-          title: 'link-terms',
-          path: '/terms',
-        },
-        {
-          id: 3,
-          title: 'link-return-policy',
-          path: '/privacy',
-        },
-        // {
-        //   id: 4,
-        //   title: 'link-site-map',
-        //   path: '/',
-        // },
-      ],
-    },
+    // {
+    //   id: 5,
+    //   widgetTitle: 'widget-title-our-information',
+    //   lists: [
+    //     {
+    //       id: 1,
+    //       title: 'link-privacy',
+    //       path: '/privacy',
+    //     },
+    //     {
+    //       id: 2,
+    //       title: 'link-terms',
+    //       path: '/terms',
+    //     },
+    //     {
+    //       id: 3,
+    //       title: 'link-return-policy',
+    //       path: '/privacy',
+    //     },
+    //     // {
+    //     //   id: 4,
+    //     //   title: 'link-site-map',
+    //     //   path: '/',
+    //     // },
+    //   ],
+    // },
     // {
     //   id: 3,
     //   // widgetTitle: 'widget-title-community',

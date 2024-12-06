@@ -84,10 +84,13 @@ export default function OrderViewHeader({
             {isPaymentActionPending && (
               <span className="order-2 mt-5 w-full max-w-full shrink-0 basis-full sm:order-1 lg:mt-0 lg:w-auto lg:max-w-none lg:basis-auto lg:ltr:ml-auto lg:rtl:mr-auto">
                 {/* <PayNowButton trackingNumber={order?.tracking_number} /> */}
+                {console.log(order?.tracking_number,order)}
                 <PayNowButton
+                
                   trackingNumber={order?.tracking_number}
                   order={order}
                 />
+               
               </span>
             )}
             {paymentGateway?.length > 1 && isPaymentActionPending && (
