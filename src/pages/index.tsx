@@ -24,7 +24,7 @@ import {
   promotionBanner,
   modernDemoBanner as banner,
   modernDemoProductBanner as productBanner,
-  modernDemoBannerB as bannerB,
+ 
 } from '@data/static/banners';
 import Link from 'next/link';
 
@@ -52,12 +52,14 @@ export default function Home() {
       <Container>
         <ProductsFlashSaleBlock />
       </Container>
+      <Container>
       <BannerCard
-          data={bannerB[0]}
+          data={banner[2]}
           href={`${ROUTES.COLLECTIONS}/${banner[0].slug}`}
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
           classNameInner="aspect-[3.15/1]"
         />
+        </Container>
 
       <Container>
        <WinterSeasonProducts></WinterSeasonProducts>

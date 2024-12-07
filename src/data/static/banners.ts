@@ -6,7 +6,8 @@ export const masonryBanner = [
     slug: 'mens-collection',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/banner-mobile-1.jpg',
+        // url: '/assets/images/banner/masonry/banner-mobile-1.png',
+        url: '/assets/images/banner/masonry/banner-1.jpg',
         width: 470,
         height: 232,
       },
@@ -267,25 +268,19 @@ export const modernDemoBanner = [
     slug: 'winter-offer',
     image: {
       mobile: {
-        url: '/assets/images/banner/banner-mobile-4.jpg',
+        url: '/assets/images/banner/banner-mobile-3.jpg',
         width: 450,
-        height: 130,
+        height: 180,
       },
       desktop: {
         url: '/assets/images/banner/banner-4.jpg',
         width: 1800,
-        height: 420,
+        height: 570,
       },
     },
   },
-];
-
-
-
-// Demo TWO -> Modern Demo
-export const modernDemoBannerB = [
   {
-    id: 1,
+    id: 3,
     title: 'Winter Collection of Kid Items',
     slug: 'winter-collection',
     image: {
@@ -300,25 +295,50 @@ export const modernDemoBannerB = [
         height: 570,
       },
     },
-  },
-  {
-    id: 2,
-    title: 'Offer Off Everything',
-    slug: 'winter-offer',
-    image: {
-      mobile: {
-        url: '/assets/images/banner/banner-mobile-4.jpg',
-        width: 450,
-        height: 130,
-      },
-      desktop: {
-        url: '/assets/images/banner/banner-4.jpg',
-        width: 1800,
-        height: 420,
-      },
-    },
-  },
+  }
+
+
 ];
+
+
+
+// Demo TWO -> Modern Demo
+// export const modernDemoBannerB = [
+//   {
+//     id: 1,
+//     title: 'Winter Collection of Kid Items',
+//     slug: 'winter-collection',
+//     image: {
+//       mobile: {
+//         url: '/assets/images/banner/banner-10.jpg',
+//         width: 450,
+//         height: 180,
+//       },
+//       desktop: {
+//         url: '/assets/images/banner/banner-3.jpg',
+//         width: 1800,
+//         height: 570,
+//       },
+//     },
+//   },
+//   {
+//     id: 2,
+//     title: 'Offer Off Everything',
+//     slug: 'winter-offer',
+//     image: {
+//       mobile: {
+//         url: '/assets/images/banner/banner-mobile-4.jpg',
+//         width: 450,
+//         height: 130,
+//       },
+//       desktop: {
+//         url: '/assets/images/banner/banner-4.jpg',
+//         width: 1800,
+//         height: 420,
+//       },
+//     },
+//   },
+// ];
 
 export const modernDemoProductBanner = [
   {
