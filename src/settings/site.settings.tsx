@@ -105,7 +105,7 @@ export const siteSettings = {
   accountMenu: [
     {
       slug: ROUTES.ACCOUNT,
-      name: 'text-dashboard',
+      name: 'Overview',
       icon: <HomeIcon className="text-lg md:text-xl" />,
     },
     {

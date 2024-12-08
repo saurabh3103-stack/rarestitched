@@ -14,6 +14,70 @@ interface Props {
   paymentGateway: PaymentGateway;
 }
 
+// const RazorpayPaymentModal: React.FC<Props> = ({
+//   trackingNumber,
+//   paymentIntentInfo,
+// }) => {
+//   const { t } = useTranslation();
+//   const { loadRazorpayScript, checkScriptLoaded } = useRazorpay();
+//   const { data: settings, isLoading: isSettingsLoading } = useSettings();
+//   const { createOrderPayment } = useOrderPayment();
+
+//   const paymentHandle = useCallback(async () => {
+//     if (!checkScriptLoaded()) {
+//       await loadRazorpayScript();
+//     }
+
+//     const options = {
+//       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
+//       amount: paymentIntentInfo.amount!,
+//       currency: paymentIntentInfo.currency!,
+//       name: paymentIntentInfo.customer_name!,
+//       description: `${t('text-order')}#${trackingNumber}`,
+//       image: settings?.options?.logo?.original,
+//       order_id: paymentIntentInfo.payment_id!,
+//       handler: async () => {
+//         await createOrderPayment({
+//           tracking_number: trackingNumber,
+//           payment_gateway: 'razorpay',
+//         });
+//         // Refresh the page upon successful payment
+//         window.location.reload();
+//       },
+//       prefill: {
+//         name: paymentIntentInfo.customer_name,
+//         contact: `+${paymentIntentInfo.customer_contact}`,
+//         email: paymentIntentInfo.customer_email,
+//       },
+//       notes: {
+//         address: formatAddress(paymentIntentInfo.billing_address),
+//       },
+//       modal: {
+//         ondismiss: () => console.log('Payment modal closed'),
+//       },
+//     };
+
+//     const razorpay = new (window as any).Razorpay(options);
+//     razorpay.open();
+//   }, [paymentIntentInfo, settings, trackingNumber]);
+
+//   useEffect(() => {
+//     if (!isSettingsLoading) {
+//       paymentHandle();
+//     }
+//   }, [isSettingsLoading, paymentHandle]);
+
+//   if (isSettingsLoading) {
+//     return <Spinner showText={false} />;
+//   }
+
+//   return null;
+// };
+
+// export default RazorpayPaymentModal;
+
+
+
 const RazorpayPaymentModal: React.FC<Props> = ({
   trackingNumber,
   paymentIntentInfo,
@@ -41,7 +105,8 @@ const RazorpayPaymentModal: React.FC<Props> = ({
           tracking_number: trackingNumber,
           payment_gateway: 'razorpay',
         });
-        // Refresh the page upon successful payment
+        // Mark payment as processed and reload
+        sessionStorage.setItem('paymentProcessed', 'true');
         window.location.reload();
       },
       prefill: {
@@ -62,7 +127,8 @@ const RazorpayPaymentModal: React.FC<Props> = ({
   }, [paymentIntentInfo, settings, trackingNumber]);
 
   useEffect(() => {
-    if (!isSettingsLoading) {
+    const paymentProcessed = sessionStorage.getItem('paymentProcessed');
+    if (!isSettingsLoading && paymentProcessed !== 'true') {
       paymentHandle();
     }
   }, [isSettingsLoading, paymentHandle]);
