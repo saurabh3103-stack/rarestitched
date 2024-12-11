@@ -119,7 +119,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
     addItemToCart(item, quantity);
     toast(t('add-to-cart'), {
       //@ts-ignore
-      type: 'dark',
+      type: 'success',
       progressClassName: 'fancy-progress-bar',
       position: width > 768 ? 'top-right' : 'top-right',
       autoClose: 2000,
@@ -618,36 +618,27 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
             </div>
             {viewCartBtn &&(
             <div className="w-full md:w-1/2">
-              <Button
-                onClick={handleBuyToCart} // Use the new function to navigate to checkout
-                variant="slim"
-                className={`w-full text-white `}
-                //    ${
-                //   !isSelected
-                //     ? 'bg-gray-400 hover:bg-gray-400'
-                //     : 'bg-red-600 hover:bg-red-700'
-                // }
+             <Button
+  onClick={handleBuyToCart}
+  variant="slim"
+  className={`w-full text-black bg-yellow-500 hover:bg-yellow-600 hover:text-black`}
+  disabled={
+    !isSelected ||
+    !product?.quantity ||
+    product.status.toLowerCase() != 'publish' ||
+    (!isEmpty(selectedVariation) && !selectedVariation?.quantity) ||
+    (!isEmpty(selectedVariation) && selectedVariation?.is_disable)
+  }
+>
+  <FaPersonWalkingLuggage className="w-5 h-5 mr-2" />
+  <span className="py-2 3xl:px-8">
+    {product?.quantity ||
+    (!isEmpty(selectedVariation) && selectedVariation?.quantity)
+      ? t('Go to Cart')
+      : t('text-out-stock')}
+  </span>
+</Button>
 
-                disabled={
-                  !isSelected ||
-                  !product?.quantity ||
-                  product.status.toLowerCase() != 'publish' ||
-                  (!isEmpty(selectedVariation) &&
-                    !selectedVariation?.quantity) ||
-                  (!isEmpty(selectedVariation) && selectedVariation?.is_disable)
-                }
-                // loading={addToCartLoader}
-              >
-                <FaPersonWalkingLuggage className="w-5 h-5 mr-2" />
-               
-
-                <span className="py-2 3xl:px-8">
-                  {product?.quantity ||
-                  (!isEmpty(selectedVariation) && selectedVariation?.quantity)
-                    ? t('Go to Cart')
-                    : t('text-out-stock')}
-                </span>
-              </Button>
             </div>)}
           </div>
         </div>

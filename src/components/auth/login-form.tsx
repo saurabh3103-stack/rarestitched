@@ -204,14 +204,35 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 mt-2">
-        <Button
-          disabled={loading}
-          className="h-11 md:h-12 w-full mt-2.5 bg-google hover:bg-googleHover"
-          onClick={() => signIn('facebook')}
-        >
-          <ImFacebook2 className="text-sm sm:text-base ltr:mr-1.5 rtl:ml-1.5" />
-          {t('common:text-login-with-facebook')}
-        </Button>
+
+      <Button
+  disabled={loading}
+  className="h-11 md:h-12 w-full mt-2.5 bg-gray-200  text-gray-700 border border-gray-400 rounded-md flex items-center justify-evenly px-4"
+  onClick={() => signIn('facebook')}
+>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+    alt="Facebook Icon"
+    className="w-5 h-5"
+  />
+  <span>{t('common:text-login-with-facebook')}</span>
+</Button>
+
+      <Button
+  type="submit"
+  loading={false}
+  disabled={isLoading}
+  onClick={() => signIn('google')}
+  className="h-11 md:h-12 w-full mt-2.5 bg-gray-200 text-gray-700 border border-gray-400 rounded-md flex items-center justify-evenly px-4"
+>
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/2702/2702602.png"
+    alt="Google Icon"
+    className="w-5 h-5"
+  />
+  <span>{t("common:text-login-with-google")}</span>
+</Button>
+
 
         {/*<Button
           className="h-11 md:h-12 w-full mt-1.5"
@@ -222,7 +243,7 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
           {t('text-login-mobile')}
         </Button> */}
 
-<Button
+{/* <Button
   type="submit"
   loading={false}
   disabled={isLoading}
@@ -231,7 +252,7 @@ const LoginForm: React.FC<Props> = ({ layout = 'modal' }) => {
 >
   <ImGoogle2 className="text-sm sm:text-base ltr:mr-1.5 rtl:ml-1.5" />
   {t("common:text-login-with-google")}
-</Button>
+</Button> */}
         {isCheckout && guestCheckout && (
           <Button
             className="h-11 w-full !bg-pink-700 !text-light hover:!bg-pink-800 sm:h-12"
