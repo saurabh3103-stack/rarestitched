@@ -58,8 +58,6 @@ export default function CheckoutPage() {
                     atom={billingAddressAtom}
                     type={AddressType.Billing}
                   />
-
-                  
                   <AddressGrid
                     userId={me?.id!}
                     className="p-5 bg-white border border-gray-100 rounded-md shadow-checkoutCard md:p-7"
