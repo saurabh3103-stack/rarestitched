@@ -121,21 +121,47 @@ export const AddressForm: React.FC<any> = ({
               )}
             </div>
 
-            <Input
+            {/* <Input
               labelKey={t("text-city")}
               {...register("address.city")}
               errorKey={t(errors?.address?.city?.message!)}
               variant="outline"
               type="string"
-            />
+            /> */}
 
-            <Input
+<Input
+  labelKey={t("text-city")}
+  {...register("address.city")}
+  errorKey={t(errors?.address?.city?.message!)}
+  variant="outline"
+  type="text"
+  onKeyPress={(e) => {
+    if (!/^[A-Za-z\s]+$/.test(e.key)) {
+      e.preventDefault(); // Prevent invalid input
+    }
+  }}
+/>
+
+            {/* <Input
               labelKey={t("text-state")}
               {...register("address.state")}
               errorKey={t(errors?.address?.state?.message!)}
               variant="outline"
               type="string"
+            /> */}
+              <Input
+              labelKey={t("text-state")}
+              {...register("address.state")}
+              errorKey={t(errors?.address?.state?.message!)}
+              variant="outline"
+              type="text"
+  onKeyPress={(e) => {
+    if (!/^[A-Za-z\s]+$/.test(e.key)) {
+      e.preventDefault(); // Prevent invalid input
+    }
+  }}
             />
+
 
             <Input
               labelKey={t("text-zip")}
