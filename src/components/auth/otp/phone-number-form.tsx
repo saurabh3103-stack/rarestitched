@@ -30,7 +30,6 @@ export default function PhoneNumberForm({
   variant = 'default',
 }: PhoneNumberFormProps) {
   const { t } = useTranslation('common');
-  console.log(phoneNumber)
   
 
   return (
