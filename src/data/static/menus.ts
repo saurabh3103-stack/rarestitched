@@ -64,7 +64,7 @@ export const menu = [
            
             id: 1,
             path: '/search?category=men',
-            label: 'Summer Collection',
+            label: 'Winter Collection',
             img:"men",
             columnItemItems: [
              
@@ -109,7 +109,7 @@ export const menu = [
           {
             id: 1,
             path: '/search?category=men',
-            label: 'Winter Collection',
+            label: 'Summer Collection',
             columnItemItems: [
               {
                 id: 1,
@@ -201,7 +201,7 @@ export const menu = [
             id: 1,
             img:'women',
             path: '/search?category=women',
-            label: 'Summer Collection',
+            label: 'Winter Collection',
             columnItemItems: [
               { id: 1, path: '/search?category=women', label: 'DropShoulder Hoodies' },
               { id: 2, path: '/search?category=women', label: 'Non Zipper Hoodies' },
@@ -219,7 +219,7 @@ export const menu = [
           {
             id: 1,
             path: '/search?category=women',
-            label: 'Winter Collection',
+            label: 'Summer Collection',
             columnItemItems: [
               { id: 1, path: '/search?category=women', label: 'Oversized Tshirt' },
               { id: 2, path: '/search?category=women', label: 'Oversized DropShoulder Tshirt' },
@@ -789,7 +789,7 @@ export const mobileMenu = [
       {
         id: 1,
         path: '/search?category=men',
-        label: 'Summer Collection',
+        label: 'Winter Collection',
         subMenu: [
           {
             id: 1,
@@ -821,7 +821,7 @@ export const mobileMenu = [
       {
         id: 2,
         path: '/search?category=men',
-        label: 'Winter Collection',
+        label: 'Summer Collection',
         subMenu: [
           {
             id: 1,
@@ -882,7 +882,7 @@ export const mobileMenu = [
       {
         id: 1,
         path: '/search?category=women',
-        label: 'Summer Collection',
+        label: 'Winter Collection',
         subMenu: [
           {
             id: 1,
@@ -914,7 +914,7 @@ export const mobileMenu = [
       {
         id: 2,
         path: '/search?category=women',
-        label: 'Winter Collection',
+        label: 'Summer Collection',
         subMenu: [
           {
             id: 1,
