@@ -10,7 +10,7 @@ const WidgetWinter: FC = () => {
         columnItems: [
           {
             id: 1,
-            label: 'Men Winter Collection',
+            label: 'Men Summer Collection',
             columnItemItems: [
               { id: 1, path: '/search?category=oversized-tshirts', label: 'Oversized Tshirt' },
               { id: 2, path: '/search?category=oversized-tshirts', label: 'Oversized dropshoulder Tshirt' },

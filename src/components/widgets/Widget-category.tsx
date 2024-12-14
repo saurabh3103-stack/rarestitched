@@ -10,7 +10,7 @@ const WidgetMen: FC = () => {
         columnItems: [
           {
             id: 1,
-            label: ' Men Summer Collection',
+            label: 'Men Winter Collection',
             columnItemItems: [
               { id: 1, path: '/search?category=hoodies', label: 'Drop Shoulder Hoodies' },
               { id: 2, path: '/search?category=hoodies', label: 'Non Zipper Hoodies' },
