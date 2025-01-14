@@ -499,6 +499,52 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                 />
               );
             })}
+
+            {product?.size_chart && (
+
+                  
+                    <div>
+                      <div className="w-full">
+                        <button
+                          type="button"
+                          onClick={handleShow}
+                          className="text-white bg-black border border-gray-300 focus:outline-none hover:bg-gray-800 active:bg-black focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2"
+                          style={{
+                            backgroundColor: 'black !important',
+                          }}
+                        >
+                         
+                          Size Chart
+                        </button>
+                        
+                      </div>
+
+                      {show && (
+
+                        <div
+                          className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50"
+                          onClick={handleClose}
+                        >
+                          <div
+                            className="bg-white rounded-lg p-4 relative overflow-hidden w-full max-w-3xl mx-4 sm:mx-8 lg:mx-auto"
+                            onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside
+                          >
+                            <button
+                              className="absolute top-2 right-2 text-xl font-bold text-gray-700"
+                              onClick={handleClose}
+                            >
+                              &times;
+                            </button>
+                            <img
+                              src={getImageUrl(product.size_chart)}
+                              alt="Size Chart"
+                              className="w-full h-auto object-contain"
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
           </div>
         )}
 
@@ -597,50 +643,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                       Number(selectedVariation.quantity) === quantity
                     }
                   />
-                  {product?.size_chart && (
-
                   
-<div>
-  <div className="w-full">
-    <button
-      type="button"
-      onClick={handleShow}
-      className="text-white bg-black border border-gray-300 focus:outline-none hover:bg-gray-800 active:bg-black focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2"
-      style={{
-        backgroundColor: 'black !important',
-      }}
-    >
-     
-      Size Chart
-    </button>
-  </div>
-
-  {show && (
-
-    <div
-      className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50"
-      onClick={handleClose}
-    >
-      <div
-        className="bg-white rounded-lg p-4 relative overflow-hidden w-full max-w-3xl mx-4 sm:mx-8 lg:mx-auto"
-        onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside
-      >
-        <button
-          className="absolute top-2 right-2 text-xl font-bold text-gray-700"
-          onClick={handleClose}
-        >
-          &times;
-        </button>
-        <img
-          src={getImageUrl(product.size_chart)}
-          alt="Size Chart"
-          className="w-full h-auto object-contain"
-        />
-      </div>
-    </div>
-  )}
-</div>
-)}
                 </div>
               )}
             </>
