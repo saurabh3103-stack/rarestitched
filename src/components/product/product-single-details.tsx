@@ -485,6 +485,23 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
           </div>
         </div>
 
+        {!isEmpty(variations) && (
+          <div className="pb-3 border-b border-gray-300 pt-7">
+            {Object.keys(variations).map((variation) => {
+              return (
+                <ProductAttributes
+                  key={variation}
+                  title={variation}
+                  attributes={variations[variation]}
+                  active={attributes[variation]}
+                  onClick={handleAttribute}
+                  clearAttribute={handleClearAttribute}
+                />
+              );
+            })}
+          </div>
+        )}
+
         <div className="flex flex-col items-start py-8 space-y-4 border-b border-gray-300 rtl:space-y-reverse ltr:md:pr-32 ltr:lg:pr-12 ltr:2xl:pr-32 ltr:3xl:pr-48 rtl:md:pl-32 rtl:lg:pl-12 rtl:2xl:pl-32 rtl:3xl:pl-48">
           {isEmpty(variations) && (
             <>
