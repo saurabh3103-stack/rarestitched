@@ -11,11 +11,14 @@ import StatusColor from '@components/orders/status-color';
 
 interface SuborderItemsProps {
   items: any;
+  total: number; //
 }
 
-const SuborderItems: React.FC<SuborderItemsProps> = ({ items }) => {
+const SuborderItems: React.FC<SuborderItemsProps> = ({ items,total }) => {
   const { t } = useTranslation('common');
   const { alignLeft } = useIsRTL();
+  console.log(items)
+
 
   const orderTableColumns = [
     {
@@ -61,7 +64,7 @@ const SuborderItems: React.FC<SuborderItemsProps> = ({ items }) => {
       // width: 100,
       render: function TotalPrice(paid_total: any) {
         const { price } = usePrice({ amount: paid_total });
-        return <p>{price}</p>;
+        return <p>{total}</p>;
       },
     },
     {
@@ -72,12 +75,13 @@ const SuborderItems: React.FC<SuborderItemsProps> = ({ items }) => {
       // width: 100,
       render: function renderTrackingNumber(tracking_number: string) {
         return (
-          <Link
-            href={`${ROUTES.ORDERS}/${tracking_number}`}
-            className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow text-heading underline hover:no-underline"
-          >
-            {t('text-view')}
-          </Link>
+          // <Link
+          //   href={`${ROUTES.ORDERS}/${tracking_number}`}
+          //   className="inline-flex items-center justify-center flex-shrink-0 font-semibold leading-none outline-none transition duration-300 ease-in-out focus:outline-none focus:shadow text-heading underline hover:no-underline"
+          // >
+          //   {t('text-view')}
+          // </Link>
+          <></>
         );
       },
     },

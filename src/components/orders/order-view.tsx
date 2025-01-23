@@ -195,7 +195,7 @@ export default function OrderView({ order, loadingStatus }: any) {
                   {t('text-message-sub-order')}
                 </p>
               </div>
-              <SuborderItems items={order?.children} />
+              <SuborderItems items={order?.children}  total={total}/>
             </div>
           </div>
         ) : null}

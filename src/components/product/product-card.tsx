@@ -83,6 +83,11 @@ const ProductCard: FC<ProductProps> = ({
       .then(() => console.log('Navigation successful.'))
       .catch(err => console.error('Navigation error:', err));
   }
+  const minPriceValue = parseFloat(minPrice.replace('₹', '').trim());
+  const maxPriceValue = parseFloat(maxPrice.replace('₹', '').trim());
+
+  // Calculate discount percentage
+  const discountPercentage = ((maxPriceValue - minPriceValue) / maxPriceValue) * 100;
 
   return (
     <div
@@ -243,9 +248,13 @@ const ProductCard: FC<ProductProps> = ({
         >
           {product_type.toLocaleLowerCase() === 'variable' ? (
             <>
-              <span className="inline-block">{minPrice}</span>
-              <span> - </span>
-              <span className="inline-block">{maxPrice}</span>
+             <span className="inline-block text-lg font-semibold">{minPrice}</span>
+      {/* Display the strikethrough maxPrice */}
+      <del className="inline-block text-gray-400 font-light text-sm">{maxPrice}</del>
+      {/* Display the discount percentage */}
+      <span className="inline-block text-green-500 font-semibold text-sm">
+        {discountPercentage.toFixed(0)}% OFF
+      </span>
             </>
           ) : (
             <>
