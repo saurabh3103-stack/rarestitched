@@ -97,12 +97,12 @@ export const masonryBanner = [
     slug: 'new-backpack',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/banner-mobile-6.jpg',
+        url: '/assets/images/banner/masonry/poster 1.jpg',
         width: 470,
         height: 232,
       },
       desktop: {
-        url: '/assets/images/banner/masonry/banner-6.jpg',
+        url: '/assets/images/banner/masonry/poster 1.jpg',
         width: 1078,
         height: 425,
       },
@@ -285,12 +285,12 @@ export const modernDemoBanner = [
     slug: 'winter-collection',
     image: {
       mobile: {
-        url: '/assets/images/banner/ayush.png',
+        url: '/assets/images/banner/ayush.jpg',
         width: 450,
         height: 180,
       },
       desktop: {
-        url: '/assets/images/banner/ayush.png',
+        url: '/assets/images/banner/ayush.jpg',
         width: 1800,
         height: 570,
       },
