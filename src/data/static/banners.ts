@@ -7,12 +7,12 @@ export const masonryBanner = [
     image: {
       mobile: {
         // url: '/assets/images/banner/masonry/banner-mobile-1.png',
-        url: '/assets/images/banner/masonry/banner-1.jpg',
+        url: '/assets/images/banner/masonry/monkey wisdom (1).jpg',
         width: 470,
         height: 232,
       },
       desktop: {
-        url: '/assets/images/banner/masonry/banner-1.jpg',
+        url: '/assets/images/banner/masonry/monkey wisdom (1).jpg',
         width: 1078,
         height: 425,
       },
