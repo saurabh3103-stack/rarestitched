@@ -193,7 +193,7 @@ export const promotionBanner = [
     slug: 'womens-collection',
     image: {
       mobile: {
-        url: '/assets/images/banner/slider/mobile/banner-2.jpg',
+        url: '/assets/images/banner/slider/mobile/banner-2.png',
         width: 450,
         height: 180,
       },
