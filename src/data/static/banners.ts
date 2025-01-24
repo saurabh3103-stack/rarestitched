@@ -97,12 +97,12 @@ export const masonryBanner = [
     slug: 'new-backpack',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/poster 1.jpg',
+        url: '/assets/images/banner/masonry/Banner no. 6 (2).jpg',
         width: 470,
         height: 232,
       },
       desktop: {
-        url: '/assets/images/banner/masonry/poster 1.jpg',
+        url: '/assets/images/banner/masonry/Banner no. 6 (2).jpg',
         width: 1078,
         height: 425,
       },
