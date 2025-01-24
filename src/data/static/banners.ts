@@ -93,7 +93,7 @@ export const masonryBanner = [
   },
   {
     id: 6,
-    title: 'New Backpack',
+    title: 'New BackpacK',
     slug: 'new-backpack',
     image: {
       mobile: {
