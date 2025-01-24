@@ -25,7 +25,7 @@ export const masonryBanner = [
     slug: 'new-sports',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/banner-mobile-2.jpg',
+        url: '/assets/images/banner/masonry/banner-2.jpg',
         width: 232,
         height: 232,
       },
@@ -285,12 +285,12 @@ export const modernDemoBanner = [
     slug: 'winter-collection',
     image: {
       mobile: {
-        url: '/assets/images/banner/ayush.jpg',
+        url: '/assets/images/banner/big banner (2).jpg',
         width: 450,
         height: 180,
       },
       desktop: {
-        url: '/assets/images/banner/ayush.jpg',
+        url: '/assets/images/banner/big banner (2).jpg',
         width: 1800,
         height: 570,
       },
