@@ -211,12 +211,12 @@ export const promotionBanner = [
     slug: 'winter-collection',
     image: {
       mobile: {
-        url: '/assets/images/banner/slider/mobile/banner-3.jpg',
+        url: '/assets/images/banner/slider/flaunt banner.jpg',
         width: 450,
         height: 180,
       },
       desktop: {
-        url: '/assets/images/banner/slider/banner-3.jpg',
+        url: '/assets/images/banner/slider/flaunt banner.jpg',
         width: 1440,
         height: 570,
       },
