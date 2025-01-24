@@ -79,7 +79,7 @@ const ProductsFlashSaleBlock: React.FC<ProductsProps> = ({
         href={`/collections/${flashSellSettings?.slug}`}
         className="flex items-center  font-semibold  transition duration-200"
       >
-        <span className="mr-2">See All</span>
+        <span className="mr-2">Explore All</span>
         <IoEyeOutline className=" transition duration-200" />
       </Link>
 
@@ -90,7 +90,7 @@ const ProductsFlashSaleBlock: React.FC<ProductsProps> = ({
         <div
           className={`${
             variant === 'default'
-              ? 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-x-3 md:gap-x-5 xl:gap-x-7 gap-y-4 lg:gap-y-5 xl:lg:gap-y-6 2xl:gap-y-8'
+              ? 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-5 gap-x-3 md:gap-x-5 xl:gap-x-7 gap-y-4 lg:gap-y-5 xl:lg:gap-y-6 2xl:gap-y-8'
               : 'block'
           }`}
         >

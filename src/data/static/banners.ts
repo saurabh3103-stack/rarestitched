@@ -97,12 +97,12 @@ export const masonryBanner = [
     slug: 'new-backpack',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/Banner no. 6 (2).jpg',
+        url: '/assets/images/banner/masonry/poster 1.0.jpg',
         width: 470,
         height: 232,
       },
       desktop: {
-        url: '/assets/images/banner/masonry/Banner no. 6 (2).jpg',
+        url: '/assets/images/banner/masonry/poster 1.0.jpg',
         width: 1078,
         height: 425,
       },
@@ -175,12 +175,12 @@ export const promotionBanner = [
     slug: 'new-backpack',
     image: {
       mobile: {
-        url: '/assets/images/banner/slider/mobile/banner-1.jpg',
+        url: '/assets/images/banner/slider/slider banner.jpg',
         width: 450,
         height: 180,
       },
       desktop: {
-        url: '/assets/images/banner/slider/banner-1.jpg',
+        url: '/assets/images/banner/slider/slider banner.jpg',
         width: 1440,
         height: 570,
       },
