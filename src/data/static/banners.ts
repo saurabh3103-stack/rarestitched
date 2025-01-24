@@ -25,12 +25,12 @@ export const masonryBanner = [
     slug: 'new-sports',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/banner-2.jpg',
+        url: '/assets/images/banner/masonry/skull mania (1).png',
         width: 232,
         height: 232,
       },
       desktop: {
-        url: '/assets/images/banner/masonry/banner-2.jpg',
+        url: '/assets/images/banner/masonry/skull mania (1).png',
         width: 425,
         height: 425,
       },
@@ -43,12 +43,12 @@ export const masonryBanner = [
     slug: 'womens-collection',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/banner-mobile-3.jpg',
+        url: '/assets/images/banner/masonry/4.png',
         width: 232,
         height: 232,
       },
       desktop: {
-        url: '/assets/images/banner/masonry/banner-3.jpg',
+        url: '/assets/images/banner/masonry/4.png',
         width: 425,
         height: 425,
       },
@@ -61,12 +61,12 @@ export const masonryBanner = [
     slug: 'exclusive-sunglasses',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/banner-mobile-4.jpg',
+        url: '/assets/images/banner/masonry/3.png',
         width: 232,
         height: 232,
       },
       desktop: {
-        url: '/assets/images/banner/masonry/banner-4.jpg',
+        url: '/assets/images/banner/masonry/3.png',
         width: 425,
         height: 425,
       },
