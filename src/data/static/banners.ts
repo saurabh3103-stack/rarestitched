@@ -79,12 +79,12 @@ export const masonryBanner = [
     slug: 'product-coupons',
     image: {
       mobile: {
-        url: '/assets/images/banner/masonry/banner-mobile-5.jpg',
+        url: '/assets/images/banner/masonry/1.png',
         width: 232,
         height: 232,
       },
       desktop: {
-        url: '/assets/images/banner/masonry/banner-5.jpg',
+        url: '/assets/images/banner/masonry/1.png',
         width: 425,
         height: 425,
       },
