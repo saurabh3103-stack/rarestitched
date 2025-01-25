@@ -223,24 +223,24 @@ export const promotionBanner = [
     },
     type: 'small',
   },
-  {
-    id: 4,
-    title: "Women's Collection",
-    slug: 'womens-collection',
-    image: {
-      mobile: {
-        url: '/assets/images/banner/slider/mobile/banner-2.jpg',
-        width: 450,
-        height: 180,
-      },
-      desktop: {
-        url: '/assets/images/banner/slider/banner-2.png',
-        width: 1440,
-        height: 570,
-      },
-    },
-    type: 'small',
-  },
+  // {
+  //   id: 4,
+  //   title: "Women's Collection",
+  //   slug: 'womens-collection',
+  //   image: {
+  //     mobile: {
+  //       url: '/assets/images/banner/slider/mobile/banner-2.jpg',
+  //       width: 450,
+  //       height: 180,
+  //     },
+  //     desktop: {
+  //       url: '/assets/images/banner/slider/banner-2.png',
+  //       width: 1440,
+  //       height: 570,
+  //     },
+  //   },
+  //   type: 'small',
+  // },
 ];
 
 // Demo One -> Modern Demo
