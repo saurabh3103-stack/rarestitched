@@ -27,7 +27,7 @@ const SectionHeader: React.FC<Props> = ({
 					href={categorySlug}
 					className="flex items-center  font-semibold  transition duration-200"
 				>
-					<span className="mr-2">See All</span>
+					<span className="mr-2">Explore All</span>
 					<IoEyeOutline className=" transition duration-200" />
 				</Link>
 			)}

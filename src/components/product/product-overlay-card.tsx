@@ -74,6 +74,12 @@ const ProductOverlayCard: React.FC<ProductProps> = ({
       .then(() => console.log('Navigation successful.'))
       .catch(err => console.error('Navigation error:', err));
   }
+
+  const minPriceValue = parseFloat(minPrice.replace('₹', '').trim());
+  const maxPriceValue = parseFloat(maxPrice.replace('₹', '').trim());
+
+  // Calculate discount percentage
+  const discountPercentage = ((maxPriceValue - minPriceValue) / maxPriceValue) * 100;
   return (
     <div
       onClick={handlePopupView}
@@ -146,7 +152,11 @@ const ProductOverlayCard: React.FC<ProductProps> = ({
         >
           {product.product_type === 'variable' ? (
             <div className="text-heading font-segoe font-semibold text-base xl:text-xl 3xl:mt-0.5 ltr:pr-2 ltr:md:pr-0 ltr:lg:pr-2 ltr:2xl:pr-0 rtl:pl-2 rtl:md:pl-0 rtl:lg:pl-2 rtl:2xl:pl-0">
-              {minPrice} - {maxPrice}
+              {minPrice}
+              <del className="inline-block text-gray-400 font-normal text-sm ml-1">{maxPrice}</del>
+              <span className="inline-block text-green-500 font-semibold ml-1 text-sm">
+        {discountPercentage.toFixed(0)}% OFF
+      </span>
             </div>
           ) : (
             <>
