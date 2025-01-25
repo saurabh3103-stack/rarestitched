@@ -203,7 +203,7 @@ export function useRegister() {
         return;
       }
       if (!data.token) {
-        toast.error(t("forms:error-credential-wrong"));
+        // toast.error(t("forms:error-credential-wrong"));
       }
     },
   });
@@ -321,7 +321,7 @@ export function useSocialLogin() {
         return;
       }
       if (!data.token) {
-        toast.error(`${t('error-credential-wrong')}`);
+        // toast.error(`${t('error-credential-wrong')}`);
       }
     },
     onError: (error: Error) => {
