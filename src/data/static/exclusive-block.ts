@@ -1,6 +1,6 @@
 export const exclusiveBlock = {
   exclusiveName: "text-new-year",
-  year: 2021,
+  year: 2025,
   exclusiveData: [
     {
       id: 1,
