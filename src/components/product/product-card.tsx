@@ -248,11 +248,11 @@ const ProductCard: FC<ProductProps> = ({
         >
           {product_type.toLocaleLowerCase() === 'variable' ? (
             <>
-             <span className="inline-block text-lg font-semibold">{minPrice}</span>
+             <span className="inline-block text-base font-semibold">{minPrice}</span>
       {/* Display the strikethrough maxPrice */}
-      <del className="inline-block text-gray-400 font-light text-sm">{maxPrice}</del>
+      <del className="inline-block text-gray-400 font-light text-xs">{maxPrice}</del>
       {/* Display the discount percentage */}
-      <span className="inline-block text-green-500 font-semibold text-sm">
+      <span className="inline-block text-green-500 font-semibold text-xs">
         {discountPercentage.toFixed(0)}% OFF
       </span>
             </>
