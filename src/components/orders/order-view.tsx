@@ -48,9 +48,6 @@ export default function OrderView({ order, loadingStatus }: any) {
     doc.text(`Order Number: ${order?.tracking_number}`, 10, 50);
     doc.text(`Date: ${dayjs(order?.created_at).format('MMMM D, YYYY')}`, 10, 60);
     doc.text(`Total: ${total.replace(/[^\d.]/g, '')}`, 10, 70);
-
-
-    console.log(total,sub_total,shipping_charge,tax)
     doc.text(`Payment Method: ${t(order?.payment_gateway) ?? 'N/A'}`, 10, 80);
   
     // Add a background color for sections
@@ -75,27 +72,33 @@ export default function OrderView({ order, loadingStatus }: any) {
     doc.setFillColor(230, 230, 230);
     doc.rect(10, 190, 190, 10, 'F');
     doc.text('Items', 105, 197, null, null, 'center');
-    console.log(order)
     order?.products.forEach((product, index) => {
       const orderQuantity = product.pivot.order_quantity; // Get the order quantity from pivot
       const minPrice = product.min_price; // Get the minimum price
   
-      // Log the product details
-      console.log(product, index);
-  
       // Use the min price and order quantity in the text
       doc.text(`${product.name} - ${orderQuantity} x ${minPrice}`, 10, 210 + (index * 10));
-  });
+    });
+  
+    // Add guidelines section
+    doc.setFillColor(230, 230, 230);
+    doc.rect(10, 250, 190, 10, 'F');
+    doc.text('Guidelines', 105, 257, null, null, 'center');
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text('1. Please keep this receipt for your records.', 10, 265);
+    doc.text('2. Contact us for any inquiries regarding your order.', 10, 270);
+    doc.text('3. Ensure to check your items upon delivery.', 10, 275);
   
     // Add footer
     doc.setFillColor(230, 230, 230);
-    doc.rect(10, 270, 190, 10, 'F');
+    doc.rect(10, 280, 190, 10, 'F');
     doc.setFontSize(10);
-    doc.text('Company Name | Address | Contact Information', 105, 276, null, null, 'center');
+    doc.text('Company Name | Address | Contact Information', 105, 286, null, null, 'center');
   
     // Save the PDF
     doc.save('order-receipt.pdf');
-  };
+};
 
   return (
     <div className="max-w-[1280px] mx-auto mb-14 lg:mb-16">
@@ -107,11 +110,9 @@ export default function OrderView({ order, loadingStatus }: any) {
       ) : (
         ''
       )}
-      <button onClick={downloadPDF} className="mb-4 p-2 bg-blue-500 text-white rounded">
-        Download Receipt
-      </button>
+     
       <div className="w-full mx-auto shadow-sm">
-        <div className="grid gap-4 lg:gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-11">
+        <div className="grid gap-4 lg:gap-5 sm:grid-cols-2 lg:grid-cols-5 mb-11">
           <div className="p-5 md:p-6 border border-gray-100 bg-gray-200 rounded-md shadow-sm">
             <h3 className="mb-2 text-base text-heading font-semibold">
               {t('text-order-number')}
@@ -138,6 +139,19 @@ export default function OrderView({ order, loadingStatus }: any) {
             </h3>
             <p className="text-sm text-body">
               {t(order?.payment_gateway) ?? 'N/A'}
+            </p>
+          </div>
+          <div className="p-5 md:p-6 border border-gray-100 bg-gray-200 rounded-md shadow-sm">
+           
+            <p className="text-sm text-body">
+            <button onClick={downloadPDF}  type="button"
+                          
+                          className="text-white bg-black border border-gray-300 focus:outline-none hover:bg-gray-800 active:bg-black focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2"
+                          style={{
+                            backgroundColor: 'black !important',
+                          }}>
+        Download Receipt
+      </button>
             </p>
           </div>
         </div>
