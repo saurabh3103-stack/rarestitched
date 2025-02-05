@@ -96,9 +96,25 @@ export const siteSettings = {
     WinterSeason: {
       slug: 'winter-season',
     },
-    MensCollection: {
-      slug: 'new-sports',
+    
+
+   KanpurEra: {
+      slug: 'kanpur-era',
     },
+    OversizedTshirt: {
+      slug: 'oversized-t-shirt',
+    },
+    Bestsellers: {
+      slug: 'bestsellers',
+    },
+    TShirtsUnder599: {
+      slug: 't-shirts-under-₹599',
+    },
+    
+
+
+    
+
     
     
   },

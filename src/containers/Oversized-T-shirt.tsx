@@ -12,6 +12,7 @@ import Carousel from '@components/ui/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import { IoEyeOutline } from 'react-icons/io5';
+
 interface ProductsProps {
   sectionHeading?: string;
   className?: string;
@@ -34,23 +35,23 @@ const breakpoints = {
     spaceBetween: 20,
   },
   '480': {
-    slidesPerView: 2,
+    slidesPerView: 3,
     spaceBetween: 12,
   },
   '0': {
-    slidesPerView: 1,
-    spaceBetween: 10,
+    slidesPerView: 2,
+    spaceBetween: 12,
   },
 };
 
-const WinterSeasonProducts: React.FC<ProductsProps> = ({
-  sectionHeading = 'Winter Seasons',
+const ProductsOversizedTshirtBlock: React.FC<ProductsProps> = ({
+  sectionHeading = 'Oversized T-shirts',
   className = 'mb-12 md:mb-14 xl:mb-16',
   variant = 'default',
   limit = 10,
 }) => {
   const { t } = useTranslation();
-  const winterSeasonSettings = siteSettings?.homePageBlocks?.WinterSeason;
+  const oversizedTshirtSettings = siteSettings?.homePageBlocks?.OversizedTshirt;
 
   const {
     data: products,
@@ -58,11 +59,11 @@ const WinterSeasonProducts: React.FC<ProductsProps> = ({
     error,
   } = useProducts({
     limit,
-    tags: winterSeasonSettings?.slug,
+    tags: oversizedTshirtSettings?.slug,
   });
 
   if (!loading && isEmpty(products)) {
-    return <NotFoundItem text={t('text-no-winter-products-found')} />;
+    return <NotFoundItem text={t('text-no-oversized-t-shirt-products-found')} />;
   }
 
   return (
@@ -76,12 +77,12 @@ const WinterSeasonProducts: React.FC<ProductsProps> = ({
       <div className="flex flex-wrap items-center justify-between mb-5 md:mb-6">
         <SectionHeader sectionHeading={sectionHeading} className="mb-0" />
         <Link
-        href={`/collections/${winterSeasonSettings?.slug}`}
-        className="flex items-center  font-semibold  transition duration-200"
-      >
-        <span className="mr-2">Explore All</span>
-        <IoEyeOutline className=" transition duration-200" />
-      </Link>
+          href={`/collections/${oversizedTshirtSettings?.slug}`}
+          className="flex items-center font-semibold transition duration-200"
+        >
+          <span className="mr-2">Explore All</span>
+          <IoEyeOutline className="transition duration-200" />
+        </Link>
       </div>
       {error ? (
         <Alert message={error?.message} />
@@ -94,10 +95,10 @@ const WinterSeasonProducts: React.FC<ProductsProps> = ({
           }`}
         >
           {loading && products?.length ? (
-            Array.from({ length: limit }).map((_, idx) => (
+            Array.from({ length: 10 }).map((_, idx) => (
               <ProductCardGridLoader
                 key={idx}
-                uniqueKey={`winter-season-${idx}`}
+                uniqueKey={`oversized-t-shirt-${idx}`}
               />
             ))
           ) : (
@@ -117,8 +118,8 @@ const WinterSeasonProducts: React.FC<ProductsProps> = ({
                   autoplay={{
                     delay: 3500,
                   }}
-                  prevActivateId="winterSlidePrev"
-                  nextActivateId="winterSlideNext"
+                  prevActivateId="oversizedTshirtSlidePrev"
+                  nextActivateId="oversizedTshirtSlideNext"
                 >
                   {products?.map((product: Product) => (
                     <SwiperSlide key={`product--key-${product.id}`}>
@@ -139,4 +140,4 @@ const WinterSeasonProducts: React.FC<ProductsProps> = ({
   );
 };
 
-export default WinterSeasonProducts;
+export default ProductsOversizedTshirtBlock;

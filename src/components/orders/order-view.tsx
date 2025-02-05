@@ -11,6 +11,8 @@ import SuborderItems from '@components/orders/suborder-items';
 import OrderViewHeader from '@components/orders/order-view-header';
 import { isEmpty } from 'lodash';
 import { jsPDF } from 'jspdf';
+import Lottie from "lottie-react";
+import animationData from "./animation.json";
 
 export default function OrderView({ order, loadingStatus }: any) {
   const { t } = useTranslation('common');
@@ -102,6 +104,8 @@ export default function OrderView({ order, loadingStatus }: any) {
 
   return (
     <div className="max-w-[1280px] mx-auto mb-14 lg:mb-16">
+
+
       {!loadingStatus ? (
         <OrderViewHeader
           order={order}
@@ -110,6 +114,8 @@ export default function OrderView({ order, loadingStatus }: any) {
       ) : (
         ''
       )}
+
+      
      
       <div className="w-full mx-auto shadow-sm">
         <div className="grid gap-4 lg:gap-5 sm:grid-cols-2 lg:grid-cols-5 mb-11">

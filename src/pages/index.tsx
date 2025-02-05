@@ -16,6 +16,10 @@ import ExclusiveBlock from '@containers/exclusive-block';
 import Subscription from '@components/common/subscription';
 import NewArrivalsProductFeed from '@components/product/feeds/new-arrivals-product-feed';
 import WinterSeasonProducts from '@containers/WinterSeasonProducts';
+import ProductsKanpurEraBlock from '@containers/ProductsKanpurEraBlock';
+import ProductsOversizedTshirtBlock from '@containers/Oversized-T-shirt';
+import BestSellerProductFeed from '@components/product/feeds/best-seller-product-feed';
+import ProductsTShirtsUnder599Block from '@containers/T-Shirts-Under-₹599';
 // import 
 import { ROUTES } from '@lib/routes';
 
@@ -30,6 +34,7 @@ import Link from 'next/link';
 
 export { getStaticProps } from '@framework/homepage/modern';
 import Marquee from "react-fast-marquee";
+import { components } from 'react-select';
 
 export default function Home() {
   return (
@@ -47,11 +52,16 @@ export default function Home() {
         </p>
       </div>
     </Marquee>
+
+
       <BannerBlock data={masonryBanner} />
+      <BannerSliderBlock data={promotionBanner} />
 
       <Container>
-        <ProductsFlashSaleBlock />
+      <NewArrivalsProductFeed />
+        <ProductsKanpurEraBlock />
       </Container>
+
       <Container>
       <BannerCard
           data={banner[2]}
@@ -61,37 +71,72 @@ export default function Home() {
         />
         </Container>
 
-      <Container>
-       <WinterSeasonProducts></WinterSeasonProducts>
+        <Container>
+        <ProductsOversizedTshirtBlock />
+        <BestSellerProductFeed />
       </Container>
-      <BannerSliderBlock data={promotionBanner} />
+
       <Container>
-        <CategoryBlock
-          sectionHeading="text-shop-by-category"
-          variant="rounded"
-        />
-        <ProductsFeatured sectionHeading="text-featured-products" />
-        <BannerCard
+      <BannerCard
           data={banner[0]}
           href={`${ROUTES.COLLECTIONS}/${banner[0].slug}`}
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
           classNameInner="aspect-[3.15/1]"
         />
-        
-         <BannerWithProducts
-          sectionHeading="text-on-selling-products"
-          categorySlug="/search"
-          data={productBanner}
+      </Container>
+
+
+      <Container>
+        <CategoryBlock
+          sectionHeading="text-shop-by-category"
+          variant="rounded"
         />
+         </Container>
+         <Container>
+        <ProductsTShirtsUnder599Block></ProductsTShirtsUnder599Block>
+      </Container>
+      
+      <ProductsFlashSaleBlock />
+      <Container>
+      <BannerCard
+          data={banner[0]}
+          href={`${ROUTES.COLLECTIONS}/${banner[0].slug}`}
+          className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
+          classNameInner="aspect-[3.15/1]"
+        />
+        </Container>
+
+      
+      
+      
+      
+     
+
+      <Container>
+       <WinterSeasonProducts></WinterSeasonProducts>
+      </Container>
+      
+      <Container>
+       
+        <ProductsFeatured sectionHeading="text-featured-products" />
+
         <BannerCard
           data={banner[1]}
           href={`${ROUTES.COLLECTIONS}/${banner[1].slug}`}
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
           classNameInner="aspect-[4.3/1]"
         />
-        <NewArrivalsProductFeed />
+       
+        
+         <BannerWithProducts
+          sectionHeading="text-on-selling-products"
+          categorySlug="/search"
+          data={productBanner}
+        />
+      
+        
          
-        <BrandGridBlock sectionHeading="text-top-brands" />
+       
         
        
         <ExclusiveBlock />
