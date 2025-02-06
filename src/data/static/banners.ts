@@ -22,7 +22,7 @@ export const masonryBanner = [
   {
     id: 2,
     title: 'New Sports',
-    slug: 'new-sports',
+    slug: 'oversized-t-shirt',
     image: {
       mobile: {
         url: '/assets/images/banner/masonry/skull mania (1).png',
@@ -40,7 +40,7 @@ export const masonryBanner = [
   {
     id: 3,
     title: 'Dress Women',
-    slug: 'womens-collection',
+    slug: 'product-coupons',
     image: {
       mobile: {
         url: '/assets/images/banner/masonry/4.png',
@@ -58,7 +58,7 @@ export const masonryBanner = [
   {
     id: 4,
     title: 'Exclusive Sunglasses',
-    slug: 'exclusive-sunglasses',
+    slug: 'flash-sale',
     image: {
       mobile: {
         url: '/assets/images/banner/masonry/3.png',
@@ -76,7 +76,7 @@ export const masonryBanner = [
   {
     id: 5,
     title: 'Product Coupons',
-    slug: 'product-coupons',
+    slug: 'oversized-t-shirt',
     image: {
       mobile: {
         url: '/assets/images/banner/masonry/1.png',
@@ -94,7 +94,7 @@ export const masonryBanner = [
   {
     id: 6,
     title: 'New BackpacK',
-    slug: 'new-backpack',
+    slug: 'kanpur-era',
     image: {
       mobile: {
         url: '/assets/images/banner/masonry/poster 1.0.jpg',
@@ -171,8 +171,8 @@ export const gridBanner = [
 export const promotionBanner = [
   {
     id: 1,
-    title: 'Travel Baggage',
-    slug: 'new-backpack',
+    title: 'Kanpur Era',
+    slug: 'oversized-t-shirt',
     image: {
       mobile: {
         url: '/assets/images/banner/slider/slider banner.jpg',
@@ -189,8 +189,8 @@ export const promotionBanner = [
   },
   {
     id: 2,
-    title: "Women's Collection",
-    slug: 'womens-collection',
+    title: "Oversized T-shirt",
+    slug: 'oversized-t-shirt',
     image: {
       mobile: {
         url: '/assets/images/banner/slider/mobile/banner-2.png',
@@ -207,8 +207,8 @@ export const promotionBanner = [
   },
   {
     id: 3,
-    title: 'Winter Collection',
-    slug: 'winter-collection',
+    title: 'Kanpur Era',
+    slug: 'kanpur-era',
     image: {
       mobile: {
         url: '/assets/images/banner/slider/flaunt banner.jpg',
@@ -225,8 +225,8 @@ export const promotionBanner = [
   },
   {
     id: 4,
-    title: "Women's Collection",
-    slug: 'womens-collection',
+    title: "Oversized T-shirt",
+    slug: 'oversized-t-shirt',
     image: {
       mobile: {
         url: '/assets/images/banner/slider/banner-2.png',
@@ -248,7 +248,7 @@ export const modernDemoBanner = [
   {
     id: 1,
     title: 'Winter Collection of Kid Items',
-    slug: 'winter-collection',
+    slug: 'mens-collection',
     image: {
       mobile: {
         url: '/assets/images/banner/banner no 13.jpg',
@@ -265,10 +265,10 @@ export const modernDemoBanner = [
   {
     id: 2,
     title: 'Offer Off Everything',
-    slug: 'winter-offer',
+    slug: 'kanpur-era',
     image: {
       mobile: {
-        url: '/assets/images/banner/banner-mobile-3.jpg',
+        url: '/assets/images/banner/banner-4.jpg',
         width: 450,
         height: 180,
       },
@@ -282,7 +282,7 @@ export const modernDemoBanner = [
   {
     id: 3,
     title: 'Winter Collection of Kid Items',
-    slug: 'winter-collection',
+    slug: 'oversized-t-shirt',
     image: {
       mobile: {
         url: '/assets/images/banner/big banner (2).jpg',

@@ -9,7 +9,7 @@ interface BannerProps {
 
 const BannerBlock: React.FC<BannerProps> = ({
   data,
-  className = 'mb-12 md:mb-14 xl:mb-16',
+  className = 'mb-4 md:mb-6 xl:mb-8',
 }) => {
   return (
     <div
