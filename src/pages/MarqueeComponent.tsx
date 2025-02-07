@@ -52,7 +52,7 @@ export const Marquee2 = () => (
 );
 
 export const Marquee3 = () => (
-  <Marquee className="bg-black py-2 my-1 shadow-lg mb-6">
+  <Marquee className=" bg-black py-2 my-1 shadow-lg mb-6">
     <div className="flex items-center justify-center w-full text-white text-lg font-semibold tracking-wider">
       <a
         href="https://www.instagram.com/thefun2shstore?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
