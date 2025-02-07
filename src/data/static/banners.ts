@@ -2,8 +2,8 @@
 export const masonryBanner = [
   {
     id: 1,
-    title: "Men's Collection",
-    slug: 'mens-collection',
+    title: "Monkey Mania",
+    slug: 'monkey-mania',
     image: {
       mobile: {
         // url: '/assets/images/banner/masonry/banner-mobile-1.png',
@@ -75,8 +75,8 @@ export const masonryBanner = [
   },
   {
     id: 5,
-    title: 'Product Coupons',
-    slug: 'oversized-t-shirt',
+    title: 'Skull Heroes',
+    slug: 'skull-heroes',
     image: {
       mobile: {
         url: '/assets/images/banner/masonry/1.png',
@@ -189,8 +189,8 @@ export const promotionBanner = [
   },
   {
     id: 2,
-    title: "Oversized T-shirt",
-    slug: 'oversized-t-shirt',
+    title: "Engineer's Paradise",
+    slug: 'engineer"s-paradise',
     image: {
       mobile: {
         url: '/assets/images/banner/slider/mobile/banner-2.png',
@@ -225,8 +225,8 @@ export const promotionBanner = [
   },
   {
     id: 4,
-    title: "Oversized T-shirt",
-    slug: 'oversized-t-shirt',
+    title: "Engineer's Paradise",
+    slug: 'engineer"s-paradise',
     image: {
       mobile: {
         url: '/assets/images/banner/slider/banner-2.png',
