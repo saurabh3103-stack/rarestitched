@@ -154,8 +154,8 @@ export default function Home() {
       </Container>
 
       <Container>
-        <ProductsOversizedTshirtBlock />
-        <BestSellerProductFeed />
+        <ProductsOversizedTshirtBlock variant="slider"/>
+        <BestSellerProductFeed  />
       </Container>
 
       {/* <Container>
@@ -174,7 +174,7 @@ export default function Home() {
         />
       </Container>
       <Container>
-        <ProductsTShirtsUnder599Block></ProductsTShirtsUnder599Block>
+        <ProductsTShirtsUnder599Block variant="slider"></ProductsTShirtsUnder599Block>
       </Container>
 
       <ProductsFlashSaleBlock />
@@ -188,11 +188,11 @@ export default function Home() {
       </Container>
 
       <Container>
-        <WinterSeasonProducts></WinterSeasonProducts>
+        <WinterSeasonProducts variant="slider"></WinterSeasonProducts>
       </Container>
 
       <Container>
-        <ProductsFeatured sectionHeading="text-featured-products" />
+        <ProductsFeatured sectionHeading="text-featured-products"  />
 
         <BannerCard
           data={banner[1]}
