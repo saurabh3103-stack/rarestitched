@@ -248,14 +248,14 @@ export function useSendOtpCode({
         setServerError(data.message!);
         return;
       }
-      setOtpState({
-        ...otpState,
-        otpId: data?.id!,
-        isContactExist: data?.is_contact_exist!,
-        phoneNumber: data?.phone_number!,
-        step: data?.is_contact_exist! ? 'OtpForm' : 'RegisterForm',
-        ...(verifyOnly && { step: 'OtpForm' }),
-      });
+      // setOtpState({
+      //   ...otpState,
+      //   otpId: data?.id!,
+      //   isContactExist: data?.is_contact_exist!,
+      //   phoneNumber: data?.phone_number!,
+      //   step: data?.is_contact_exist! ? 'OtpForm' : 'RegisterForm',
+      //   ...(verifyOnly && { step: 'OtpForm' }),
+      // });
     },
     onError: (error: Error) => {
       console.log(error.message);

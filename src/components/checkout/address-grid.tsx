@@ -96,12 +96,16 @@ export const AddressGrid: React.FC<AddressesProps> = ({
         </RadioGroup>
       ) : (
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-          <span className="text-sm relative p-4 lg:p-5 xl:p-6 text-heading font-semibold text-center bg-gray-200 border-gray-100 rounded border border-border-200">
+          <button
+            onClick={onAdd} // Trigger the onAdd function when clicked
+            className="text-sm relative p-4 lg:p-5 xl:p-6 text-heading font-semibold text-center bg-gray-200 border-gray-100 rounded border border-border-200 hover:bg-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-heading"
+          >
             {t("text-no-address")}
-          </span>
+          </button>
         </div>
       )}
     </div>
   );
 };
+
 export default AddressGrid;

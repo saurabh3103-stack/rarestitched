@@ -70,8 +70,10 @@ class Client {
       HttpClient.get<Attribute[]>(API_ENDPOINTS.ATTRIBUTES, { ...params }),
   };
 
+
   brands = {
     find: (params: ParamsType) => {
+      
       const {
         type,
         text: name,
@@ -123,6 +125,62 @@ class Client {
       HttpClient.delete(`${API_ENDPOINTS.ADDRESS}/${id}`),
   };
 
+   // sendOtpCode: (input: SendOtpCodeInputType) =>
+    //   HttpClient.post(API_ENDPOINTS.SEND_OTP_CODE, input),
+
+    // verifyOtpCode: (input: VerifyOtpInputType) =>
+    //   HttpClient.post(API_ENDPOINTS.VERIFY_OTP_CODE, input),
+
+    // otpLogin: (input: OtpLoginInputType) =>
+    //   HttpClient.post(API_ENDPOINTS.OTP_LOGIN, input),
+
+  // auth = {
+  //   login: (input: LoginInputType) =>
+  //     HttpClient.post(API_ENDPOINTS.LOGIN, input),
+
+  //   socialLogin: (input: SocialLoginInputType) =>
+  //     HttpClient.post(API_ENDPOINTS.SOCIAL_LOGIN, input),
+
+   
+
+  //   sendOtpCode: (input: UpdateContactInput) =>
+  //     HttpClient.post(API_ENDPOINTS.UPDATE_CONTACT,user.id, input),
+
+  //   register: (input: RegisterUserInputType) =>
+  //     HttpClient.post(API_ENDPOINTS.REGISTER, input),
+
+  //   logout: () => HttpClient.post<boolean>(API_ENDPOINTS.LOGOUT, {}),
+
+  //   changePassword: (input: ChangePasswordInputType) =>
+  //     HttpClient.post(API_ENDPOINTS.CHANGE_PASSWORD, input),
+
+  //   forgetPassword: (input: ForgetPasswordInputType) =>
+  //     HttpClient.post(API_ENDPOINTS.FORGET_PASSWORD, input),
+
+  //   resetPassword: (input: ResetPasswordInputType) =>
+  //     HttpClient.post(API_ENDPOINTS.RESET_PASSWORD, input),
+
+  //   verifyForgetPassword: (input: VerifyPasswordInputType) =>
+  //     HttpClient.post(API_ENDPOINTS.VERIFY_FORGET_PASSWORD, input),
+  //   resendVerificationEmail: (input?: VerificationEmailUserInput) =>
+  //     HttpClient.post(API_ENDPOINTS.SEND_VERIFICATION_EMAIL, input),
+  //   subscribe: (input: { email: string }) =>
+  //     HttpClient.post<any>(API_ENDPOINTS.USERS_SUBSCRIBE_TO_NEWSLETTER, input),
+  // };
+
+  user = {
+    me: () => HttpClient.get<User>(API_ENDPOINTS.CUSTOMER),
+
+    updateEmail: (input: UpdateEmailUserInput) =>
+      HttpClient.post<EmailChangeResponse>(
+        API_ENDPOINTS.USERS_UPDATE_EMAIL,
+        input,
+      ),
+
+    update: (user: UpdateUserInput) =>
+      HttpClient.put<User>(`${API_ENDPOINTS.CUSTOMERS}/${user.id}`, user),
+  };
+
   auth = {
     login: (input: LoginInputType) =>
       HttpClient.post(API_ENDPOINTS.LOGIN, input),
@@ -130,17 +188,27 @@ class Client {
     socialLogin: (input: SocialLoginInputType) =>
       HttpClient.post(API_ENDPOINTS.SOCIAL_LOGIN, input),
 
-    sendOtpCode: (input: SendOtpCodeInputType) =>
-      HttpClient.post(API_ENDPOINTS.SEND_OTP_CODE, input),
-
-    verifyOtpCode: (input: VerifyOtpInputType) =>
-      HttpClient.post(API_ENDPOINTS.VERIFY_OTP_CODE, input),
-
-    otpLogin: (input: OtpLoginInputType) =>
-      HttpClient.post(API_ENDPOINTS.OTP_LOGIN, input),
-
-    updateContact: (input: UpdateContactInput) =>
-      HttpClient.post(API_ENDPOINTS.UPDATE_CONTACT, input),
+    sendOtpCode: (input: UpdateContactInput) => {
+      return this.user
+        .me()
+        .then((userResponse) => {
+          console.log("User Me Response:", userResponse);
+          const user_id = userResponse.id;
+          const updatedInput = {
+            ...input,
+            user_id,
+          };
+          return HttpClient.post(API_ENDPOINTS.UPDATE_CONTACT, updatedInput);
+        })
+        .then((otpResponse) => {
+          console.log("Send OTP Response:", otpResponse);
+          return otpResponse;
+        })
+        .catch((error) => {
+          console.error("Send OTP Error:", error);
+          throw error;
+        });
+    },
 
     register: (input: RegisterUserInputType) =>
       HttpClient.post(API_ENDPOINTS.REGISTER, input),
@@ -158,23 +226,12 @@ class Client {
 
     verifyForgetPassword: (input: VerifyPasswordInputType) =>
       HttpClient.post(API_ENDPOINTS.VERIFY_FORGET_PASSWORD, input),
+
     resendVerificationEmail: (input?: VerificationEmailUserInput) =>
       HttpClient.post(API_ENDPOINTS.SEND_VERIFICATION_EMAIL, input),
+
     subscribe: (input: { email: string }) =>
       HttpClient.post<any>(API_ENDPOINTS.USERS_SUBSCRIBE_TO_NEWSLETTER, input),
-  };
-
-  user = {
-    me: () => HttpClient.get<User>(API_ENDPOINTS.CUSTOMER),
-
-    updateEmail: (input: UpdateEmailUserInput) =>
-      HttpClient.post<EmailChangeResponse>(
-        API_ENDPOINTS.USERS_UPDATE_EMAIL,
-        input,
-      ),
-
-    update: (user: UpdateUserInput) =>
-      HttpClient.put<User>(`${API_ENDPOINTS.CUSTOMERS}/${user.id}`, user),
   };
 
   category = {

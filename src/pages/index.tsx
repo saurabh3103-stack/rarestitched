@@ -21,7 +21,7 @@ import ProductsOversizedTshirtBlock from '@containers/Oversized-T-shirt';
 import BestSellerProductFeed from '@components/product/feeds/best-seller-product-feed';
 import ProductsTShirtsUnder599Block from '@containers/T-Shirts-Under-₹599';
 import { SlUserFemale } from 'react-icons/sl';
-import { FaFemale, FaInstagram, FaSnowflake } from 'react-icons/fa';
+import {  FaInstagram, FaSnowflake } from 'react-icons/fa';
 import { FaShoppingCart, FaTags, FaGift } from 'react-icons/fa';
 import { FaShoppingBag, FaPercentage } from 'react-icons/fa';
 
@@ -44,84 +44,151 @@ import { MdCelebration } from 'react-icons/md';
 
 import { CiDiscount1 } from 'react-icons/ci';
 import { FaCameraRetro } from 'react-icons/fa';
+import {   FaFemale, FaTag } from 'react-icons/fa';
 
 export default function Home() {
   return (
     <>
-  <Marquee className="bg-white py-2 my-1 shadow-lg border-t-2 border-black">
-  <div className="flex items-center space-x-4 w-full text-black text-lg font-semibold">
-    {/* Snowflake Icon */}
-   
 
-    <p className="w-full text-center">
-      <Link href="/collections/winter-collection">
-        <span 
-          className="flex items-center space-x-2 font-bold tracking-wider"
-          style={{ fontFamily: 'Arial, sans-serif', color: '#000000' }} // Changed font color to dark black
-        >
-          The Winter Discount Season Is On
-          {/* Shopping Cart Icon */}
+
+{/* Winter Discount Season Marquee */}
+<Marquee className="bg-gradient-to-r from-blue-50 to-white py-4 my-2 shadow-2xl border-t-2 border-b-2 border-gray-200">
+  <div className="flex items-center justify-center w-full text-black text-xl font-bold tracking-wide">
+    <Link
+      href="/collections/winter-collection"
+      className="group hover:text-blue-600 transition-all duration-500 ease-in-out"
+    >
+      <span className="flex items-center space-x-6">
+        {/* Snowflake Icon */}
+        <span className="bg-blue-100 p-3 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-md">
+          <FaSnowflake className="text-blue-600 text-xl" />
         </span>
-      </Link>
-    </p>
+
+        {/* Text with Underline Animation */}
+        <span className="relative inline-block">
+          <span className="text-gray-800 group-hover:text-blue-600 transition-all duration-300">
+            The Winter Discount Season Is On
+          </span>
+          {/* Underline Animation */}
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-500"></span>
+        </span>
+
+        {/* Shopping Cart Icon */}
+        <span className="bg-blue-500 p-3 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-md">
+          <FaShoppingCart className="text-white text-xl" />
+        </span>
+      </span>
+    </Link>
   </div>
 </Marquee>
 
-<Marquee className="bg-white py-2 my-1 shadow-lg border-t-2 border-b-2 border-black" direction={'right'}>
-  <div className="flex items-center justify-center space-x-4 w-full text-black text-lg font-semibold">
-    {/* Female Icon */}
-
-    {/* Text */}
-    <p className="text-center">
-      <Link href="/collections/womens-collection">
-        <span 
-          className="flex items-center space-x-2 font-bold tracking-wider"
-          style={{ color: '#000000' }} // Changed font color to dark black
-        >
-          40% Off On Women Wear
-          
+{/* Women's Collection Marquee */}
+<Marquee
+  className="bg-gradient-to-r from-pink-50 to-white py-4 my-2 shadow-2xl border-t-2 border-b-2 border-gray-200"
+  direction={'right'}
+>
+  <div className="flex items-center justify-center w-full text-black text-xl font-bold tracking-wide">
+    <Link
+      href="/collections/womens-collection"
+      className="group hover:text-pink-600 transition-all duration-500 ease-in-out"
+    >
+      <span className="flex items-center space-x-6">
+        {/* Female Icon */}
+        <span className="bg-pink-100 p-3 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-md">
+          <FaFemale className="text-pink-600 text-xl" />
         </span>
-      </Link>
-    </p>
+
+        {/* Text with Underline Animation */}
+        <span className="relative inline-block">
+          <span className="text-gray-800 group-hover:text-pink-600 transition-all duration-300">
+            40% Off On Women Wear
+          </span>
+          {/* Underline Animation */}
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pink-600 group-hover:w-full transition-all duration-500"></span>
+        </span>
+
+        {/* Tag Icon */}
+        <span className="bg-pink-500 p-3 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-md">
+          <FaTag className="text-white text-xl" />
+        </span>
+      </span>
+    </Link>
   </div>
 </Marquee>
 
 
 
       <BannerBlock data={masonryBanner} />
+      <Marquee className="bg-gradient-to-r from-white to-gray-50 py-6 my-2 shadow-2xl border-t-2 border-b-2 border-gray-200">
+  <div className="flex items-center justify-center w-full text-black text-xl font-bold tracking-wide">
+    {/* Text with Icons */}
+    <a
+      href="https://www.instagram.com/thefun2shstore?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group hover:text-blue-600 transition-all duration-500 ease-in-out"
+      style={{ fontFamily: 'Le Havre Layers, sans-serif' }}
+    >
+      <span className="flex items-center flex-wrap space-x-6">
+        {/* Upload Your Pic */}
+        <span className="relative inline-block">
+          <span className="text-gray-800 group-hover:text-blue-600 transition-all duration-300">
+            Upload Your Pic
+          </span>
+          {/* Underline Animation */}
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-500"></span>
+        </span>
 
-      <Marquee className="bg-black py-2 my-1 shadow-lg">
-        <div className="flex items-center justify-center w-full text-white text-lg font-semibold tracking-wider">
-          {/* Text with Icons */}
-          <a
-            href="https://www.instagram.com/thefun2shstore?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="flex items-center flex-wrap">
-              <span>Upload Your Pic</span>
-              {/* Camera Icon */}
-              <span className="bg-yellow-300 p-2 rounded-full m-1">
-                <FaCameraRetro className="text-black text-xs" />
-              </span>
-              <span>Tagging @thefun2shstore on Instagram </span>
-              <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 p-2 rounded-full shadow-lg m-1">
-                <FaInstagram className="text-white text-sm" />
-              </span>
-              <span>With our Brand</span>
-              {/* Tag Icon */}
-              <span className="bg-blue-500 p-2 rounded-full m-1">
-                <FaTags className="text-white text-xs" />
-              </span>
-              <span>& Get 20% Additional Discount</span>
-              {/* Gift Icon */}
-              <span className="bg-red-500 p-2 rounded-full m-1">
-                <FaGift className="text-white text-xs" />
-              </span>
-            </span>
-          </a>
-        </div>
-      </Marquee>
+        {/* Camera Icon */}
+        <span className="bg-yellow-300 p-3 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-md">
+          <FaCameraRetro className="text-black text-xl" />
+        </span>
+
+        {/* Tagging Text */}
+        <span className="relative inline-block">
+          <span className="text-gray-800 group-hover:text-blue-600 transition-all duration-300">
+            Tagging @thefun2shstore on Instagram
+          </span>
+          {/* Underline Animation */}
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-500"></span>
+        </span>
+
+        {/* Instagram Icon */}
+        <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 p-3 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+          <FaInstagram className="text-white text-xl" />
+        </span>
+
+        {/* With our Brand */}
+        <span className="relative inline-block">
+          <span className="text-gray-800 group-hover:text-blue-600 transition-all duration-300">
+            With our Brand
+          </span>
+          {/* Underline Animation */}
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-500"></span>
+        </span>
+
+        {/* Tag Icon */}
+        <span className="bg-blue-500 p-3 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-md">
+          <FaTags className="text-white text-xl" />
+        </span>
+
+        {/* Get 20% Additional Discount */}
+        <span className="relative inline-block">
+          <span className="text-gray-800 group-hover:text-blue-600 transition-all duration-300">
+            & Get 20% Additional Discount
+          </span>
+          {/* Underline Animation */}
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-500"></span>
+        </span>
+
+        {/* Gift Icon */}
+        <span className="bg-red-500 p-3 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-md">
+          <FaGift className="text-white text-xl" />
+        </span>
+      </span>
+    </a>
+  </div>
+</Marquee>
 
       <BannerSliderBlock data={promotionBanner} />
 
