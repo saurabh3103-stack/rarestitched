@@ -116,7 +116,7 @@ const ProductsTShirtsUnder599Block: React.FC<ProductsProps> = ({
                   breakpoints={breakpoints}
                   buttonClassName="-mt-8 md:-mt-10"
                   autoplay={{
-                    delay: 3500,
+                    delay: 1000,
                   }}
                   prevActivateId="tShirtsUnder599SlidePrev"
                   nextActivateId="tShirtsUnder599SlideNext"

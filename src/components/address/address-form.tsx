@@ -72,7 +72,7 @@ export const AddressForm: React.FC<any> = ({
       {({ register, formState: { errors }, setValue }) => {
         return (
           <>
-            <div>
+            <div className="hidden">
               <Label>{t("text-type")}</Label>
               <div className="flex items-center space-x-4 rtl:space-x-reverse">
                 <Radio

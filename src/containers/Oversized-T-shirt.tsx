@@ -116,7 +116,7 @@ const ProductsOversizedTshirtBlock: React.FC<ProductsProps> = ({
                   breakpoints={breakpoints}
                   buttonClassName="-mt-8 md:-mt-10"
                   autoplay={{
-                    delay: 3500,
+                    delay: 1500,
                   }}
                   prevActivateId="oversizedTshirtSlidePrev"
                   nextActivateId="oversizedTshirtSlideNext"

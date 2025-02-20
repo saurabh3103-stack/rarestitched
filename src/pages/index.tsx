@@ -48,59 +48,45 @@ import { FaCameraRetro } from 'react-icons/fa';
 export default function Home() {
   return (
     <>
-      <Marquee className="bg-black py-2 my-1 shadow-lg">
-        <div className="flex items-center space-x-4 w-full text-white text-lg font-semibold">
-          {/* Snowflake Icon */}
-          <span className="bg-blue-500 p-2 rounded-full shadow-lg">
-            <FaSnowflake className="text-white text-sm" />
-          </span>
+  <Marquee className="bg-white py-2 my-1 shadow-lg border-t-2 border-black">
+  <div className="flex items-center space-x-4 w-full text-black text-lg font-semibold">
+    {/* Snowflake Icon */}
+   
 
-          <p className="w-full text-center">
-            <Link href="/collections/winter-collection">
-              <span className="flex items-center space-x-2 text-yellow-300 font-bold tracking-wider ">
-                The Winter Discount Season Is On
-                {/* Shopping Cart Icon */}
-                <span className="bg-green-500 p-2 rounded-full shadow-lg ml-1">
-                  <FaShoppingCart className="text-white text-sm" />
-                </span>
-                {/* Tag Icon */}
-                <span className="bg-red-500 p-2 rounded-full shadow-lg">
-                  <FaTags className="text-white text-sm" />
-                </span>
-                {/* Gift Icon */}
-                <span className="bg-purple-500 p-2 rounded-full shadow-lg">
-                  <FaGift className="text-white text-sm" />
-                </span>
-              </span>
-            </Link>
-          </p>
-        </div>
-      </Marquee>
-      <Marquee className="bg-black py-2 my-1 shadow-lg" direction={'right'}>
-        <div className="flex items-center justify-center space-x-4 w-full text-white text-lg font-semibold">
-          {/* Female Icon */}
+    <p className="w-full text-center">
+      <Link href="/collections/winter-collection">
+        <span 
+          className="flex items-center space-x-2 font-bold tracking-wider"
+          style={{ fontFamily: 'Arial, sans-serif', color: '#000000' }} // Changed font color to dark black
+        >
+          The Winter Discount Season Is On
+          {/* Shopping Cart Icon */}
+        </span>
+      </Link>
+    </p>
+  </div>
+</Marquee>
 
-          {/* Text */}
-          <p className="text-center">
-            <Link href="/collections/womens-collection">
-              <span className="flex items-center space-x-2 text-yellow-300 font-bold tracking-wider">
-                40% Off On Women Wear
-                <span className="bg-pink-500 p-2 rounded-full shadow-lg ml-1">
-                  <FaFemale className="text-white text-sm" />
-                </span>
-                {/* Percentage Icon */}
-                <span className="bg-red-500 p-2 rounded-full shadow-lg">
-                  <FaPercentage className="text-white text-sm" />
-                </span>
-                {/* Discount Tag Icon */}
-                <span className="bg-green-500 p-2 rounded-full shadow-lg">
-                  <FaTags className="text-white text-sm" />
-                </span>
-              </span>
-            </Link>
-          </p>
-        </div>
-      </Marquee>
+<Marquee className="bg-white py-2 my-1 shadow-lg border-t-2 border-b-2 border-black" direction={'right'}>
+  <div className="flex items-center justify-center space-x-4 w-full text-black text-lg font-semibold">
+    {/* Female Icon */}
+
+    {/* Text */}
+    <p className="text-center">
+      <Link href="/collections/womens-collection">
+        <span 
+          className="flex items-center space-x-2 font-bold tracking-wider"
+          style={{ color: '#000000' }} // Changed font color to dark black
+        >
+          40% Off On Women Wear
+          
+        </span>
+      </Link>
+    </p>
+  </div>
+</Marquee>
+
+
 
       <BannerBlock data={masonryBanner} />
 
@@ -158,14 +144,7 @@ export default function Home() {
         <BestSellerProductFeed  />
       </Container>
 
-      {/* <Container>
-        <BannerCard
-          data={banner[0]}
-          href={`${ROUTES.COLLECTIONS}/${banner[0].slug}`}
-          className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
-          classNameInner="aspect-[3.15/1]"
-        />
-      </Container> */}
+    
 
       <Container>
         <CategoryBlock
@@ -188,7 +167,7 @@ export default function Home() {
       </Container>
 
       <Container>
-        <WinterSeasonProducts variant="slider"></WinterSeasonProducts>
+        <WinterSeasonProducts ></WinterSeasonProducts>
       </Container>
 
       <Container>

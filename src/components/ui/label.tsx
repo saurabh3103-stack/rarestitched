@@ -12,6 +12,7 @@ const Label: React.FC<Props> = ({ className, ...rest }) => {
         "block text-gray-600 font-semibold text-sm leading-none mb-3",
         className
       )}
+      
       {...rest}
     />
   );
