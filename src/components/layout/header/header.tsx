@@ -5,8 +5,11 @@ import CountdownTimer from '@components/ui/countdown-timer';
 import LanguageSwitcher from '@components/ui/language-switcher';
 import Logo from '@components/ui/logo';
 import { useSettings } from '@contexts/settings.context';
+import UserIcon from '@components/icons/user-icon';
 import { useUI } from '@contexts/ui.context';
 import { menu } from '@data/static/menus';
+
+import { ROUTES } from '@lib/routes';
 import { useShop, useShopMaintenanceEvent } from '@framework/shops';
 import {
   RESPONSIVE_WIDTH,
@@ -27,7 +30,14 @@ import { useTranslation } from 'react-i18next';
 import { FaTruck } from 'react-icons/fa';
 import Link from '@components/ui/link';
 import { useWindowSize } from 'react-use';
+import MenuIcon from '@components/icons/menu-icon';
+import { authorizationAtom } from '@store/authorization-atom';
+
 const CartButton = dynamic(() => import('@components/cart/cart-button'), {
+  ssr: false,
+});
+
+const AuthMenu = dynamic(() => import('@components/layout/header/auth-menu'), {
   ssr: false,
 });
 const LoginButton = dynamic(
@@ -36,6 +46,7 @@ const LoginButton = dynamic(
     ssr: false,
   },
 );
+
 interface Props {
   variant?: 'default' | 'modern';
 }
@@ -43,7 +54,7 @@ interface Props {
 type DivElementRef = React.MutableRefObject<HTMLDivElement>;
 const Header: React.FC<Props> = ({ variant = 'default' }) => {
   const { t } = useTranslation();
-  const { openSearch, openSidebar } = useUI();
+  const { openSearch, openSidebar, setModalView, openModal } = useUI();
   const siteHeaderRef = useRef() as DivElementRef;
   addActiveScroll(siteHeaderRef);
   const router = useRouter();
@@ -60,6 +71,13 @@ const Header: React.FC<Props> = ({ variant = 'default' }) => {
       view: 'DISPLAY_MOBILE_MENU',
     });
   }, []);
+
+  const handleLogin = useCallback(() => {
+    setModalView('LOGIN_VIEW');
+    return openModal();
+  }, []);
+
+    const [isAuthorize] = useAtom(authorizationAtom);
 
   const { settings } = useSettings();
   const [underMaintenanceIsComing] = useAtom(checkIsMaintenanceModeComing);
@@ -146,88 +164,98 @@ const Header: React.FC<Props> = ({ variant = 'default' }) => {
       ) : (
         ''
       )}
-      <div className="innerSticky text-gray-700 body-font fixed bg-white w-full h-16 sm:h-20 lg:h-24 z-20 ltr:pl-4 ltr:lg:pl-6 ltr:pr-4 ltr:lg:pr-6 rtl:pr-4 rtl:lg:pr-6 rtl:pl-4 rtl:lg:pl-6 transition duration-200 ease-in-out">
-        <div className="flex items-center justify-center mx-auto max-w-[1920px] h-full w-full">
-          <button
-            aria-label="Menu"
-            className={`menuBtn md:flex ${
-              variant !== 'modern'
-                ? 'hidden lg:hidden px-5 2xl:px-7'
-                : 'ltr:pr-7 rtl:pl-7 hidden md:block'
-            } flex-col items-center justify-center flex-shrink-0 h-full outline-none focus:outline-none`}
-            onClick={handleMobileMenu}
-          >
-            <span className="menuIcon">
-              <span className="bar" />
-              <span className="bar" />
-              <span className="bar" />
-            </span>
-          </button>
-          <Logo />
+     <div className="innerSticky text-gray-700 body-font fixed bg-white w-full h-16 sm:h-20 lg:h-24 z-20 ltr:pl-4 ltr:lg:pl-6 ltr:pr-4 ltr:lg:pr-6 rtl:pr-4 rtl:lg:pr-6 rtl:pl-4 rtl:lg:pl-6 transition duration-200 ease-in-out">
+  <div className="flex items-center justify-center mx-auto max-w-[1920px] h-full w-full">
+    {/* Mobile Menu Button (Visible on Mobile Only) */}
+    <button
+      aria-label="Menu"
+      className="menuBtn md:hidden flex flex-col items-center justify-center flex-shrink-0 outline-none focus:outline-none"
+      onClick={handleMobileMenu}
+    >
+      <MenuIcon />
+    </button>
 
-          {isMultiLangEnable ? (
-            <div className="flex-shrink-0 ltr:ml-auto rtl:mr-auto md:hidden flex">
-              <LanguageSwitcher />
-            </div>
-          ) : (
-            ''
-          )}
+    {/* Logo (Centered on Mobile) */}
+    <div className="flex-grow md:flex-grow-0 text-center md:text-left">
+      <Logo />
+    </div>
 
-          {variant !== 'modern' ? (
-            <HeaderMenu
-              data={menu}
-              className="hidden lg:flex ltr:md:ml-6 ltr:xl:ml-10 rtl:md:mr-6 rtl:xl:mr-10"
-            />
-          ) : (
-            ''
-          )}
+    {/* Search, Cart, and Login Buttons (Visible on Mobile Only) */}
+    <div className="md:hidden flex items-center space-x-4 ltr:ml-auto rtl:mr-auto">
+      <button
+        className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none transform"
+        onClick={openSearch}
+        aria-label="search-button"
+      >
+        <SearchIcon />
+      </button>
+      <CartButton />
 
-          <div className="hidden md:flex justify-end items-center space-x-6 lg:space-x-5 xl:space-x-8 2xl:space-x-10 rtl:space-x-reverse ltr:ml-auto rtl:mr-auto flex-shrink-0">
-            {isMultiLangEnable ? (
-              <div className="ms-auto flex-shrink-0">
-                <LanguageSwitcher />
-              </div>
-            ) : (
-              ''
-            )}
-            <button
-              className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none transform"
-              onClick={openSearch}
-              aria-label="search-button"
-            >
-              <SearchIcon />
-            </button>
-            {/* <div className="-mt-0.5 flex-shrink-0">
-							<AuthMenu
-								isAuthorized={isAuthorize}
-								href={ROUTES.ACCOUNT}
-								className="text-sm xl:text-base text-heading font-semibold"
-								btnProps={{
-									className:
-										"text-sm xl:text-base text-heading font-semibold focus:outline-none",
-									children: t("text-sign-in"),
-									onClick: handleLogin,
-								}}
-							>
-								{t("text-page-my-account")}
-							</AuthMenu>
-						</div> */}
 
-            <CartButton />
-            <div className="flex flex-col items-center">
-              <Link
-                href="/my-account/orders"
-                className="flex flex-col items-center gap-1   rounded-lg   transition-colors"
-              >
-                <FaTruck className="text-lg" />
-                <span className="text-xxs font-bold text-gray-600 font-sans">Track Your Order</span>
-              </Link>
-            </div>
+      <AuthMenu
+          isAuthorized={isAuthorize}
+          href={ROUTES.ACCOUNT}
+          className="flex-shrink-0"
+          btnProps={{
+            className: 'flex-shrink-0 focus:outline-none',
+            children: <UserIcon />,
+            onClick: handleLogin,
+          }}
+        >
+          <UserIcon />
+        </AuthMenu>
+      
+    </div>
 
-            <LoginButton />
-          </div>
-        </div>
+    {/* Language Switcher (Visible on Mobile Only) */}
+    {isMultiLangEnable ? (
+      <div className="flex-shrink-0 ltr:ml-auto rtl:mr-auto md:hidden flex">
+        <LanguageSwitcher />
       </div>
+    ) : (
+      ''
+    )}
+
+    {/* Header Menu (Visible on Desktop Only) */}
+    {variant !== 'modern' ? (
+      <HeaderMenu
+        data={menu}
+        className="hidden lg:flex ltr:md:ml-6 ltr:xl:ml-10 rtl:md:mr-6 rtl:xl:mr-10"
+      />
+    ) : (
+      ''
+    )}
+
+    {/* Links (Visible on Desktop Only) */}
+    <div className="hidden md:flex justify-end items-center space-x-6 lg:space-x-5 xl:space-x-8 2xl:space-x-10 rtl:space-x-reverse ltr:ml-auto rtl:mr-auto flex-shrink-0">
+      {isMultiLangEnable ? (
+        <div className="ms-auto flex-shrink-0">
+          <LanguageSwitcher />
+        </div>
+      ) : (
+        ''
+      )}
+      <button
+        className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none transform"
+        onClick={openSearch}
+        aria-label="search-button"
+      >
+        <SearchIcon />
+      </button>
+      <CartButton />
+      <div className="flex flex-col items-center">
+        <Link
+          href="/my-account/orders"
+          className="flex flex-col items-center gap-1 rounded-lg transition-colors"
+        >
+          <FaTruck className="text-lg" />
+          <span className="text-xxs font-bold text-gray-600 font-sans">Track Your Order</span>
+        </Link>
+      </div>
+      <LoginButton />
+    </div>
+  </div>
+</div>
     </header>
   );
 };
