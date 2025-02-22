@@ -22,11 +22,11 @@ interface ProductsProps {
 
 const breakpoints = {
   '1500': {
-    slidesPerView: 5,
+    slidesPerView: 6,
     spaceBetween: 28,
   },
   '1025': {
-    slidesPerView: 4,
+    slidesPerView: 5,
     spaceBetween: 20,
   },
   '768': {

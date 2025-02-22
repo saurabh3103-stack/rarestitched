@@ -26,19 +26,19 @@ const breakpoints = {
     spaceBetween: 28,
   },
   '1025': {
-    slidesPerView: 4,
+    slidesPerView: 5,
     spaceBetween: 20,
   },
   '768': {
-    slidesPerView: 3,
+    slidesPerView: 4,
     spaceBetween: 20,
   },
   '480': {
-    slidesPerView: 2,
+    slidesPerView: 3,
     spaceBetween: 12,
   },
   '0': {
-    slidesPerView: 1,
+    slidesPerView: 2,
     spaceBetween: 10,
   },
 };

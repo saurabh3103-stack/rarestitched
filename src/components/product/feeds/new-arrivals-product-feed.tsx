@@ -28,6 +28,7 @@ export default function NewArrivalsProductFeed() {
       loading={loading}
       error={error?.message}
       uniqueKey="new-arrivals"
+      variant="slider"
     />
 	);
 }

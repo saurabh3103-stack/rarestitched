@@ -21,14 +21,13 @@ import ProductsOversizedTshirtBlock from '@containers/Oversized-T-shirt';
 import BestSellerProductFeed from '@components/product/feeds/best-seller-product-feed';
 import ProductsTShirtsUnder599Block from '@containers/T-Shirts-Under-₹599';
 import { SlUserFemale } from 'react-icons/sl';
-import {  FaInstagram, FaSnowflake } from 'react-icons/fa';
+import { FaInstagram, FaSnowflake } from 'react-icons/fa';
 import { FaShoppingCart, FaTags, FaGift } from 'react-icons/fa';
 import { FaShoppingBag, FaPercentage } from 'react-icons/fa';
-
+import ProductsBestsellersBlock from '@containers/BestSellers';
+import { useState, useEffect } from "react";
 import { FaInstagramSquare } from 'react-icons/fa';
-// import
 import { ROUTES } from '@lib/routes';
-
 import {
   masonryBanner,
   promotionBanner,
@@ -36,175 +35,55 @@ import {
   modernDemoProductBanner as productBanner,
 } from '@data/static/banners';
 import Link from 'next/link';
-
-export { getStaticProps } from '@framework/homepage/modern';
 import Marquee from 'react-fast-marquee';
 import { components } from 'react-select';
 import { MdCelebration } from 'react-icons/md';
-
 import { CiDiscount1 } from 'react-icons/ci';
 import { FaCameraRetro } from 'react-icons/fa';
-import {   FaFemale, FaTag } from 'react-icons/fa';
+import { FaFemale, FaTag } from 'react-icons/fa';
+import WinterDiscountMarquee from '@components/marquees/WinterDiscountMarquee';
+import InstagramTaggingMarquee from '@components/marquees/InstagramTaggingMarquee';
+import WomensCollectionMarquee from '@components/marquees/WomensCollectionMarquee';
+
+export { getStaticProps } from '@framework/homepage/modern';
 
 export default function Home() {
+  const [aspectRatio, setAspectRatio] = useState("aspect-[3.15/1]");
+
+  useEffect(() => {
+    const updateAspectRatio = () => {
+      setAspectRatio(window.innerWidth < 550 ? "aspect-[2.92/1]" : "aspect-[3.15/1]");
+    };
+
+    updateAspectRatio(); // Initial check
+    window.addEventListener("resize", updateAspectRatio);
+
+    return () => window.removeEventListener("resize", updateAspectRatio);
+  }, []);
+
   return (
     <>
-
-
-<Marquee
-  className="bg-gradient-to-r from-blue-50 to-white py-1 my-1 shadow-md border-t border-b border-gray-200"
->
-  <div className="flex items-center justify-center w-full text-black text-xs sm:text-sm md:text-base font-semibold tracking-wide">
-    <Link
-      href="/collections/winter-collection"
-      className="group hover:text-blue-600 transition-all duration-500 ease-in-out"
-    >
-      <span className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
-        {/* Snowflake Icon */}
-        <span className="bg-blue-100 p-1 sm:p-1.5 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-sm">
-          <FaSnowflake className="text-blue-600 text-xs sm:text-sm md:text-base" />
-        </span>
-
-        {/* Text with Underline Animation */}
-        <span className="relative inline-block">
-          <span
-            className="text-black group-hover:text-blue-600 transition-all duration-300 text-xs sm:text-sm font-semibold"
-            style={{ textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)" }}
-          >
-            The Winter Discount Season Is On
-          </span>
-          {/* Underline Animation */}
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-500"></span>
-        </span>
-
-        {/* Shopping Cart Icon */}
-        <span className="bg-blue-500 p-1 sm:p-1.5 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-sm">
-          <FaShoppingCart className="text-white text-xs sm:text-sm md:text-base" />
-        </span>
-      </span>
-    </Link>
-  </div>
-</Marquee>
-
-
-
-
-
-{/* Women's Collection Marquee */}
-{/* Women's Collection Marquee */}
-
-
-
-
-
-
-
-
-
-
-
-
+      <WinterDiscountMarquee />
       <BannerBlock data={masonryBanner} />
-    {/* Instagram Tagging Marquee */}
-    <Marquee
-  className="bg-gradient-to-r from-yellow-50 to-white py-1 my-3 shadow-md border-t border-b border-gray-200"
-  direction="left"
->
-  <div className="flex items-center justify-center w-full text-black text-xs sm:text-sm md:text-base font-bold tracking-wide">
-    <a
-      href="https://www.instagram.com/thefun2shstore?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group hover:text-blue-600 transition-all duration-500 ease-in-out"
-    >
-      <span className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
-        {/* Camera Icon */}
-        <span className="bg-yellow-300 p-1 sm:p-1.5 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-sm">
-          <FaCameraRetro className="text-black text-xs sm:text-sm md:text-base" />
-        </span>
-
-        {/* Text with Underline Animation */}
-        <span className="relative inline-block">
-          <span
-            className="text-black group-hover:text-blue-600 transition-all duration-300 text-xs sm:text-sm font-semibold"
-            style={{ textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)" }}
-          >
-            Upload Your Pic & Tag @thefun2shstore on Instagram to Get 20% Additional Discount!
-          </span>
-          {/* Underline Animation */}
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-500"></span>
-        </span>
-
-        {/* Instagram Icon */}
-        <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 p-1 sm:p-1.5 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-sm">
-          <FaInstagram className="text-white text-xs sm:text-sm md:text-base" />
-        </span>
-      </span>
-    </a>
-  </div>
-</Marquee>
-
-
-
-
+      <InstagramTaggingMarquee />
       <BannerSliderBlock data={promotionBanner} />
-
-      <Marquee
-  className="bg-gradient-to-r from-pink-50 to-white py-1 my-3 shadow-md border-t border-b border-gray-200"
-  direction="right"
->
-  <div className="flex items-center justify-center w-full text-black text-xs sm:text-sm md:text-base font-bold tracking-wide">
-    <Link
-      href="/collections/womens-collection"
-      className="group hover:text-pink-600 transition-all duration-500 ease-in-out"
-    >
-      <span className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
-        {/* Female Icon */}
-        <span className="bg-pink-100 p-1 sm:p-1.5 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-sm">
-          <FaFemale className="text-pink-600 text-xs sm:text-sm md:text-base" />
-        </span>
-
-        {/* Text with Underline Animation */}
-        <span className="relative inline-block">
-          <span
-            className="text-black group-hover:text-pink-600 transition-all duration-300 text-xs sm:text-sm font-semibold"
-            style={{ textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)" }}
-          >
-            40% Off On Women Wear
-          </span>
-          {/* Underline Animation */}
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pink-600 group-hover:w-full transition-all duration-500"></span>
-        </span>
-
-        {/* Tag Icon */}
-        <span className="bg-pink-500 p-1 sm:p-1.5 rounded-full transform group-hover:scale-110 transition-all duration-300 shadow-sm">
-          <FaTag className="text-white text-xs sm:text-sm md:text-base" />
-        </span>
-      </span>
-    </Link>
-  </div>
-</Marquee>
+      <WomensCollectionMarquee />
       <Container>
         <NewArrivalsProductFeed />
-        <ProductsKanpurEraBlock />
+        <ProductsFlashSaleBlock variant="slider" />
       </Container>
-
       <Container>
         <BannerCard
           data={banner[2]}
           href={`${ROUTES.COLLECTIONS}/${banner[2].slug}`}
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
-          classNameInner="aspect-[3.15/1]"
+          classNameInner={aspectRatio}
         />
       </Container>
-
       <Container>
-        <ProductsOversizedTshirtBlock variant="slider"/>
-        <BestSellerProductFeed  />
+        <BestSellerProductFeed />
+        <ProductsOversizedTshirtBlock variant="slider" />
       </Container>
-
-    
-
       <Container>
         <CategoryBlock
           sectionHeading="text-shop-by-category"
@@ -212,43 +91,36 @@ export default function Home() {
         />
       </Container>
       <Container>
-        <ProductsTShirtsUnder599Block variant="slider"></ProductsTShirtsUnder599Block>
+        <ProductsTShirtsUnder599Block variant="slider" />
       </Container>
-
-      <ProductsFlashSaleBlock />
+      <Container>
+        <ProductsKanpurEraBlock variant="slider" />
+      </Container>
       <Container>
         <BannerCard
           data={banner[0]}
           href={`${ROUTES.COLLECTIONS}/${banner[0].slug}`}
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
-          classNameInner="aspect-[3.15/1]"
+          classNameInner={aspectRatio}
         />
       </Container>
-
       <Container>
-        <WinterSeasonProducts ></WinterSeasonProducts>
+        <WinterSeasonProducts variant="slider" />
       </Container>
-
       <Container>
-        <ProductsFeatured sectionHeading="text-featured-products"  />
-
+        <ProductsFeatured sectionHeading="text-featured-products" />
         <BannerCard
           data={banner[1]}
           href={`${ROUTES.COLLECTIONS}/${banner[1].slug}`}
           className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
-          classNameInner="aspect-[4.3/1]"
+          classNameInner="aspect-[3.55/1]"
         />
-
         <BannerWithProducts
           sectionHeading="text-on-selling-products"
           categorySlug="/search"
           data={productBanner}
         />
-
         <ExclusiveBlock />
-        {/* <NewArrivalsProductFeed /> */}
-
-        {/* <DownloadApps /> */}
         <Support />
         <Instagram />
         <Subscription className="px-5 py-12 bg-opacity-0 sm:px-16 xl:px-0 md:py-14 xl:py-16" />

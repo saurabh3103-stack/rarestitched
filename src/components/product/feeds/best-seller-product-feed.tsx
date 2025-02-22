@@ -29,6 +29,7 @@ export default function BestSellerProductFeed() {
 			loading={loading}
 			error={error?.message}
 			uniqueKey="best-sellers"
+      variant="slider"
 		/>
 	);
 }
