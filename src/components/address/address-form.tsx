@@ -1,16 +1,16 @@
-import Select from "react-select";
-import Button from "@components/ui/button";
-import Input from "@components/ui/input";
-import Label from "@components/ui/label";
-import { RadioBox as Radio } from "@components/ui/radiobox";
-import TextArea from "@components/ui/text-area";
-import { useTranslation } from "next-i18next";
-import * as yup from "yup";
-import { AddressType } from "@framework/utils/constants";
-import { Form } from "@components/ui/forms/form";
-import { useUpdateCustomer } from "@framework/customer";
-import { useUI } from "@contexts/ui.context";
-import { GoogleMapLocation } from "@type/index";
+import Select from 'react-select';
+import Button from '@components/ui/button';
+import Input from '@components/ui/input';
+import Label from '@components/ui/label';
+import { RadioBox as Radio } from '@components/ui/radiobox';
+import TextArea from '@components/ui/text-area';
+import { useTranslation } from 'next-i18next';
+import * as yup from 'yup';
+import { AddressType } from '@framework/utils/constants';
+import { Form } from '@components/ui/forms/form';
+import { useUpdateCustomer } from '@framework/customer';
+import { useUI } from '@contexts/ui.context';
+import { GoogleMapLocation } from '@type/index';
 
 type FormValues = {
   __typename?: string;
@@ -28,25 +28,25 @@ type FormValues = {
 
 // Static country options
 const countryOptions = [
-  { value: "United States", label: "United States" },
-  { value: "Canada", label: "Canada" },
-  { value: "India", label: "India" },
-  { value: "Australia", label: "Australia" },
-  { value: "United Kingdom", label: "United Kingdom" },
+  { value: 'United States', label: 'United States' },
+  { value: 'Canada', label: 'Canada' },
+  { value: 'India', label: 'India' },
+  { value: 'Australia', label: 'Australia' },
+  { value: 'United Kingdom', label: 'United Kingdom' },
 ];
 
 const addressSchema = yup.object().shape({
   type: yup
     .string()
     .oneOf([AddressType?.Billing, AddressType?.Shipping])
-    .required("error-type-required"),
-  title: yup.string().required("error-title-required"),
+    .required('error-type-required'),
+  title: yup.string().required('error-title-required'),
   address: yup.object().shape({
-    country: yup.string().required("error-country-required"),
-    city: yup.string().required("error-city-required"),
-    state: yup.string().required("error-state-required"),
-    zip: yup.string().required("error-zip-required"),
-    street_address: yup.string().required("error-street-required"),
+    country: yup.string().required('error-country-required'),
+    city: yup.string().required('error-city-required'),
+    state: yup.string().required('error-state-required'),
+    zip: yup.string().required('error-zip-required'),
+    street_address: yup.string().required('error-street-required'),
   }),
 });
 
@@ -55,7 +55,7 @@ export const AddressForm: React.FC<any> = ({
   defaultValues,
   isLoading,
 }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
 
   return (
     <Form<FormValues>
@@ -73,28 +73,28 @@ export const AddressForm: React.FC<any> = ({
         return (
           <>
             <div className="hidden">
-              <Label>{t("text-type")}</Label>
+              <Label>{t('text-type')}</Label>
               <div className="flex items-center space-x-4 rtl:space-x-reverse">
                 <Radio
                   id="billing"
-                  {...register("type")}
+                  {...register('type')}
                   type="radio"
                   value={AddressType?.Billing}
-                  labelKey={t("text-billing")}
+                  labelKey={t('text-billing')}
                 />
                 <Radio
                   id="shipping"
-                  {...register("type")}
+                  {...register('type')}
                   type="radio"
                   value={AddressType?.Shipping}
-                  labelKey={t("text-shipping")}
+                  labelKey={t('text-shipping')}
                 />
               </div>
             </div>
 
             <Input
-              labelKey={t("text-title")}
-              {...register("title")}
+              labelKey={t('Flat no/Building/Office')}
+              {...register('title')}
               errorKey={t(errors?.title?.message!)}
               variant="outline"
               className="col-span-2"
@@ -102,17 +102,17 @@ export const AddressForm: React.FC<any> = ({
 
             {/* Country Dropdown */}
             <div>
-              <Label>{t("text-country")}</Label>
+              <Label>{t('text-country')}</Label>
               <Select
                 options={countryOptions}
                 defaultValue={countryOptions.find(
-                  (option) => option.value === defaultValues?.address?.country
+                  (option) => option.value === defaultValues?.address?.country,
                 )}
                 onChange={(selectedOption) => {
-                  setValue("address.country", selectedOption?.value || "");
+                  setValue('address.country', selectedOption?.value || '');
                 }}
                 classNamePrefix="react-select"
-                placeholder={t("Select a Country")}
+                placeholder={t('Select a Country')}
               />
               {errors?.address?.country && (
                 <p className="text-sm text-red-500">
@@ -129,18 +129,18 @@ export const AddressForm: React.FC<any> = ({
               type="string"
             /> */}
 
-<Input
-  labelKey={t("text-city")}
-  {...register("address.city")}
-  errorKey={t(errors?.address?.city?.message!)}
-  variant="outline"
-  type="text"
-  onKeyPress={(e) => {
-    if (!/^[A-Za-z\s]+$/.test(e.key)) {
-      e.preventDefault(); // Prevent invalid input
-    }
-  }}
-/>
+            <Input
+              labelKey={t('text-city')}
+              {...register('address.city')}
+              errorKey={t(errors?.address?.city?.message!)}
+              variant="outline"
+              type="text"
+              onKeyPress={(e) => {
+                if (!/^[A-Za-z\s]+$/.test(e.key)) {
+                  e.preventDefault(); // Prevent invalid input
+                }
+              }}
+            />
 
             {/* <Input
               labelKey={t("text-state")}
@@ -149,31 +149,30 @@ export const AddressForm: React.FC<any> = ({
               variant="outline"
               type="string"
             /> */}
-              <Input
-              labelKey={t("text-state")}
-              {...register("address.state")}
+            <Input
+              labelKey={t('text-state')}
+              {...register('address.state')}
               errorKey={t(errors?.address?.state?.message!)}
               variant="outline"
               type="text"
-  onKeyPress={(e) => {
-    if (!/^[A-Za-z\s]+$/.test(e.key)) {
-      e.preventDefault(); // Prevent invalid input
-    }
-  }}
+              onKeyPress={(e) => {
+                if (!/^[A-Za-z\s]+$/.test(e.key)) {
+                  e.preventDefault(); // Prevent invalid input
+                }
+              }}
             />
 
-
             <Input
-              labelKey={t("text-zip")}
-              {...register("address.zip")}
+              labelKey={t('PIN code/ZIP code')}
+              {...register('address.zip')}
               errorKey={t(errors?.address?.zip?.message!)}
               variant="outline"
               type="number"
             />
 
             <TextArea
-              labelKey={t("text-street-address")}
-              {...register("address.street_address")}
+              labelKey={t('text-street-address')}
+              {...register('address.street_address')}
               errorKey={t(errors?.address?.street_address?.message!)}
               variant="outline"
               className="col-span-2"
@@ -184,8 +183,8 @@ export const AddressForm: React.FC<any> = ({
               loading={isLoading}
               disabled={isLoading}
             >
-              {Boolean(defaultValues) ? t("text-update") : t("text-save")}{" "}
-              {t("text-address")}
+              {Boolean(defaultValues) ? t('text-update') : t('text-save')}{' '}
+              {t('text-address')}
             </Button>
           </>
         );
@@ -246,7 +245,6 @@ export default function CreateOrUpdateAddressForm() {
   );
 }
 
-
 // import Button from "@components/ui/button";
 // import Input from "@components/ui/input";
 // import Label from "@components/ui/label";
@@ -303,7 +301,7 @@ export default function CreateOrUpdateAddressForm() {
 //   { value: 'Australia', label: 'Australia' },
 //   { value: 'China', label: 'China' },
 //   { value: 'Japan', label: 'Japan' },
- 
+
 // ];
 
 // export const AddressForm: React.FC<any> = ({
