@@ -114,13 +114,13 @@ export default function AccountPage() {
     },
     {
       icon: <FaAddressCard className="text-orange-500 text-2xl" />,
-      title: "Account Address",
+      title: "Delivery Address",
       text: "Ensure your address is correct for seamless deliveries and correspondence.",
       route:ROUTES.ACCOUNT_ADDRESS
     },
     {
       icon: <FaBox className="text-teal-500 text-2xl" />,
-      title: "Recent Orders",
+      title: "My Orders",
       text: "View and track your recent orders for better management.",
       route:ROUTES.ACCOUNT_ORDERS
     },
