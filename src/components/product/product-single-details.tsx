@@ -11,10 +11,13 @@ import isEmpty from 'lodash/isEmpty';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import {
+  FaCartPlus,
   FaChevronDown,
   FaChevronUp,
+  FaFire,
   FaShoppingCart,
   FaStar,
+  FaTag,
 } from 'react-icons/fa';
 import Link from '@components/ui/link';
 import Image from 'next/image';
@@ -37,6 +40,7 @@ import { useUser } from '@framework/auth';
 import { User } from '@type/index';
 import { cn } from '@lib/cn';
 import ImageModal from './ImageModal';
+import PincodeDeliveryChecker from './PincodeDeliveryChecker';
 
 
 const FavoriteButton = dynamic(
@@ -243,6 +247,56 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
         return 'https://www.adiricha.com/wp-content/uploads/2024/03/Default-Size-Chart.jpg';
     }
   };
+
+
+  const getHighlightMessage = (imageHighLight, tags) => {
+    console.log(imageHighLight, tags);
+    const hasRelevantTags = tags.some(tag => ["new-arrivals", "flash-sale"].includes(tag.slug));
+
+    if (!hasRelevantTags) return null;
+
+    const highlightMessages = {
+        "Most Trending": {
+            icon: <FaCartPlus className="w-4 h-4" />,
+            message: "63 people bought this in the last 7 days",
+            color: "#1C6C9E", // Text color
+            gradient: "linear-gradient(90deg, rgba(28, 108, 158, 0.2), rgba(255, 255, 255, 0))", // Light blue gradient
+        },
+        "Discounted": {
+            icon: <FaTag className="w-4 h-4" />,
+            message: "Get this discount for a limited time!",
+            color: "#FF0000", // Text color
+            gradient: "linear-gradient(90deg, rgba(255, 0, 0, 0.2), rgba(255, 255, 255, 0))", // Light red gradient
+        },
+        "Hot New": {
+            icon: <FaFire className="w-4 h-4" />,
+            message: "In demand! Buy now, few left!",
+            color: "#FF4500", // Text color
+            gradient: "linear-gradient(90deg, rgba(255, 69, 0, 0.2), rgba(255, 255, 255, 0))", // Light orange gradient
+        },
+    };
+
+    return highlightMessages[imageHighLight] || null;
+};
+
+
+const getTagColor = (tagId) => {
+  const colors = [
+      { text: "#1C6C9E", bg: "#E6F4F9" }, // Blue
+      { text: "#FF0000", bg: "#FFE6E6" }, // Red
+      { text: "#FF4500", bg: "#FFEEE6" }, // Orange
+      { text: "#4CAF50", bg: "#E8F5E9" }, // Green
+      { text: "#9C27B0", bg: "#F3E5F5" }, // Purple
+      { text: "#FFC107", bg: "#FFF8E1" }, // Yellow
+  ];
+  return colors[tagId % colors.length]; // Cycle through colors based on tagId
+};
+
+
+
+
+
+
   return (
     <div className="items-start block grid-cols-9 pb-10 lg:grid gap-x-10 xl:gap-x-14 pt-7 lg:pb-14 2xl:pb-20 ">
       <div className="col-span-5 grid grid-cols-5 gap-2.5">
@@ -479,24 +533,51 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                       % off
                     </span>
                   </>
+
+                  
                 )}
               </>
+              
             )}
           </div>
+          
+
+          {(() => {
+    const highlightMessage = getHighlightMessage(imageHighLight, product.tags);
+    return highlightMessage && (
+        <div 
+            className="flex items-center space-x-2 mt-4 p-2 rounded-lg"
+            style={{ 
+                color: highlightMessage.color,
+                background: highlightMessage.gradient,
+            }}
+        >
+            {highlightMessage.icon}
+            <span className="font-semibold text-sm">{highlightMessage.message}</span>
+        </div>
+    );
+})()}
+
+
+
+
+
         </div>
 
         {!isEmpty(variations) && (
           <div className="pb-3 border-b border-gray-300 pt-7">
             {Object.keys(variations).map((variation) => {
               return (
-                <ProductAttributes
-                  key={variation}
-                  title={variation}
-                  attributes={variations[variation]}
-                  active={attributes[variation]}
-                  onClick={handleAttribute}
-                  clearAttribute={handleClearAttribute}
-                />
+              <ProductAttributes
+  key={variation}
+  title={variation}
+  attributes={variations[variation]}
+  active={attributes[variation]}
+  onClick={handleAttribute}
+  clearAttribute={handleClearAttribute}
+  sizeChart={product.size_chart} // Pass the size chart
+  onSizeGuideClick={handleShow} // Pass the click handler
+/>
               );
             })}
 
@@ -504,20 +585,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
                   
                     <div>
-                      <div className="w-full">
-                        <button
-                          type="button"
-                          onClick={handleShow}
-                          className="text-white bg-black border border-gray-300 focus:outline-none hover:bg-gray-800 active:bg-black focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2"
-                          style={{
-                            backgroundColor: 'black !important',
-                          }}
-                        >
-                         
-                          Size Chart
-                        </button>
-                        
-                      </div>
+                     
 
                       {show && (
 
@@ -704,10 +772,20 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 </Button>
 
             </div>)}
+
+
+           
           </div>
+         
         </div>
-        <div className="py-6">
+
+      
+        <div className="py-4">
+         
+        <PincodeDeliveryChecker></PincodeDeliveryChecker>
+       
           <ul className="pb-1 space-y-5 text-sm">
+          
             {/* Existing code */}
             {product?.sku && (
               <li>
@@ -738,26 +816,37 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
                   ))}
                 </li>
               )}
+
+             
             {/* Tags */}
             {product?.tags &&
-              Array.isArray(product.tags) &&
-              product.tags.length > 0 && (
-                <li className="productTags">
-                  <span className="inline-block font-semibold text-heading ltr:pr-2 rtl:pl-2">
-                    Tags:
-                  </span>
-                  {product.tags.map((tag) => (
+    Array.isArray(product.tags) &&
+    product.tags.length > 0 && (
+        <li className="productTags">
+            <span className="inline-block font-semibold text-heading ltr:pr-2 rtl:pl-2">
+                Tags:
+            </span>
+            {product.tags.map((tag) => {
+                const tagColor = getTagColor(tag.id); // Get color for the tag
+                return (
                     <Link
-                      key={tag.id}
-                      href={`${ROUTES.COLLECTIONS}/${tag?.slug}`}
-                      className="inline-block ltr:pr-1.5 rtl:pl-1.5 transition hover:underline hover:text-heading ltr:last:pr-0 rtl:last:pl-0"
+                        key={tag.id}
+                        href={`${ROUTES.COLLECTIONS}/${tag?.slug}`}
+                        className="inline-block ltr:pr-1.5 rtl:pl-1.5 transition no-underline hover:text-heading  rtl:last:pl-0 px-2 py-1 rounded-md mx-1"
+                        style={{
+                            color: tagColor.text, // Dark text color
+                            backgroundColor: tagColor.bg, // Light background color
+                            textDecoration: "none", // Ensures no underline
+                        }}
                     >
-                      {tag.name}
-                      <span className="text-heading">,</span>
+                        {tag.name}
                     </Link>
-                  ))}
-                </li>
-              )}
+                );
+            })}
+        </li>
+    )}
+
+
            
           </ul>
           <div className="accordion-container mt-2">

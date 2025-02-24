@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+
 interface Props {
   className?: string;
   title: string;
@@ -13,6 +14,8 @@ interface Props {
   onClick: any;
   clearAttribute?: any;
   variant?: 'default' | 'wishlist';
+  sizeChart?: string; // Add this prop
+  onSizeGuideClick?: () => void; // Add this prop
 }
 
 export const ProductAttributes: React.FC<Props> = ({
@@ -23,20 +26,33 @@ export const ProductAttributes: React.FC<Props> = ({
   onClick,
   clearAttribute,
   variant = 'default',
+  sizeChart, // Destructure the new prop
+  onSizeGuideClick, // Destructure the new prop
 }) => {
   const [activeValue, setActiveValue] = useState({ [title]: active });
+
   return (
     <div className={className}>
       <h3
         className={cn(
-          'font-semibold capitalize',
+          'font-semibold capitalize flex items-center justify-between',
           variant === 'default'
             ? 'text-base md:text-lg text-heading mb-2.5'
             : 'text-base text-black tracking-[-0.16px] mb-2'
         )}
       >
         {title}
+        {/* Size Guide Button */}
+        {title.toLowerCase() === 'size' && sizeChart && (
+          <button
+            onClick={onSizeGuideClick}
+            className="text-blue-600 text-sm font-semibold hover:underline ml-4"
+          >
+            Size Guide
+          </button>
+        )}
       </h3>
+
       <ul
         className={cn(
           'colors flex flex-wrap',
@@ -88,6 +104,7 @@ export const ProductAttributes: React.FC<Props> = ({
           </li>
         ))}
       </ul>
+
       {activeValue[title] ? (
         <span
           className="cursor-pointer text-red-500 text-xs"
@@ -98,9 +115,7 @@ export const ProductAttributes: React.FC<Props> = ({
         >
           Clear
         </span>
-      ) : (
-        ''
-      )}
+      ) : null}
     </div>
   );
 };
