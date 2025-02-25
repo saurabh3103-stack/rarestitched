@@ -14,6 +14,8 @@ const ItemCard = ({ item, notAvailable }: Props) => {
   const { price } = usePrice({
     amount: item.itemTotal,
   });
+
+  console.log(item)
   return (
     <div
       className={cn('flex justify-between items-center py-2.5')}

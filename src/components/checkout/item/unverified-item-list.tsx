@@ -1,3 +1,4 @@
+// Add your Lottie JSON file here
 import { useCart } from '@store/quick-cart/cart.context';
 import { useTranslation } from 'next-i18next';
 import ItemCard from './item-card';
@@ -5,6 +6,8 @@ import EmptyCartIcon from '@components/icons/empty-cart';
 import usePrice from '@lib/use-price';
 import { ItemInfoRow } from './item-info-row';
 import { CheckAvailabilityAction } from '@components/checkout/action/check-availability-action';
+import FreeDeliveryBanner from './FreeDeliveryBanner';
+import PriceCounter from './AnimatedPriceCounter';
 
 const UnverifiedItemList = () => {
   const { t } = useTranslation('common');
@@ -14,13 +17,18 @@ const UnverifiedItemList = () => {
       amount: total,
     }
   );
+
+ 
+
   return (
     <div className="w-full">
+
       <h2 className="text-xl xl:text-2xl font-bold text-heading mb-5 md:mb-6 -mt-2 text-center ltr:lg:text-left rtl:lg:text-right">
         {t('text-your-order')}
       </h2>
       <div className="border border-gray-300 bg-white rounded-md overflow-hidden">
         <div className="flex flex-col">
+        <PriceCounter></PriceCounter>
           {isEmpty ? (
             <div className="h-full flex flex-col items-center justify-center py-8">
               <EmptyCartIcon width={190} height={205} />
@@ -42,24 +50,23 @@ const UnverifiedItemList = () => {
             </>
           )}
         </div>
-        <div className="">
+        <div>
           <ItemInfoRow title={t('text-sub-total')} value={subtotal} />
-          <ItemInfoRow
-            title={t('text-tax')}
-            value={t('text-calculated-checkout')}
-          />
-          <ItemInfoRow
-            title={t('text-shipping')}
-            value={t('text-calculated-checkout')}
-          />
+          <ItemInfoRow title={t('text-tax')} value={t('text-calculated-checkout')} />
+          <ItemInfoRow title={t('text-shipping')} value={t('text-calculated-checkout')} />
         </div>
         <div className="px-6 pt-2 pb-6">
           <CheckAvailabilityAction>
             {t('text-check-availability')}
           </CheckAvailabilityAction>
         </div>
+
+        {/* Lottie Animation for Free Delivery */}
+
+
       </div>
     </div>
   );
 };
+
 export default UnverifiedItemList;

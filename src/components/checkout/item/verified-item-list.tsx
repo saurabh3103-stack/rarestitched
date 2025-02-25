@@ -18,6 +18,9 @@ import ItemCard from '@components/checkout/item/item-card';
 import { ItemInfoRow } from '@components/checkout/item/item-info-row';
 import PaymentGrid from '@components/checkout/payment/payment-grid';
 import { PlaceOrderAction } from '@components/checkout/action/place-order-action';
+import FreeDeliveryBanner from './FreeDeliveryBanner';
+
+import PriceCounter from './AnimatedPriceCounter';
 
 interface Props {
   className?: string;
@@ -71,15 +74,33 @@ const VerifiedItemList: React.FC<Props> = ({ className }) => {
       ),
     }
   );
+
+
+
+  const savedAmount = discount ? Number(discount) : 0;
+const freeShippingAmount = verifiedResponse?.shipping_charge ?? 0;
+const totalSavedAmount = savedAmount + freeShippingAmount;
+
+console.log("Total Money Saved:", totalSavedAmount);
+  
   return (
     <div className={className}>
+      <PriceCounter></PriceCounter>
       <div className="flex flex-col">
         <div className="flex items-center justify-between text-heading text-base font-semibold bg-gray-200 px-6 py-3.5 border-b border-gray-300">
+
+       
+         
+
+          
           <span>{t('text-product')}</span>
           <span>{t('text-sub-total')}</span>
         </div>
+        
         {!isEmptyCart ? (
           <div className="px-6 py-2.5">
+
+
             {items?.map((item) => {
               const notAvailable = verifiedResponse?.unavailable_products?.find(
                 (d: any) => d === item.id
@@ -102,6 +123,11 @@ const VerifiedItemList: React.FC<Props> = ({ className }) => {
         <ItemInfoRow title={t('text-sub-total')} value={sub_total} />
         <ItemInfoRow title={t('text-tax')} value={tax} />
         <ItemInfoRow title={t('text-shipping')} value={shipping} />
+
+        {/* FreeDeliveryBanner placed here for optimal visibility */}
+        <FreeDeliveryBanner />
+       
+
         {discount && coupon ? (
           <div className="flex justify-between px-6 py-5 border-t border-gray-100">
             <p className="text-sm text-body ltr:mr-4 rtl:ml-4">

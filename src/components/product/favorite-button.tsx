@@ -23,6 +23,8 @@ function FavoriteButton({
     product_id: productId,
   });
 
+  
+
   const { openModal } = useUI();
   function toggle() {
     if (!isAuthorized) {
@@ -60,7 +62,12 @@ function FavoriteButton({
       )}
       onClick={toggle}
     >
-      {inWishlist ? <HeartFillIcon /> : <HeartOutlineIcon />}
+      {inWishlist ? (
+  <HeartFillIcon className="text-red-500 cursor-pointer" />
+) : (
+  <HeartOutlineIcon className="text-gray-500 hover:text-red-500 cursor-pointer" />
+)}
+
     </button>
   );
 }

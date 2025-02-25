@@ -25,6 +25,9 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 	const { price: totalPrice } = usePrice({
 		amount: Number(item.itemTotal),
 	});
+
+
+  console.log(item)
 	return (
     <motion.div
       // layout
