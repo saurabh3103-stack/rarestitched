@@ -93,7 +93,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ columns }) => {
 					</ul>
 					
 				))}
-				{console.log(columns[0].columnItems[0].img)}
+			
 				  {renderImages(columns[0].columnItems[0].img)}
 			</div>
 		</div>

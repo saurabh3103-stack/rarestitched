@@ -10,21 +10,17 @@ interface Item {
   };
   price: number;
   sale_price?: number;
+  max_price?: number; // Add max_price here
   quantity?: number;
   [key: string]: unknown;
 }
 
-// interface Variation {
-//   id: string | number;
-//   title: string;
-//   price: number;
-//   sale_price?: number;
-//   quantity: number;
-//   [key: string]: unknown;
-// }
+
+
 
 export function generateCartItem(item: Item, variation: any) {
-  const { id, name, slug, image, price, sale_price, quantity, unit } = item;
+  const { id, name, slug, image, price, sale_price, max_price, quantity, unit } = item;
+  console.log(max_price) // Include max_price
   if (!isEmpty(variation)) {
     return {
       id: `${id}.${variation.id}`,
@@ -34,6 +30,7 @@ export function generateCartItem(item: Item, variation: any) {
       unit,
       stock: variation.quantity,
       price: variation.sale_price ? variation.sale_price : variation.price,
+      max_price: max_price, // Add max_price to the cart item
       image: image?.thumbnail,
       variationId: variation.id,
     };
@@ -46,5 +43,6 @@ export function generateCartItem(item: Item, variation: any) {
     image: image?.thumbnail,
     stock: quantity,
     price: sale_price ? sale_price : price,
+    max_price: max_price, // Add max_price to the cart item
   };
 }

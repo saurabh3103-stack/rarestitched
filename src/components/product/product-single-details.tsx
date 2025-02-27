@@ -119,7 +119,11 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
       setAddToCartLoader(false);
     }, 600);
 
-    const item = generateCartItem(product!, selectedVariation);
+    const item = generateCartItem({
+      ...product,
+      max_price: product.max_price, // Ensure max_price is included
+    }, selectedVariation);
+    
     addItemToCart(item, quantity);
     toast(t('add-to-cart'), {
       //@ts-ignore

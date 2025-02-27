@@ -18,6 +18,10 @@ const UnverifiedItemList = () => {
     }
   );
 
+
+
+  
+
  
 
   return (
@@ -28,7 +32,8 @@ const UnverifiedItemList = () => {
       </h2>
       <div className="border border-gray-300 bg-white rounded-md overflow-hidden">
         <div className="flex flex-col">
-        <PriceCounter></PriceCounter>
+       
+
           {isEmpty ? (
             <div className="h-full flex flex-col items-center justify-center py-8">
               <EmptyCartIcon width={190} height={205} />

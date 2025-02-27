@@ -95,6 +95,7 @@ module.exports = {
         shine: {
           '100%': { left: '125%' },
         },
+        
       },
     },
     boxShadow: {

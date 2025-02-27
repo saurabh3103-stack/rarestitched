@@ -85,7 +85,8 @@ console.log("Total Money Saved:", totalSavedAmount);
   
   return (
     <div className={className}>
-      <PriceCounter></PriceCounter>
+      <PriceCounter items={items} freeShippingAmount={freeShippingAmount} />
+
       <div className="flex flex-col">
         <div className="flex items-center justify-between text-heading text-base font-semibold bg-gray-200 px-6 py-3.5 border-b border-gray-300">
 
