@@ -49,7 +49,7 @@ const VariationPrice: React.FC<Props> = ({
       </div>
       
 
-      {basePrice && <del className={discountPriceClassName}>{basePrice}</del>}
+      { <del className={discountPriceClassName}>{`₹${maxPrice.toFixed(2)}`}</del>}
       <span className="inline-block text-green-500 font-semibold text-sm my-2 ml-2">
   {discountPercentage.toFixed(0)}% OFF
 </span>

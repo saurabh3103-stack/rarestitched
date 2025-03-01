@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Button from '@components/ui/button';
 import { FaPersonWalkingLuggage } from "react-icons/fa6";
 import Counter from '@components/common/counter';
@@ -28,11 +28,10 @@ import isEqual from 'lodash/isEqual';
 import VariationPrice from '@components/product/product-variant-price';
 import { useTranslation } from 'next-i18next';
 import isMatch from 'lodash/isMatch';
-import { useCallback } from 'react';
 import { ROUTES } from '@lib/routes';
 import dynamic from 'next/dynamic';
 import { useSanitizeContent } from '@lib/sanitize-content';
-import ReviewForm from '@components/common/form/review-form'; // Import the ReviewForm
+import ReviewForm from '@components/common/form/review-form';
 import { IoBagCheckOutline } from 'react-icons/io5';
 import axios from 'axios';
 import { useUI } from '@contexts/ui.context';
@@ -41,7 +40,6 @@ import { User } from '@type/index';
 import { cn } from '@lib/cn';
 import ImageModal from './ImageModal';
 import PincodeDeliveryChecker from './PincodeDeliveryChecker';
-
 
 const FavoriteButton = dynamic(
   () => import('@components/product/favorite-button'),
@@ -52,9 +50,8 @@ type Props = {
   product: Product;
 };
 
-const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
+const ProductSingleDetails: React.FC<Props> = ({ product }) => {
   const { t } = useTranslation();
-
   const { width } = useWindowSize();
   const { addItemToCart } = useCart();
   const [attributes, setAttributes] = useState<{ [key: string]: string }>({});
@@ -62,56 +59,72 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
   const [addToCartLoader, setAddToCartLoader] = useState<boolean>(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
-  const [overallRating, setOverallRating] = useState(null);
+  const [overallRating, setOverallRating] = useState<number | null>(null);
   const [showReviews, setShowReviews] = useState(true);
   const { closeModal, openSidebar } = useUI();
+  const { me } = useUser();
+  const [id, setId] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [viewCartBtn, setViewCartBtn] = useState(false);
+  const [currentImage, setCurrentImage] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageHighLight, setImageHighLight] = useState<string | null>(null);
+  const [show, setShow] = useState(false);
 
   const { price, basePrice } = usePrice({
     amount: product?.sale_price ? product?.sale_price : product?.price!,
     baseAmount: product?.price,
   });
-  console.log(product);
 
-  const variations = getVariations(product?.variations!);
- 
+  const variations = useMemo(() => getVariations(product?.variations!), [product]);
+  const combineImages = useMemo(() => [...product?.gallery, product?.image], [product]);
+  const content = useSanitizeContent({ description: product?.description });
 
-  const { me } = useUser();
-  const [id, setId] = useState(null);
   useEffect(() => {
     if (me?.id) {
       setId(me.id);
-
-      // Set id only once when `me` is available
     }
   }, [me]);
 
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  // Toggle function to set open/close state based on the section index
-  const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
- 
-  const isSelected = !isEmpty(variations)
-    ? !isEmpty(attributes) &&
-      Object.keys(variations).every((variation) =>
-        attributes.hasOwnProperty(variation),
-      )
-    : true;
-
-  let selectedVariation: any = {};
-  if (isSelected) {
-    selectedVariation = product?.variation_options?.find((o: any) =>
-      isEqual(
-        o.options.map((v: any) => v.value).sort(),
-        Object.values(attributes).sort(),
-      ),
+  useEffect(() => {
+    setCurrentImage(
+      combineImages[0]?.original ||
+      combineImages[0]?.image?.original ||
+      '/assets/placeholder/products/product-gallery.svg',
     );
-  }
-  const [viewCartBtn, setViewCartBtn] = useState(false);
+  }, [combineImages]);
 
-  function addToCart() {
+  const isSelected = useMemo(() => (
+    !isEmpty(variations)
+      ? !isEmpty(attributes) &&
+        Object.keys(variations).every((variation) => attributes.hasOwnProperty(variation))
+      : true
+  ), [variations, attributes]);
+
+  const selectedVariation = useMemo(() => {
+    if (isSelected) {
+      return product?.variation_options?.find((o: any) =>
+        isEqual(
+          o.options.map((v: any) => v.value).sort(),
+          Object.values(attributes).sort(),
+        ),
+      );
+    }
+    return {};
+  }, [isSelected, product, attributes]);
+
+  const handleImageClick = useCallback((imageSrc: string) => {
+    setCurrentImage(imageSrc);
+    setIsModalOpen(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const openCart = useCallback(() => openSidebar({ view: 'DISPLAY_CART' }), [openSidebar]);
+
+  const addToCart = useCallback(() => {
     setViewCartBtn(true);
     if (!isSelected) return;
     setAddToCartLoader(true);
@@ -119,14 +132,9 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
       setAddToCartLoader(false);
     }, 600);
 
-    const item = generateCartItem({
-      ...product,
-      max_price: product.max_price, // Ensure max_price is included
-    }, selectedVariation);
-    
+    const item = generateCartItem({ ...product, max_price: product.max_price }, selectedVariation);
     addItemToCart(item, quantity);
     toast(t('add-to-cart'), {
-      //@ts-ignore
       type: 'success',
       progressClassName: 'fancy-progress-bar',
       position: width > 768 ? 'top-right' : 'top-right',
@@ -136,75 +144,98 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
       pauseOnHover: true,
       draggable: true,
     });
-  }
+  }, [isSelected, product, selectedVariation, quantity, addItemToCart, t, width]);
 
-  function handleAttribute(attribute: any) {
+  const handleAttribute = useCallback((attribute: any) => {
     if (!isMatch(attributes, attribute)) {
       setQuantity(1);
     }
-    setAttributes((prev) => ({
-      ...prev,
-      ...attribute,
-    }));
-  }
+    setAttributes((prev) => ({ ...prev, ...attribute }));
+  }, [attributes]);
 
-  function handleClearAttribute() {
+  const handleClearAttribute = useCallback(() => {
     setAttributes({});
-  }
+  }, []);
 
-  // Combine image and gallery
-  const combineImages = [...product?.gallery, product?.image];
-  const content = useSanitizeContent({ description: product?.description });
-  // {
-  //   console.log(product.id);
-  // }
+  const handleToggleReviewForm = useCallback(() => {
+    setShowReviewForm((prev) => !prev);
+  }, []);
 
-  const [currentImage, setCurrentImage] = useState<string>(
-    combineImages[0]?.original ||
-      combineImages[0]?.image?.original ||
-      '/assets/placeholder/products/product-gallery.svg',
-  );
+  const handleAddReview = useCallback((newReview: any) => {
+    setReviews((prevReviews) => [...prevReviews, newReview]);
+  }, []);
 
-  // Update currentImage whenever product changes
-  useEffect(() => {
-    setCurrentImage(
-      combineImages[0]?.original ||
-        combineImages[0]?.image?.original ||
-        '/assets/placeholder/products/product-gallery.svg',
-    );
-  }, [product]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleToggleReviews = useCallback(() => {
+    setShowReviews((prev) => !prev);
+  }, []);
 
-  const handleImageClick = (imageSrc) => {
-    setCurrentImage(imageSrc);
-    setIsModalOpen(true);
-  };
+  const getImageUrl = useCallback((size: string) => {
+    switch (size) {
+      case 't-shirt':
+        return "/sizeChart/tshirt.jpg";
+      case 'shirt':
+        return 'https://www.adiricha.com/wp-content/uploads/2024/03/Adiricha-Men-Shirt-Size-Chart.jpg';
+      case 'oversized-tshirt':
+        return "/sizeChart/oversized-tshirt.jpg";
+      case 'hoodie':
+        return "/sizeChart/oversized-hoodie.jpg";
+      case 'oversized-hoodie':
+        return "/sizeChart/oversized-hoodie.jpg";
+      default:
+        return 'https://www.adiricha.com/wp-content/uploads/2024/03/Default-Size-Chart.jpg';
+    }
+  }, []);
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
- 
-  const openCart = useCallback(() => openSidebar({ view: 'DISPLAY_CART' }), []);
-  function handleBuyToCart() {
+  const getHighlightMessage = useCallback((imageHighLight: string, tags: any[]) => {
+    const hasRelevantTags = tags.some(tag => ["new-arrivals", "flash-sale"].includes(tag.slug));
+    if (!hasRelevantTags) return null;
+
+    const highlightMessages = {
+      "Most Trending": {
+        icon: <FaCartPlus className="w-4 h-4" />,
+        message: "63 people bought this in the last 7 days",
+        color: "#1C6C9E",
+        gradient: "linear-gradient(90deg, rgba(28, 108, 158, 0.2), rgba(255, 255, 255, 0))",
+      },
+      "Discounted": {
+        icon: <FaTag className="w-4 h-4" />,
+        message: "Get this discount for a limited time!",
+        color: "#FF0000",
+        gradient: "linear-gradient(90deg, rgba(255, 0, 0, 0.2), rgba(255, 255, 255, 0))",
+      },
+      "Hot New": {
+        icon: <FaFire className="w-4 h-4" />,
+        message: "In demand! Buy now, few left!",
+        color: "#FF4500",
+        gradient: "linear-gradient(90deg, rgba(255, 69, 0, 0.2), rgba(255, 255, 255, 0))",
+      },
+    };
+
+    return highlightMessages[imageHighLight] || null;
+  }, []);
+
+  const getTagColor = useCallback((tagId: number) => {
+    const colors = [
+      { text: "#1C6C9E", bg: "#E6F4F9" },
+      { text: "#FF0000", bg: "#FFE6E6" },
+      { text: "#FF4500", bg: "#FFEEE6" },
+      { text: "#4CAF50", bg: "#E8F5E9" },
+      { text: "#9C27B0", bg: "#F3E5F5" },
+      { text: "#FFC107", bg: "#FFF8E1" },
+    ];
+    return colors[tagId % colors.length];
+  }, []);
+
+
+   function handleBuyToCart() {
     // if (!isSelected) return;
     // router.push('/checkout');
   
     openCart();
   }
 
-  const handleToggleReviewForm = () => {
-    setShowReviewForm(!showReviewForm);
-  };
-
-  const handleAddReview = (newReview) => {
-    setReviews((prevReviews) => [...prevReviews, newReview]);
-  };
-
-  // Function to toggle the reviews visibility
-  const handleToggleReviews = () => {
-    setShowReviews((prev) => !prev);
-  };
-  const [imageHighLight, setImageHighLight] = useState<String | null>(null);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -225,78 +256,6 @@ const ProductSingleDetails: React.FC<Props> = ({ product }: any) => {
 
     fetchReviews();
   }, [product]);
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  // const data="shirt"
-
-  {console.log(product.short_description)}
-  const getImageUrl = (size) => {
-    console.log("get image url size",size)
-    switch (size) {
-      case 't-shirt':
-        return "/sizeChart/tshirt.jpg";
-      case 'shirt':
-        return 'https://www.adiricha.com/wp-content/uploads/2024/03/Adiricha-Men-Shirt-Size-Chart.jpg';
-      case 'oversized-tshirt':
-        return "/sizeChart/oversized-tshirt.jpg";
-      case 'hoodie':
-        return "/sizeChart/oversized-hoodie.jpg"
-      case 'oversized-hoodie':
-        return "/sizeChart/oversized-hoodie.jpg";
-      default:
-        return 'https://www.adiricha.com/wp-content/uploads/2024/03/Default-Size-Chart.jpg';
-    }
-  };
-
-
-  const getHighlightMessage = (imageHighLight, tags) => {
-    console.log(imageHighLight, tags);
-    const hasRelevantTags = tags.some(tag => ["new-arrivals", "flash-sale"].includes(tag.slug));
-
-    if (!hasRelevantTags) return null;
-
-    const highlightMessages = {
-        "Most Trending": {
-            icon: <FaCartPlus className="w-4 h-4" />,
-            message: "63 people bought this in the last 7 days",
-            color: "#1C6C9E", // Text color
-            gradient: "linear-gradient(90deg, rgba(28, 108, 158, 0.2), rgba(255, 255, 255, 0))", // Light blue gradient
-        },
-        "Discounted": {
-            icon: <FaTag className="w-4 h-4" />,
-            message: "Get this discount for a limited time!",
-            color: "#FF0000", // Text color
-            gradient: "linear-gradient(90deg, rgba(255, 0, 0, 0.2), rgba(255, 255, 255, 0))", // Light red gradient
-        },
-        "Hot New": {
-            icon: <FaFire className="w-4 h-4" />,
-            message: "In demand! Buy now, few left!",
-            color: "#FF4500", // Text color
-            gradient: "linear-gradient(90deg, rgba(255, 69, 0, 0.2), rgba(255, 255, 255, 0))", // Light orange gradient
-        },
-    };
-
-    return highlightMessages[imageHighLight] || null;
-};
-
-
-const getTagColor = (tagId) => {
-  const colors = [
-      { text: "#1C6C9E", bg: "#E6F4F9" }, // Blue
-      { text: "#FF0000", bg: "#FFE6E6" }, // Red
-      { text: "#FF4500", bg: "#FFEEE6" }, // Orange
-      { text: "#4CAF50", bg: "#E8F5E9" }, // Green
-      { text: "#9C27B0", bg: "#F3E5F5" }, // Purple
-      { text: "#FFC107", bg: "#FFF8E1" }, // Yellow
-  ];
-  return colors[tagId % colors.length]; // Cycle through colors based on tagId
-};
-
-
 
 
 
@@ -325,25 +284,26 @@ const getTagColor = (tagId) => {
 
               return (
                 <div
-                  key={index}
-                  style={{
-                  
-                    minHeight: '80px',
-                    maxWidth: '100px',
-                    maxHeight: '100px',
-                    display: 'flex', // Aligns image within container
-                    alignItems: 'center', // Centers image vertically
-                    justifyContent: 'center', // Centers image horizontally
-                  }}
-                  className="relative mb-2 rounded-lg overflow-hidden border border-gray-300 shadow-md transition-transform duration-200 hover:scale-105 cursor-pointer"
-                >
-                  <img
-                    src={imageSrc}
-                    alt={`Thumbnail ${index}`}
-                    onClick={() => setCurrentImage(imageSrc)}
-                    className="object-contain w-full h-full"
-                  />
-                </div>
+  key={index}
+  style={{
+    minHeight: '80px',
+    maxWidth: '100px',
+    maxHeight: '100px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}
+  className="relative mb-2 rounded-lg overflow-hidden border border-gray-300 shadow-md transition-transform duration-200 hover:scale-105 cursor-pointer"
+>
+  <Image
+    src={imageSrc}
+    alt={`Thumbnail ${index}`}
+    width={100}
+    height={100}
+    onClick={() => setCurrentImage(imageSrc)}
+    className="object-contain w-full h-full"
+  />
+</div>
               );
             })}
           </div>
@@ -375,40 +335,41 @@ const getTagColor = (tagId) => {
 
         {/* Main image column (col-4) */}
         <div className="col-span-4">
-          <div className="relative rounded-lg overflow-hidden w-full h-full border border-gray-200 shadow-lg">
-            <img
-            onClick={() => handleImageClick(currentImage)}
-              src={currentImage}
-              alt="Selected"
-              className="object-cover w-full h-full max-h-[400px] md:max-h-[500px] lg:max-h-[600px]"
-            />
-            {imageHighLight && (
-              <div
-                className={cn(
-                  'absolute top-0 left-0 text-white text-xs px-2 py-1 rounded-br-md',
-                  {
-                    'bg-blue-500': imageHighLight === 'Discounted',
-                    'bg-green-500': imageHighLight === 'Most Trending',
-                    'bg-red-500': !['Discounted', 'Most Trending'].includes(
-                      imageHighLight,
-                    ),
-                  },
-                )}
-              >
-                {imageHighLight}
-              </div>
-            )}
-          </div>
-          {isModalOpen && (
-        <ImageModal
-
-        images={combineImages}
-          imageSrc={currentImage}
-          onClose={handleCloseModal}
-        />
-      )}
-        </div>
-
+  <div className="relative rounded-lg overflow-hidden w-full h-full border border-gray-200 shadow-lg">
+    <Image
+      src={currentImage}
+      alt="Selected"
+      width={600}
+      height={600}
+      onClick={() => handleImageClick(currentImage)}
+      className="object-cover w-full h-full max-h-[400px] md:max-h-[500px] lg:max-h-[600px]"
+      priority // Use priority for above-the-fold images
+    />
+    {imageHighLight && (
+      <div
+        className={cn(
+          'absolute top-0 left-0 text-white text-xs px-2 py-1 rounded-br-md',
+          {
+            'bg-blue-500': imageHighLight === 'Discounted',
+            'bg-green-500': imageHighLight === 'Most Trending',
+            'bg-red-500': !['Discounted', 'Most Trending'].includes(
+              imageHighLight,
+            ),
+          },
+        )}
+      >
+        {imageHighLight}
+      </div>
+    )}
+  </div>
+  {isModalOpen && (
+    <ImageModal
+      images={combineImages}
+      imageSrc={currentImage}
+      onClose={handleCloseModal}
+    />
+  )}
+</div>
         {width >= 1024 && (
           <>
             {/* Customer Reviews and Ratings Section */}
@@ -1064,7 +1025,7 @@ const getTagColor = (tagId) => {
   );
 };
 
-export default ProductSingleDetails;
+export default React.memo(ProductSingleDetails);
 
 
 
