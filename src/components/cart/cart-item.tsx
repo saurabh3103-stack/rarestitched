@@ -126,26 +126,28 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       </p>
 
       <div className="flex justify-between mt-4">
-        <span 
-          onClick={confirmRemoveItem}
-          className=" border border-red-600 bg-red-100 text-red-800 text-xs px-2 py-1 rounded cursor-pointer hover:bg-red-200 transition duration-200 flex items-center font-small"
-          style={{ fontFamily: 'Roboto, sans-serif' }}
-        >
-          {t('Remove')} <MdDelete className="ml-1 text-sm" />
-        </span>
+  {/* Remove Button */}
+  <span 
+    onClick={confirmRemoveItem}
+    className="border-2 border-gray-500 bg-white text-gray-900 text-sm font-semibold px-3 py-1 rounded-md cursor-pointer hover:bg-gray-100 hover:border-gray-700 transition duration-200 flex items-center shadow-md"
+    style={{ fontFamily: 'Roboto, sans-serif' }}
+  >
+    {t('Remove')}
+    <MdDelete className="ml-2 text-lg" />
+  </span>
 
-        <span 
-  className=" bg-green-100 border border-green-600 text-green-800 text-xs px-2 py-1 rounded cursor-pointer hover:border-green-800 transition duration-200 flex items-center font-small"
-  style={{ fontFamily: 'Lora, serif' }}
-  onClick={() => {
-    clearItemFromCart(item.id); // Remove from cart
-  }}
->
-  <span className="mr-1">{t('Save later')}</span>
-  <FavoriteButton productId={Math.floor(item?.id)} className="ml-1 text-xs" />
-</span>
+  {/* Save for Later Button */}
+  <span 
+    className="bg-yellow-400 border-2 border-yellow-600 text-black text-sm font-semibold px-3 py-1 rounded-md cursor-pointer hover:bg-yellow-500 hover:border-yellow-700 transition duration-200 flex items-center shadow-md"
+    style={{ fontFamily: 'Roboto, sans-serif' }}
+    onClick={() => clearItemFromCart(item.id)}
+  >
+    <span>{t('Save for later')}</span>
+    <FavoriteButton productId={Math.floor(item?.id)} />
+  </span>
+</div>
 
-      </div>
+
     </div>
   </div>
 )}

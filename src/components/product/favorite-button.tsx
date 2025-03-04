@@ -39,7 +39,7 @@ function FavoriteButton({
       <div
         className={twMerge(
           cn(
-            'mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-300',
+            'mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full ',
             className
           )
         )}
@@ -53,7 +53,7 @@ function FavoriteButton({
       type="button"
       className={twMerge(
         cn(
-          'mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-300 transition-colors text-heading text-xl',
+          'mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors text-heading text-sm',
           {
             '!border-heading': inWishlist,
           },
@@ -63,9 +63,9 @@ function FavoriteButton({
       onClick={toggle}
     >
       {inWishlist ? (
-  <HeartFillIcon className="text-red-500 cursor-pointer" />
+  <HeartFillIcon className="text-red-800 cursor-pointer" />
 ) : (
-  <HeartOutlineIcon className="text-gray-500 hover:text-red-500 cursor-pointer" />
+  <HeartFillIcon className="text-gray-800 hover:text-red-500 cursor-pointer" />
 )}
 
     </button>
