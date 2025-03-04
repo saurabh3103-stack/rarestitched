@@ -801,7 +801,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }) => {
                     <Link
                         key={tag.id}
                         href={`${ROUTES.COLLECTIONS}/${tag?.slug}`}
-                        className="inline-block ltr:pr-1.5 rtl:pl-1.5 transition no-underline hover:text-heading  rtl:last:pl-0 px-2 py-1 rounded-md mx-1"
+                        className="inline-block ltr:pr-1.5 rtl:pl-1.5 transition no-underline hover:text-heading  rtl:last:pl-0 px-2 py-1 rounded-md mx-1 mt-0.5"
                         style={{
                             color: tagColor.text, // Dark text color
                             backgroundColor: tagColor.bg, // Light background color

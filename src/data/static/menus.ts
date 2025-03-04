@@ -632,95 +632,85 @@ export const menu = [
 
   
  
-  {
-    id: 7,
-    path: '/',
-    label: 'menu-pages',
-    subMenu: [
-      {
-        id: 1,
-        path: '/',
-        label: 'menu-users',
-        subMenu: [
-          {
-            id: 1,
-            path: '/my-account',
-            label: 'menu-my-account',
-          },
-          {
-            id: 2,
-            path: '/signin',
-            label: 'menu-sign-in',
-          },
-          {
-            id: 3,
-            path: '/signup',
-            label: 'menu-sign-up',
-          },
-          {
-            id: 4,
-            path: '/forget-password',
-            label: 'menu-forget-password',
-          },
-        ],
-      },
-      {
-        id: 2,
-        path: '/offers',
-        label: 'menu-offers',
-      },
-      {
-        id: 3,
-        path: '/faq',
-        label: 'menu-faq',
-      },
-      {
-        id: 4,
-        path: '/privacy',
-        label: 'menu-privacy-policy',
-      },
-      {
-        id: 5,
-        path: '/terms',
-        label: 'menu-terms-condition',
-      },
-      {
-        id: 6,
-        path: '/contact-us',
-        label: 'menu-contact-us',
-      },
-      {
-        id: 7,
-        path: '/checkout',
-        label: 'menu-checkout',
-      },
-      {
-        id: 8,
-        path: '/collections/on-sale',
-        label: 'menu-collection',
-      },
-      {
-        id: 9,
-        path: '/search',
-        label: 'menu-category',
-      },
-      {
-        id: 10,
-        path: '/my-account/orders',
-        label: 'menu-order',
-      },
-      {
-        id: 11,
-        path: '/404',
-        label: 'menu-404',
-      },
-      // {
-      //   id:12,
-      //   path: '/become-seller',
-      //   label: 'menu-become-seller',
-      // },
-    ],
-  },
+// {
+//   id: 7,
+//   path: '/',
+//   label: 'More',
+//   subMenu: [
+//     // {
+//     //   id: 1,
+//     //   path: '/my-account',
+//     //   label: 'menu-my-account',
+//     // },
+//     // {
+//     //   id: 2,
+//     //   path: '/signin',
+//     //   label: 'menu-sign-in',
+//     // },
+//     // {
+//     //   id: 3,
+//     //   path: '/signup',
+//     //   label: 'menu-sign-up',
+//     // },
+//     // {
+//     //   id: 4,
+//     //   path: '/forget-password',
+//     //   label: 'menu-forget-password',
+//     // },
+   
+//     // {
+//     //   id: 6,
+//     //   path: '/faq',
+//     //   label: 'menu-faq',
+//     // },
+//     // {
+//     //   id: 7,
+//     //   path: '/privacy',
+//     //   label: 'menu-privacy-policy',
+//     // },
+//     // {
+//     //   id: 8,
+//     //   path: '/terms',
+//     //   label: 'menu-terms-condition',
+//     // },
+//     // {
+//     //   id: 9,
+//     //   path: '/contact-us',
+//     //   label: 'menu-contact-us',
+//     // },
+//     // {
+//     //   id: 10,
+//     //   path: '/checkout',
+//     //   label: 'menu-checkout',
+//     // },
+//     {
+//       id: 1,
+//       path: '/collections/on-sale',
+//       label: 'menu-collection',
+//     },
+//     {
+//       id: 2,
+//       path: '/search',
+//       label: 'menu-category',
+//     },
+
+//      {
+//       id: 3,
+//       path: '/offers',
+//       label: 'menu-offers',
+//     },
+//     // {
+//     //   id: 13,
+//     //   path: '/my-account/orders',
+//     //   label: 'menu-order',
+//     // },
+//     // {
+//     //   id: 14,
+//     //   path: '/404',
+//     //   label: 'menu-404',
+//     // },
+//   ],
+// },
   // {
   //   id: 8,
   //   path: '/shops',
@@ -1143,81 +1133,83 @@ export const mobileMenu = [
       },
     ],
   },
-  {
-    id: 7,
-    path: '/',
-    label: 'menu-pages',
-    subMenu: [
-      {
-        id: 1,
-        path: '/my-account',
-        label: 'menu-my-account',
-      },
-      {
-        id: 2,
-        path: '/signin',
-        label: 'menu-sign-in',
-      },
-      {
-        id: 3,
-        path: '/signup',
-        label: 'menu-sign-up',
-      },
-      {
-        id: 4,
-        path: '/forget-password',
-        label: 'menu-forget-password',
-      },
-      {
-        id: 5,
-        path: '/offers',
-        label: 'menu-offers',
-      },
-      {
-        id: 6,
-        path: '/faq',
-        label: 'menu-faq',
-      },
-      {
-        id: 7,
-        path: '/privacy',
-        label: 'menu-privacy-policy',
-      },
-      {
-        id: 8,
-        path: '/terms',
-        label: 'menu-terms-condition',
-      },
-      {
-        id: 9,
-        path: '/contact-us',
-        label: 'menu-contact-us',
-      },
-      {
-        id: 10,
-        path: '/checkout',
-        label: 'menu-checkout',
-      },
-      {
-        id: 11,
-        path: '/collections/on-sale',
-        label: 'menu-collection',
-      },
-      {
-        id: 12,
-        path: '/search',
-        label: 'menu-category',
-      },
-      {
-        id: 13,
-        path: '/my-account/orders',
-        label: 'menu-order',
-      },
-      {
-        id: 14,
-        path: '/404',
-        label: 'menu-404',
-      },
-    ],
-  },
+  // {
+  //   id: 7,
+  //   path: '/',
+  //   label: 'More',
+  //   subMenu: [
+  //     // {
+  //     //   id: 1,
+  //     //   path: '/my-account',
+  //     //   label: 'menu-my-account',
+  //     // },
+  //     // {
+  //     //   id: 2,
+  //     //   path: '/signin',
+  //     //   label: 'menu-sign-in',
+  //     // },
+  //     // {
+  //     //   id: 3,
+  //     //   path: '/signup',
+  //     //   label: 'menu-sign-up',
+  //     // },
+  //     // {
+  //     //   id: 4,
+  //     //   path: '/forget-password',
+  //     //   label: 'menu-forget-password',
+  //     // },
+     
+  //     // {
+  //     //   id: 6,
+  //     //   path: '/faq',
+  //     //   label: 'menu-faq',
+  //     // },
+  //     // {
+  //     //   id: 7,
+  //     //   path: '/privacy',
+  //     //   label: 'menu-privacy-policy',
+  //     // },
+  //     // {
+  //     //   id: 8,
+  //     //   path: '/terms',
+  //     //   label: 'menu-terms-condition',
+  //     // },
+  //     // {
+  //     //   id: 9,
+  //     //   path: '/contact-us',
+  //     //   label: 'menu-contact-us',
+  //     // },
+  //     // {
+  //     //   id: 10,
+  //     //   path: '/checkout',
+  //     //   label: 'menu-checkout',
+  //     // },
+  //     {
+  //       id: 1,
+  //       path: '/collections/on-sale',
+  //       label: 'menu-collection',
+  //     },
+  //     {
+  //       id: 2,
+  //       path: '/search',
+  //       label: 'menu-category',
+  //     },
+
+  //      {
+  //       id: 3,
+  //       path: '/offers',
+  //       label: 'menu-offers',
+  //     },
+  //     // {
+  //     //   id: 13,
+  //     //   path: '/my-account/orders',
+  //     //   label: 'menu-order',
+  //     // },
+  //     // {
+  //     //   id: 14,
+  //     //   path: '/404',
+  //     //   label: 'menu-404',
+  //     // },
+  //   ],
+  // },
 ];
