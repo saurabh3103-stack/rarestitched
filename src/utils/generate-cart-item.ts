@@ -20,7 +20,7 @@ interface Item {
 
 export function generateCartItem(item: Item, variation: any) {
   const { id, name, slug, image, price, sale_price, max_price, quantity, unit } = item;
-  console.log(max_price) // Include max_price
+ 
   if (!isEmpty(variation)) {
     return {
       id: `${id}.${variation.id}`,

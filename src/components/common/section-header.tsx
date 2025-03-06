@@ -16,7 +16,7 @@ const SectionHeader: React.FC<Props> = ({
 }) => {
 	const { t } = useTranslation("common");
 	
-	console.log(categorySlug,sectionHeading)
+	
 	return (
 		<div
 			className={`flex items-center justify-between -mt-2 lg:-mt-2.5 ${className}`}

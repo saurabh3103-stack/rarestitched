@@ -11,10 +11,15 @@ import SuborderItems from '@components/orders/suborder-items';
 import OrderViewHeader from '@components/orders/order-view-header';
 import { isEmpty } from 'lodash';
 import { jsPDF } from 'jspdf';
-import Lottie from "lottie-react";
-import animationData from "./animation.json";
+
+import OrderConfirmation from './order-confirmation';
+import { useEffect, useState } from 'react';
 
 export default function OrderView({ order, loadingStatus }: any) {
+
+
+
+
   const { t } = useTranslation('common');
 
   const { price: total } = usePrice({ amount: order?.paid_total! });
@@ -102,6 +107,11 @@ export default function OrderView({ order, loadingStatus }: any) {
     doc.save('order-receipt.pdf');
 };
 
+
+
+
+
+
   return (
     <div className="max-w-[1280px] mx-auto mb-14 lg:mb-16">
 
@@ -123,6 +133,8 @@ export default function OrderView({ order, loadingStatus }: any) {
             <h3 className="mb-2 text-base text-heading font-semibold">
               {t('text-order-number')}
             </h3>
+
+           
             <p className="text-sm text-body">{order?.tracking_number}</p>
           </div>
           <div className="p-5 md:p-6 border border-gray-100 bg-gray-200 rounded-md shadow-sm">
@@ -158,6 +170,9 @@ export default function OrderView({ order, loadingStatus }: any) {
                           }}>
         Download Receipt
       </button>
+
+
+      <OrderConfirmation trackingNo={order.tracking_number}></OrderConfirmation>
             </p>
           </div>
         </div>

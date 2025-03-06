@@ -91,7 +91,7 @@ const HeaderMenu: React.FC<MenuProps> = ({ data, className }) => {
       )} */}
 
 <nav className={classNames(`headerMenu flex w-full relative`, className)}>
-  {console.log(data)}
+ 
   {data
     ?.filter((item: any) => item.label !== 'menu-demos' && item.label!=='menu-pages') // Adjusted label to 'menu-demos'
     .map((item: any) => (

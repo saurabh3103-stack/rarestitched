@@ -81,7 +81,7 @@ const VerifiedItemList: React.FC<Props> = ({ className }) => {
 const freeShippingAmount = verifiedResponse?.shipping_charge ?? 0;
 const totalSavedAmount = savedAmount + freeShippingAmount;
 
-console.log("Total Money Saved:", totalSavedAmount);
+
   
   return (
     <div className={className}>

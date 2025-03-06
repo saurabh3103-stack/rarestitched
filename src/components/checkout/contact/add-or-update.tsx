@@ -213,7 +213,7 @@ const AddOrUpdateCheckoutContact: React.FC<Props> = () => {
   const { me } = useUser();
 
   const defaultContactNumber = me?.last_order?.customer_contact || 'DefaultContactNumber';
-  console.log(me,"from add or update")
+
   const useOtp = settings?.options?.useOtp ?? false;
   const [contactNumber, setContactNumber] = useAtom(customerContactAtom);
 
@@ -229,7 +229,7 @@ const AddOrUpdateCheckoutContact: React.FC<Props> = () => {
     closeModal();
   }
 
-  console.log("contact", effectiveContactNumber);
+ 
 
   return (
     <div className="p-6 sm:p-8 bg-white rounded-lg md:rounded-xl flex flex-col justify-center md:min-h-0">

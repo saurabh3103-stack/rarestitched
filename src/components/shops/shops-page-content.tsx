@@ -29,9 +29,7 @@ const ShopsPageContent: React.FC = () => {
   const gridViewHandel = () => {
     setGridView(true);
   };
-  if(data){
-    console.log(data)
-  }
+  
 
   if (error) return <Alert message={error?.message} />;
 

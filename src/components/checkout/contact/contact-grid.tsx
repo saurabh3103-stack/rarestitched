@@ -190,7 +190,7 @@ const ContactGrid = ({ contact, label, count, className, userId, profileId }: Co
 
   const defaultContactNumber = me?.last_order?.customer_contact || "DefaultContactNumber";
   const effectiveContactNumber = contactNumber || defaultContactNumber;
-  console.log("contact", defaultContactNumber);
+
 
   useEffect(() => {
     if (contact) {

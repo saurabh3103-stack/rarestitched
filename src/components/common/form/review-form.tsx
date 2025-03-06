@@ -25,7 +25,7 @@ const ReviewForm: React.FC<{ productID: number; userID: number }> = ({ productID
     handleSubmit,
     formState: { errors },
   } = useForm<ReviewFormValues>();
-  console.log(productID,userID)
+ 
   
 
   const [newRating, setNewRating] = useState<number>(0); // Store the rating state
@@ -38,7 +38,7 @@ const ReviewForm: React.FC<{ productID: number; userID: number }> = ({ productID
       user_idd: userID,
     };
   
-    console.log(reviewData);
+
   
     try {
       const response = await axios.post(
@@ -51,7 +51,7 @@ const ReviewForm: React.FC<{ productID: number; userID: number }> = ({ productID
         }
       );
   
-      console.log(response.data, 'Response from API'); // Log the API response
+      
   
       if (response.data.status === 3) {
         toast('You have already submitted your review', {
@@ -106,7 +106,7 @@ const ReviewForm: React.FC<{ productID: number; userID: number }> = ({ productID
   };
   const ratingChanged = (newRating: number) => {
     setNewRating(newRating); // Set the new rating
-    console.log(newRating);
+  
   };
 
   const { t } = useTranslation();

@@ -71,7 +71,7 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
                       )}
                     >
                       {t(name)}
-                      {console.log(slug,name)}
+                    
                     </Link>
                   </div>
                 )}

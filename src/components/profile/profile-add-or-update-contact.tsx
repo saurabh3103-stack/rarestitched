@@ -16,7 +16,7 @@ type Props = {
 const ProfileAddOrUpdateContact: React.FC<Props> = ({ data }) => {
   const { t } = useTranslation("common");
   const { customerId, contactNumber, profileId } = data;
-  console.log(data)
+ 
   const { closeModal } = useUI();
   const { mutate: updateProfile } = useUpdateCustomer();
 

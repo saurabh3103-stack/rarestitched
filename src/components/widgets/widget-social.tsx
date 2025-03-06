@@ -10,7 +10,7 @@ import { extractEndpoint } from '@lib/use-url';
 const WidgetSocial: FC = () => {
   const { t } = useTranslation();
   const settings = useSettings();
-  console.log(settings?.contactDetails)
+  
 
   const socials = settings?.contactDetails?.socials;
 

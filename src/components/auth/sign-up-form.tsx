@@ -76,7 +76,7 @@ const SignUpForm: React.FC<Props> = ({ layout = "modal" }) => {
   
 
   function onSubmit({ name, email, password }: SignUpInputType) {
-    console.log(name,email,password)
+  
     signUp(
       {
         name,

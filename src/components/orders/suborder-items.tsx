@@ -17,7 +17,7 @@ interface SuborderItemsProps {
 const SuborderItems: React.FC<SuborderItemsProps> = ({ items,total }) => {
   const { t } = useTranslation('common');
   const { alignLeft } = useIsRTL();
-  console.log(items)
+ 
 
 
   const orderTableColumns = [
