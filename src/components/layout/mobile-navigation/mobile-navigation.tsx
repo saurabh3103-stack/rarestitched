@@ -9,6 +9,7 @@ import { authorizationAtom } from '@store/authorization-atom';
 import { useAtom } from 'jotai';
 import dynamic from 'next/dynamic';
 import { useCallback } from 'react';
+import { AiOutlineHeart} from 'react-icons/ai';
 const CartButton = dynamic(() => import('@components/cart/cart-button'), {
   ssr: false,
 });
@@ -33,7 +34,7 @@ const BottomNavigation: React.FC = () => {
 
   return (
     <>
-      <div className="hidden fixed z-10 bottom-0 flex items-center justify-between shadow-bottomNavigation text-gray-700 body-font bg-white w-full h-14 sm:h-16 px-4">
+      <div className="md:hidden fixed z-10 bottom-0 flex items-center justify-between shadow-bottomNavigation text-gray-700 body-font bg-white w-full h-14 sm:h-16 px-4">
         <button
           aria-label="Menu"
           className="menuBtn flex flex-col items-center justify-center flex-shrink-0 outline-none focus:outline-none"
@@ -41,13 +42,19 @@ const BottomNavigation: React.FC = () => {
         >
           <MenuIcon />
         </button>
-        <button
+        {/* <button
           className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none"
           onClick={openSearch}
           aria-label="search-button"
         >
           <SearchIcon />
-        </button>
+        </button> */}
+
+
+<Link href="/my-account/wishlists" className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none">
+  <AiOutlineHeart className="w-6 h-6" />
+</Link>
+
         <Link href="/" className="flex-shrink-0">
           <HomeIcon />
         </Link>

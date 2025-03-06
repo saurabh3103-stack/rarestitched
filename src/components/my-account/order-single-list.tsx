@@ -4,6 +4,7 @@ import Link from "@components/ui/link";
 import dayjs from "dayjs";
 import { useTranslation } from "next-i18next";
 import { ROUTES } from "@lib/routes";
+import CancelOrder from "./CancelOrder";
 
 type Props = {
   order: Order;
@@ -11,6 +12,10 @@ type Props = {
 
 const OrderSingleList: React.FC<Props> = ({ order }) => {
   const { t } = useTranslation();
+
+  const handleCancelSuccess = () => {
+    setTimeout(() => window.location.reload(), 1000); // Reload the page after cancellation
+  };
 
   return (
     <ul className="text-sm font-semibold text-heading border border-gray-300 rounded-md flex flex-col px-4 pt-5 pb-6 space-y-5">
@@ -51,7 +56,14 @@ const OrderSingleList: React.FC<Props> = ({ order }) => {
           >
             {t('button-view')}
           </Link>
+
         </span>
+
+        <CancelOrder
+              orderId={order.id}
+              order={order}
+              onCancelSuccess={handleCancelSuccess}
+            />
       </li>
     </ul>
   );
