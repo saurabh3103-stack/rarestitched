@@ -5,18 +5,20 @@ import Modal from '@components/common/modal/ConfirmationModal';
 
 type OrderConfirmationProps = {
   trackingNo: string;
+  orderDetails: any;
 };
 
-const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ trackingNo }) => {
+const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ trackingNo,orderDetails }) => {
+ 
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const storedTrackingNos = JSON.parse(localStorage.getItem('viewedTrackingNos') || '[]');
    
 
-    if (!storedTrackingNos.includes(trackingNo)) {
+    if (!storedTrackingNos.includes(trackingNo) && orderDetails.order_status==="order-processing") {
       // Open modal if tracking number is new
-      setIsOpen(true);
+      setIsOpen(true); 
 
       // Store this tracking number in localStorage
       localStorage.setItem('viewedTrackingNos', JSON.stringify([...storedTrackingNos, trackingNo]));

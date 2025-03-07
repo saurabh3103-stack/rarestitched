@@ -8,8 +8,8 @@ import { FaCheckCircle } from "react-icons/fa";
 
 type CancelOrderProps = {
   orderId: number;
-  onCancelSuccess: () => void;
-  order:String // Callback to notify parent of successful cancellation
+  onCancelSuccess: () => void; // Callback to notify parent of successful cancellation
+  order: Order; // Ensure the correct type is used
 };
 
 const CancelOrder: React.FC<CancelOrderProps> = ({ orderId, onCancelSuccess, order }) => {
@@ -33,7 +33,7 @@ const CancelOrder: React.FC<CancelOrderProps> = ({ orderId, onCancelSuccess, ord
 
     try {
       const response = await axios.post(url, payload, { headers });
-      console.log("API Response:", response.data);
+     
 
       toast.success("Order cancelled successfully!", {
         position: toast.POSITION.TOP_RIGHT,
@@ -70,36 +70,34 @@ const CancelOrder: React.FC<CancelOrderProps> = ({ orderId, onCancelSuccess, ord
 
       {/* Modal for confirmation */}
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-  <div className="p-6 text-center bg-white rounded-lg shadow-xl font-sans relative">
-    {/* Close Icon */}
-    
-    <h2 className="text-xl font-bold mb-4 text-gray-900">
-      Are you sure?
-    </h2>
-    <p className="mb-6 text-gray-700">
-      Do you really want to cancel your order? This action cannot be undone.
-    </p>
+        <div className="p-6 text-center bg-white rounded-lg shadow-xl font-sans relative">
+          <h2 className="text-xl font-bold mb-4 text-gray-900">
+            Are you sure?
+          </h2>
+          <p className="mb-6 text-gray-700">
+            Do you really want to cancel your order? This action cannot be undone.
+          </p>
 
-    <div className="flex justify-center gap-4 mt-2">
-      <button
-        onClick={handleCancelOrder}
-        disabled={isProcessing}
-        className="flex items-center gap-2 bg-red-600 text-white px-5 py-2.5 rounded-md hover:bg-red-700 disabled:bg-red-400 disabled:cursor-not-allowed"
-      >
-        <MdCancel size={20} />
-        {isProcessing ? "Processing..." : "Yes, Cancel Order"}
-      </button>
+          <div className="flex justify-center gap-4 mt-2">
+            <button
+              onClick={handleCancelOrder}
+              disabled={isProcessing}
+              className="flex items-center gap-2 bg-red-600 text-white px-5 py-2.5 rounded-md hover:bg-red-700 disabled:bg-red-400 disabled:cursor-not-allowed"
+            >
+              <MdCancel size={20} />
+              {isProcessing ? "Processing..." : "Yes, Cancel Order"}
+            </button>
 
-      <button
-        onClick={() => setIsModalOpen(false)}
-        className="flex items-center gap-2 bg-green-600 text-white px-5 py-2.5 rounded-md hover:bg-green-700"
-      >
-        <FaCheckCircle size={20} />
-        No, Keep Order
-      </button>
-    </div>
-  </div>
-</Modal>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="flex items-center gap-2 bg-green-600 text-white px-5 py-2.5 rounded-md hover:bg-green-700"
+            >
+              <FaCheckCircle size={20} />
+              No, Keep Order
+            </button>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

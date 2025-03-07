@@ -248,7 +248,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }) => {
         setOverallRating(parseFloat(data.overall_rating).toFixed(1));
 
         setReviews(data.reviews.data);
-        console.log(data.reviews.data); // Assuming the reviews are in the "data" field
+       // Assuming the reviews are in the "data" field
       } catch (error) {
         console.error('Error fetching reviews:', error);
       }
@@ -900,7 +900,7 @@ const ProductSingleDetails: React.FC<Props> = ({ product }) => {
               {openIndex === 3 && (
                 <div className="pb-6 md:pb-7 leading-7 text-sm text-gray-600">
                   Our return and refund policy is simple: if you are not
-                  satisfied with your purchase, you can return it within 30 days
+                  satisfied with your purchase, you can return it within 7 days
                   for a full refund.
                 </div>
               )}

@@ -172,7 +172,7 @@ export default function OrderView({ order, loadingStatus }: any) {
       </button>
 
 
-      <OrderConfirmation trackingNo={order.tracking_number}></OrderConfirmation>
+      <OrderConfirmation trackingNo={order.tracking_number} orderDetails={order}></OrderConfirmation>
             </p>
           </div>
         </div>
