@@ -105,7 +105,7 @@ const Modal: FC<ModalProps> = ({
           >
             <div
               className={cn(
-                'fixed inset-0 h-full w-full bg-black bg-opacity-70',
+                'fixed inset-0 h-full w-full bg-black bg-opacity-95',
                 useBlurBackdrop && 'backdrop-filter backdrop-blur-sm',
               )}
             />
