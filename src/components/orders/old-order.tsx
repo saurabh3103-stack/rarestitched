@@ -4,7 +4,7 @@ import { useOrder } from "@framework/orders";
 import Spinner from "@components/ui/loaders/spinner/spinner";
 import OrderView from "@components/orders/order-view";
 import Divider from "@components/ui/divider";
-import OrderBadgeUpdate from "@components/ui/OrderBadgeUpdate";
+
 import Subscription from "@components/common/subscription";
 import Container from "@components/ui/container";
 
