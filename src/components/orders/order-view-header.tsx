@@ -121,6 +121,8 @@ import { SpinnerLoader } from '@components/ui/loaders/spinner/spinner';
 import { isEmpty } from 'lodash';
 import { useSettings } from '@framework/settings';
 import ChangeGateway from '@components/payment/gateway-control/change-gateway';
+import OrderBadgeUpdate from "@components/ui/OrderBadgeUpdate";
+
 
 interface OrderViewHeaderProps {
   order: any;

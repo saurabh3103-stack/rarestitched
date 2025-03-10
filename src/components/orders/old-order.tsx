@@ -27,7 +27,7 @@ export default function OldOrder() {
   return (
     <>
     {
-      data?.order_status==="order-processing" ?<OrderBadgeUpdate></OrderBadgeUpdate>:<Divider></Divider>
+      data?.order_status==="order-processing" ?<></>:<Divider></Divider>
     }
      
    

@@ -14,6 +14,7 @@ import { jsPDF } from 'jspdf';
 
 import OrderConfirmation from './order-confirmation';
 import { useEffect, useState } from 'react';
+import OrderBadgeUpdate from '@components/ui/OrderBadgeUpdate';
 
 export default function OrderView({ order, loadingStatus }: any) {
 
@@ -114,7 +115,10 @@ export default function OrderView({ order, loadingStatus }: any) {
 
   return (
     <div className="max-w-[1280px] mx-auto mb-14 lg:mb-16">
-
+      <OrderConfirmation trackingNo={order.tracking_number} orderDetails={order}></OrderConfirmation>
+      {
+      order?.order_status==="order-processing" ?<OrderBadgeUpdate></OrderBadgeUpdate>:""
+    }
 
       {!loadingStatus ? (
         <OrderViewHeader
@@ -126,7 +130,9 @@ export default function OrderView({ order, loadingStatus }: any) {
       )}
 
       
-     
+
+
+
       <div className="w-full mx-auto shadow-sm">
         <div className="grid gap-4 lg:gap-5 sm:grid-cols-2 lg:grid-cols-5 mb-11">
           <div className="p-5 md:p-6 border border-gray-100 bg-gray-200 rounded-md shadow-sm">
@@ -172,7 +178,7 @@ export default function OrderView({ order, loadingStatus }: any) {
       </button>
 
 
-      <OrderConfirmation trackingNo={order.tracking_number} orderDetails={order}></OrderConfirmation>
+    
             </p>
           </div>
         </div>
