@@ -16,7 +16,7 @@ const breakpoints = {
 };
 
 const BannerSliderBlock: React.FC<BannerProps> = ({
-  className = 'mb-12 md:mb-14 xl:mb-16',
+  className = '',
   data,
 }) => {
   return (

@@ -5,7 +5,7 @@ import Marquee from 'react-fast-marquee';
 export default function WomensCollectionMarquee() {
   return (
     <Marquee
-      className="bg-gradient-to-r from-pink-50 to-white py-1 my-3 shadow-md border-t border-b border-gray-200"
+      className="bg-gradient-to-r from-pink-50 to-white py-1 mb-8 shadow-md border-t border-b border-gray-200"
       direction="right"
     >
       <div className="flex items-center justify-center w-full text-black text-xs sm:text-sm md:text-base font-bold tracking-wide">
