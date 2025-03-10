@@ -104,8 +104,6 @@ const RazorpayPaymentModal: React.FC<Props> = ({
     tracking_number: trackingNumber,
   });
 
-  console.log(isSettingsLoading,isLoading,paymentIntentInfo)
-
   console.log(trackingNumber, data, order);
   const { createOrderPayment } = useOrderPayment();
 
@@ -117,14 +115,11 @@ const RazorpayPaymentModal: React.FC<Props> = ({
     payment_gateway,
   } = order || {};
   
-  
 
   const paymentHandle = useCallback(async () => {
     if (!checkScriptLoaded()) {
-      console.log(loadRazorpayScript())
       await loadRazorpayScript();
     }
-    console.log("Razorpay available:", Boolean((window as any).Razorpay));
     const options: RazorpayOptions = {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
       amount: paymentIntentInfo?.amount!,
@@ -149,13 +144,11 @@ const RazorpayPaymentModal: React.FC<Props> = ({
       },
       modal: {
         ondismiss: async () => {
-          // await refetch();
+          await refetch();
         },
       },
     };
-    const razorpay = new (window as any).Razorpay(options);
-    console.log(razorpay)
-
+    const razorpay = new(window as any).Razorpay(options);
     return razorpay.open();
   }, [isLoading, isSettingsLoading]);
 
