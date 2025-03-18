@@ -104,7 +104,7 @@ const RazorpayPaymentModal: React.FC<Props> = ({
     tracking_number: trackingNumber,
   });
 
-  console.log(trackingNumber, data, order);
+ 
   const { createOrderPayment } = useOrderPayment();
 
   const {
@@ -128,12 +128,23 @@ const RazorpayPaymentModal: React.FC<Props> = ({
       description: `${t('text-order')}#${trackingNumber}`,
       image: data?.options?.logo?.original!,
       order_id: paymentIntentInfo?.payment_id!,
-      handler: async () => {
-        createOrderPayment({
-          tracking_number: trackingNumber!,
-          payment_gateway: 'razorpay' as string,
-        });
-      },
+      handler: async (response) => {
+       
+        console.log('Payment Successful:', response);
+      
+        try {
+          const paymentResponse = await createOrderPayment({
+            tracking_number: trackingNumber!,
+            payment_gateway: 'razorpay' as string,
+          });
+      
+          console.log('Order Payment Response:', paymentResponse);
+        } catch (error) {
+          console.error('Error creating order payment:', error);
+          alert('Payment succeeded, but order processing failed ❌');
+        }
+      }
+      ,
       prefill: {
         ...(customer_name && { name: customer_name }),
         ...(customer_contact && { contact: `+${customer_contact}` }),
@@ -144,12 +155,16 @@ const RazorpayPaymentModal: React.FC<Props> = ({
       },
       modal: {
         ondismiss: async () => {
-          await refetch();
+          console.log('Payment Failed or Cancelled ❌');  // Log failure
+          alert('Payment Failed or Cancelled from the backend ❌');       // Show message
+          await refetch();                              // Refetch order data
         },
       },
+      
     };
-    const razorpay = new(window as any).Razorpay(options);
-    return razorpay.open();
+    const razorpay = new (window as any).Razorpay(options);
+    razorpay.open();
+    
   }, [isLoading, isSettingsLoading]);
 
   useEffect(() => {
