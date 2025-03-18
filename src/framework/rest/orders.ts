@@ -529,17 +529,30 @@ export function useOrderPayment() {
   const { mutate: createOrderPayment, isLoading } = useMutation(
     client.orders.payment,
     {
+      // Runs after mutation (success or failure)
       onSettled: (data) => {
+        console.log('✅ Mutation Settled:', data);
+        alert('Mutation Settled: Payment process completed (success or failure)');
+        
+        // Refetch the order list
         queryClient.refetchQueries(API_ENDPOINTS.ORDERS);
       },
+  
+      // Handles Backend Errors
       onError: (error) => {
+        console.error('❌ Payment Failed:', error);
+        alert(`Payment Failed: ${error?.response?.data?.message || 'Unknown error'}`);
+        
         const {
           response: { data },
         }: any = error ?? {};
-        toast.error(data?.message);
+        
+        console.log('🔍 Error Response Data:', data);  // Log full error data
+        toast.error(data?.message || 'An error occurred during payment');
       },
     }
   );
+  
 
   function formatOrderInput(input: CreateOrderPaymentInput) {
     const formattedInputs = {

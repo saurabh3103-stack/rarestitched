@@ -129,7 +129,7 @@ const RazorpayPaymentModal: React.FC<Props> = ({
       image: data?.options?.logo?.original!,
       order_id: paymentIntentInfo?.payment_id!,
       handler: async (response) => {
-       
+        alert('Payment success from the backend server right');
         console.log('Payment Successful:', response);
       
         try {
