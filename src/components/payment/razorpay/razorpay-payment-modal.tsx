@@ -124,7 +124,7 @@ const RazorpayPaymentModal: React.FC<Props> = ({
     let paymentSuccess = false;  // Track payment success status
   
     const options: RazorpayOptions = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      key: "rzp_test_oP8rbwETBxlRsU",
       amount: paymentIntentInfo?.amount!,
       currency: paymentIntentInfo?.currency!,
       name: customer_name!,
@@ -166,9 +166,9 @@ const RazorpayPaymentModal: React.FC<Props> = ({
           if (!paymentSuccess) {   // Only show failure alert if payment wasn't successful
             console.log('Payment Failed or Cancelled ❌');
             alert('Payment Failed or Cancelled ❌');
-            await refetch();
+           
           }
-          
+          await refetch();
         },
       },
     };
