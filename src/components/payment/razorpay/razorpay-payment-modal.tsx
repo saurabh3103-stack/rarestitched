@@ -1,3 +1,4 @@
+
 // import { useCallback, useEffect } from 'react';
 // import useRazorpay from '@lib/use-razorpay';
 // import { formatAddress } from '@lib/format-address';
@@ -120,66 +121,62 @@ const RazorpayPaymentModal: React.FC<Props> = ({
     if (!checkScriptLoaded()) {
       await loadRazorpayScript();
     }
-  
-    let paymentSuccess = false;  // Track payment success status
-  
     const options: RazorpayOptions = {
-      key: 'rzp_test_oP8rbwETBxlRsU',
+      key:"rzp_test_oP8rbwETBxlRsU",
       amount: paymentIntentInfo?.amount!,
       currency: paymentIntentInfo?.currency!,
       name: customer_name!,
       description: `${t('text-order')}#${trackingNumber}`,
       image: data?.options?.logo?.original!,
       order_id: paymentIntentInfo?.payment_id!,
-  
       handler: async (response) => {
+        alert('Payment success from the backend server right');
         console.log('Payment Successful:', response);
-        alert('Payment success ✅');
-        
-        paymentSuccess = true;  // Mark payment as successful
-  
+      
         try {
           const paymentResponse = await createOrderPayment({
             tracking_number: trackingNumber!,
-            payment_gateway: 'razorpay',
+            payment_gateway: 'razorpay' as string,
           });
-  
+      
           console.log('Order Payment Response:', paymentResponse);
         } catch (error) {
           console.error('Error creating order payment:', error);
           alert('Payment succeeded, but order processing failed ❌');
         }
-      },
-  
+      }
+      ,
       prefill: {
         ...(customer_name && { name: customer_name }),
         ...(customer_contact && { contact: `+${customer_contact}` }),
         ...(customer?.email && { email: customer?.email }),
       },
-  
       notes: {
         address: formatAddress(billing_address as any),
       },
-  
       modal: {
         ondismiss: async () => {
-          if (!paymentSuccess) {   // Only show failure alert if payment wasn't successful
-            console.log('Payment Failed or Cancelled ❌');
-            alert('Payment Failed or Cancelled ❌');
-           
-          }
-          await refetch();
-          
+          console.log('Payment Failed or Cancelled ❌');  // Log failure
+          alert('Payment Failed or Cancelled from the backend ❌');       // Show message
+          await refetch();                              // Refetch order data
         },
       },
+      
     };
-  
+   
     const razorpay = new (window as any).Razorpay(options);
-    console.log(razorpay);
-    console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
+    console.log(options,razorpay)
     razorpay.open();
+    
   }, [isLoading, isSettingsLoading]);
-  
+
+  useEffect(() => {
+    if (!isLoading && !isSettingsLoading) {
+      (async () => {
+        await paymentHandle();
+      })();
+    }
+  }, [isLoading, isSettingsLoading]);
 
   if (isLoading || isSettingsLoading) {
     return <Spinner showText={false} />;
