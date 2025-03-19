@@ -124,7 +124,7 @@ const RazorpayPaymentModal: React.FC<Props> = ({
     let paymentSuccess = false;  // Track payment success status
   
     const options: RazorpayOptions = {
-      key: "rzp_test_oP8rbwETBxlRsU",
+      key: 'rzp_test_oP8rbwETBxlRsU',
       amount: paymentIntentInfo?.amount!,
       currency: paymentIntentInfo?.currency!,
       name: customer_name!,
@@ -169,11 +169,14 @@ const RazorpayPaymentModal: React.FC<Props> = ({
            
           }
           await refetch();
+          
         },
       },
     };
   
     const razorpay = new (window as any).Razorpay(options);
+    console.log(razorpay);
+    console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
     razorpay.open();
   }, [isLoading, isSettingsLoading]);
   
